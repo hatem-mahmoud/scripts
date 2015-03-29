@@ -1,0 +1,254 @@
+#! /usr/bin/env stap
+#
+# oracle_cpu_monitor.stp
+#
+# This systemtap script monitor the cpu usage of an oracle session 
+# Usage:  stap -v /home/oracle/stp/oracle_cpu_monitor.stp  --all-modules -x  "spid"  "refresh_time"
+# Add the following line to print the symbol names : | awk '{if(match($0, "#")) #{cmd="/usr/bin/addr2line -f -e /app/oracle/product/12.1.0/dbhome_1/bin/oracle " $2; #system(cmd) } else {printf("%s\n", $0)}}'
+#
+# This script contains excerpt of code developed by : Jason Baron <jbaron@redhat.com> and  Josh #Stone <jistone@redhat.com> #(https://sourceware.org/systemtap/examples/process/schedtimes.stp)
+#
+# Version oracle_cpu_monitor 0.1
+# Note: this is an experimental script, use at your own risk
+
+
+
+global DEAD=-1, RUNNING=1, QUEUED=2, SLEEPING=3
+global kernel_func_call,user_func_call, pcount,sch_switch
+global run_time, queued_time, sleep_time, iowait_time
+global pid_state
+global sys_time ,user_time
+global previous_timestamp,prev_sys_time,prev_user_time
+global obj_cr,previous_cr_timestamp,dur_cr,in_cr_function,dur_cr_not_cpu,previous_cr_not_cpu_timestamp
+global pid_in_iowait
+global pid_iowait_count
+
+
+@define in_iowait(task) %(
+  @choose_defined(@task->in_iowait,
+    (pid_in_iowait ? pid_in_iowait-- : 0))
+%)
+
+@define clear_iowait(rq, task) %(
+    if (!@defined(@task->in_iowait))
+      pid_iowait_count = @nr_iowait(@rq)
+%)
+
+@define set_iowait(rq, task) %(
+    if (!@defined(@task->in_iowait))
+      pid_in_iowait = (@nr_iowait(@rq) > pid_iowait_count)
+%)
+
+@define nr_iowait(rq) %(
+    atomic_read(&@cast(@rq, "rq")->nr_iowait)
+%)
+
+
+function timestamp()
+{
+  return gettimeofday_us()
+}
+
+probe process("oracle").function("kcbgtcr")
+	 {
+	if (pid() == target()) {  
+		in_cr_function=1
+		obj = user_int32(u64_arg(1)+8)
+		obj_cr <<< obj
+		previous_cr_timestamp = timestamp()
+				
+   }
+}
+
+
+%(kernel_v>="3.10" %?
+probe process("oracle").function("kcbgtcr").return
+	 {
+   if (pid() == target()) {  
+        in_cr_function=0
+		dur_cr <<< timestamp() - previous_cr_timestamp
+   }
+}
+%)
+
+function update_times(now)
+{
+  delta = now - previous_timestamp
+  previous_timestamp = now
+
+  if ((state = pid_state) > 0) {
+    if (state == SLEEPING)
+      sleep_time += delta
+    else if (state == QUEUED)
+      queued_time += delta
+    else if (state == RUNNING)
+      run_time += delta
+  }
+
+  return delta
+}
+
+probe timer.profile { 
+if (target() == pid())
+{
+  pcount <<< 1
+  if ( user_mode() == 1) 
+  {
+	user_func_call[ucallers(1)] <<< 1
+  }
+  else
+  {
+	kernel_func_call[callers(1)] <<< 1
+  }
+ }
+}
+
+probe scheduler.ctxswitch
+{
+  // Task $prev is scheduled off this cpu
+  if ($prev->pid == target()) { 
+  
+   if (in_cr_function == 1)
+   {
+      previous_cr_not_cpu_timestamp=timestamp()
+   }
+  
+    sch_switch <<< cpu()
+	
+    state = $prev->state
+    update_times(timestamp())
+
+	if(@defined($prev->utime)) {
+	
+	//Calculate user_time and cpu_time delta using cpu clock tick
+	user_time <<< ($prev->utime - prev_user_time)
+    prev_user_time=$prev->utime
+	sys_time <<< ($prev->stime - prev_sys_time)
+    prev_sys_time=$prev->stime
+	}
+	
+    if (state > 0) {
+      @set_iowait($rq, $prev)
+      pid_state = SLEEPING
+    } else if (state == 0) {
+      pid_state = QUEUED
+    } else {
+      pid_state = DEAD
+    }
+  }
+
+  // Task $next is scheduled onto this cpu
+  if ($next->pid == target() ) {
+    
+	 if (in_cr_function == 1)
+   {
+      dur_cr_not_cpu = (timestamp() - previous_cr_not_cpu_timestamp ) + dur_cr_not_cpu    
+   }
+    
+	sch_switch <<< cpu()  
+    
+	update_times(timestamp())
+    @clear_iowait($rq, $next)
+    pid_state = RUNNING
+  }
+}
+
+probe scheduler.wakeup
+{
+  // Task $p is awakened
+  if ($p->pid == target()) {  
+    delta = update_times(timestamp())
+    if (pid_state == SLEEPING && @in_iowait($p)) {
+      iowait_time += delta
+    }
+    pid_state = QUEUED
+  }
+}
+
+
+probe timer.s($1)
+{
+	printf ("\n====================================================================================\n")	
+	printf ("====================== Oracle CPU monitor version 0.1 ==============================")	
+	printf ("\n====================================================================================\n")	
+    printf ("\n%6s : %16s %16s %20s %16s %16s %10s %10s \n\n",
+         "pid", "run(us)", "sleep(us)", "iowait(us)",
+         "queued(us)", "total(us)","user_time(%)","sys_time(%)")
+    update_times(timestamp())
+	
+	
+	ratio_sys=10000 * @sum(sys_time) /  ( @sum(user_time) + @sum(sys_time) +1 )
+	ratio_user=10000 * @sum(user_time) /  ( @sum(user_time) + @sum(sys_time) +1 )
+	ratio_run_time=10000 * run_time /(run_time + sleep_time + queued_time +1)
+	ratio_sleep_time=10000 * sleep_time /(run_time + sleep_time + queued_time +1)
+	ratio_iowait_time=10000 *  iowait_time/(run_time + sleep_time + queued_time +1)
+	ratio_queued_time=10000 * queued_time /(run_time + sleep_time + queued_time +1)
+    
+	printf("%6d : %10d(%2d.%02d %s) %10d(%2d.%02d %s) %5d(%2d.%02d %s) %10d(%2d.%02d %s) %10d %8d.%02d %8d.%02d \n",target(),
+           run_time,ratio_run_time/100,ratio_run_time%100,"%",sleep_time,ratio_sleep_time/100,ratio_sleep_time%100,"%", iowait_time,ratio_iowait_time/100,ratio_iowait_time%100,"%",queued_time,
+          ratio_queued_time/100,ratio_queued_time%100,"%", (run_time + sleep_time + queued_time),ratio_user/100,ratio_user%100,ratio_sys/100,ratio_sys%100)
+		  
+    printf ("\n--- %d samples recorded:\n", @count(pcount))
+
+	printf ("---------------------------------------------------------\n")	
+	printf ("------- Top 5 Kernel space Functions --------------------\n")	
+	printf ("---------------------------------------------------------\n")	
+	foreach ([p] in kernel_func_call- limit 5) {
+		printf ("%d hits \n%s\n\n", @count(kernel_func_call[p]), sprint_syms(p))
+	}
+	
+	printf ("---------------------------------------------------------\n")	
+	printf ("------- Top 5 user space Functions ----------------------\n")
+	printf ("---------------------------------------------------------\n")	
+	foreach ([p] in user_func_call- limit 5) {
+		printf ("%d hits \n #%s \n\n", @count(user_func_call[p]),  p)
+	} 
+	printf ("---------------------------------------------------------\n")	
+	printf ("------- Scheduler Switches per CPU ----------------------\n")
+  	printf ("---------------------------------------------------------\n")	
+	if( @count(sch_switch) > 0 ) {
+	print(@hist_log(sch_switch))
+	}
+	
+	
+	printf ("\n---------------------------------------------------------\n")	
+	
+	cr_ratio_run_time=10000 * (@sum(dur_cr)-dur_cr_not_cpu) /(run_time + 1 )
+	cr_ratio_elapsed_time=10000 * @sum(dur_cr) /(run_time + sleep_time + queued_time +1) 
+		
+	printf("Total cr elapsed time : %6d (%2d.%02d %s from Total elapsed time) \n",@sum(dur_cr),cr_ratio_elapsed_time/100,cr_ratio_elapsed_time%100,"%")
+	printf("Total cr cpu time     : %6d (%2d.%02d %s from Total cpu time)  \n",(@sum(dur_cr)-dur_cr_not_cpu),cr_ratio_run_time/100,cr_ratio_run_time%100,"%")
+		
+	printf ("---------------------------------------------------------\n")	
+    printf ("------- Object number and cr I/O count ------------------\n")
+	printf ("---------------------------------------------------------\n")
+    if( @count(obj_cr) > 0 ) {
+	print(@hist_log(obj_cr))
+	}
+		
+	printf ("---------------------------------------------------------\n")	
+	printf ("------- CR I/O duration (us) ----------------------------\n")
+	printf ("---------------------------------------------------------\n")	
+    %(kernel_v>="3.10" %?
+	if( @count(dur_cr) > 0 ) {
+	print(@hist_log(dur_cr))
+	}
+	%:
+	printf ("------- You need at least kernel version >= 3.10 --------\n")
+	%)
+  
+  	delete kernel_func_call
+	delete user_func_call
+	delete pcount
+	delete sch_switch
+    delete run_time 
+	delete queued_time 
+	delete sleep_time 
+	delete iowait_time 
+    delete sys_time 
+    delete user_time 
+    delete obj_cr
+	delete dur_cr
+    delete dur_cr_not_cpu
+
+}
