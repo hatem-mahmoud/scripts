@@ -8,6 +8,8 @@
 #
 # This script contains excerpt of code developed by : Jason Baron <jbaron@redhat.com> and  Josh #Stone <jistone@redhat.com> #(https://sourceware.org/systemtap/examples/process/schedtimes.stp)
 #
+# Author : Hatem Mahmoud <h.mahmoud87@gmail.com>
+#
 # Version oracle_cpu_monitor 0.1
 # Note: this is an experimental script, use at your own risk
 
