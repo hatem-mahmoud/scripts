@@ -5,6 +5,8 @@
 # This script simulate the view V$KERNEL_IO_OUTLIER on linux system using Systemtap
 # Usage:  stap -v kernel_io_outlier_simul.stp ORACLE_SID
 #
+# Author : Hatem Mahmoud <h.mahmoud87@gmail.com>
+#
 # Note: this is experimental code, use at your own risk
 #
 
