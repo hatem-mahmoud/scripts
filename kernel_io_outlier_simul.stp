@@ -1,0 +1,76 @@
+#!/usr/local/bin/stap
+#
+# kernel_io_outlier_simul.stp
+#
+# This script simulate the view V$KERNEL_IO_OUTLIER on linux system using Systemtap
+# Usage:  stap -v kernel_io_outlier_simul.stp ORACLE_SID
+#
+# Note: this is experimental code, use at your own risk
+#
+
+global write_start_ts
+global bio_start_ts
+global wait_start_ts
+global wait_end_ts
+global write_end_ts
+global bsize
+global boffset
+global bfd
+global init
+
+probe syscall.pwrite {
+  if ( isinstr(execname(),@1 ) ){
+     write_start_ts[pid()] = local_clock_us()
+     bsize[pid()]=count
+     boffset[pid()]=offset
+     init[pid()]=1
+  }
+}
+
+probe ioblock.request {
+  if (  init[pid()] && bio_start_ts[pid()] == 0) {
+     bio_start_ts[pid()] = local_clock_us()
+   }
+}
+
+probe ioscheduler_trace.elv_issue_request{
+ if (  init[pid()]  && wait_start_ts[pid()] == 0) {
+   wait_start_ts[pid()] = local_clock_us()
+ }
+}
+
+probe ioblock.end {
+  if (  init[pid()]  && wait_start_ts[pid()])  {
+     wait_end_ts[pid()] = local_clock_us()
+     bfd[pid()]= devname
+   }
+}
+
+probe syscall.pwrite.return {
+  if ( init[pid()]) {
+     write_end_ts[pid()]  = local_clock_us()
+
+     e2e=local_clock_us() - write_start_ts[pid()]
+     setup=bio_start_ts[pid()] - write_start_ts[pid()]
+     queue=wait_start_ts[pid()] - bio_start_ts[pid()]
+     txfr=wait_end_ts[pid()] - wait_start_ts[pid()]
+     cleanup=local_clock_us() - wait_end_ts[pid()]
+
+     if ( txfr > 500000 ) {
+      printf("%d %9d %11d %9s %21s %9d %12d %12d %22d %22d %7d   \n",gettimeofday_s(),bsize[pid()],boffset[pid()],bfd[pid()],substr(execname(),0,6),e2e,setup,queue,txfr,cleanup,p
+id())
+      }
+
+     delete write_start_ts[pid()]
+     delete bio_start_ts[pid()]
+     delete wait_start_ts[pid()]
+     delete wait_end_ts[pid()]
+     delete write_end_ts[pid()]
+     delete init[pid()]
+  }
+}
+
+probe begin {
+  printf(" TIMESTAMP    IO_SIZE  IO_OFFSET DEVICE_NAME     PROCESS_NAME    TOTAL_LATENCY SETUP_LATENCY QUEUE_TO_HBA_LATENCY TRANSFER_LATENCY CLEANUP_LATENCY      PID\n");
+  printf("---------- ---------- ---------- --------------- --------------- ------------- ------------- -------------------- ---------------- --------------- --------\n");
+}
