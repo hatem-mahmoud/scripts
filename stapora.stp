@@ -21,7 +21,7 @@
 #
 # Functionality :
 #    -Top wait events
-#	 -Wait events histograms
+#    -Wait events histograms
 #    -Time spent on the run queue
 #    -IO wait time
 #    -Top kernel function
@@ -272,10 +272,10 @@ probe timer.s($1)
 	printf ("\n====================================================================================\n")	
 	printf ("================================= StapOra V1.0 BETA ================================")	
 	printf ("\n====================================================================================\n")	
-    printf ("\n%6s : %16s %16s %20s %16s %16s %10s %10s \n\n",
+    	printf ("\n%6s : %16s %16s %20s %16s %16s %10s %10s \n\n",
          "pid", "run(us)", "sleep(us)", "iowait(us)",
          "queued(us)", "total(us)","user_time(%)","sys_time(%)")
-    update_times(timestamp())
+	update_times(timestamp())
 	
 	
 	ratio_sys=10000 * @sum(sys_time) /  ( @sum(user_time) + @sum(sys_time) +1 )
@@ -291,7 +291,7 @@ probe timer.s($1)
 		  
     
 	
-	  printf ("\n---------------------------------------------------------\n")
+      printf ("\n---------------------------------------------------------\n")
       printf ("------- Oracle wait events/CPU (CPU WAIT)----------------\n")
       printf ("---------------------------------------------------------\n")
 	  if ( session_addr > 0 )
@@ -354,16 +354,13 @@ probe timer.s($1)
 	printf("Total cr cpu time     : %6d (%2d.%02d %s from Total cpu time)  \n",(@sum(dur_cr)-dur_cr_not_cpu),cr_ratio_run_time/100,cr_ratio_run_time%100,"%")
 	
 	printf ("---------------------------------------------------------\n")	
-    printf ("------- Object number and cr I/O count ------------------\n")
+	printf ("------- Object number and cr I/O count ------------------\n")
 	printf ("---------------------------------------------------------\n")
  	
 	foreach ([m] in obj_cr+ ) {
 		printf ("cr=%d obj_n=%d \n", @count(obj_cr[m]),  m)
 	} 
-	
 
-
-		
 	printf ("---------------------------------------------------------\n")	
 	printf ("------- CR I/O duration hist(us) ------------------------\n")
 	printf ("---------------------------------------------------------\n")	
