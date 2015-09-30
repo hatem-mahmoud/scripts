@@ -21,14 +21,16 @@
 # w : Display wait event histograms.
 # b : Display bind variables.
 # d : Display I/O stats. 
+# g : Display SQL genealogy 
 #
 # Example : 
-# @TrcExtProf.sql tracefile.trc -t(20)r(20)wb 
+# @TrcExtProf.sql tracefile.trc -t(20)r(20)wbg 
 # This will display  : - All statements which contribute more than 20% of total response time
 #					   - For every statements displayed list all recursive statements which contribute more than 20% of parent statement response time
 #					   - Display wait event histograms
 #					   - Display bind variables
 #					   - Does not display I/O stats because 'd' option is not specified
+#					   - Display SQL genealogy 
 #
 #
 #
@@ -277,6 +279,7 @@ var l_max_time number;
 var l_show_bind number;
 var l_show_wait_hist number;
 var l_show_io_stat number;
+var l_show_sql_gea number;
 var l_min_time number;
 var last_call_time number;
 var l_total_response_time number;
@@ -313,6 +316,7 @@ BEGIN
 :l_show_wait_hist := 0;
 :l_show_bind := 0;
 :l_show_io_stat := 0;
+:l_show_sql_gea := 0;
 :l_final_line := 9999999999999999;
 
  if ('&2' like '-%w%' ) then 
@@ -327,6 +331,13 @@ BEGIN
 	dbms_output.put_line('Display bind variables : Y ');
 	else
 	dbms_output.put_line('Display bind variables : N ');
+ end if;
+ 
+  if ('&2' like '-%g%' ) then 
+    :l_show_sql_gea := 1;
+	dbms_output.put_line('Display sql geanology : Y ');
+	else
+	dbms_output.put_line('Display sql geanology : N ');
  end if;
   
  if ('&2' like '-%d%' ) then 
@@ -1367,6 +1378,73 @@ SELECT *
  else
  
  DBMS_OUTPUT.put_line (' * Option ''d'' not specified to display Hot I/O Blocks');
+
+ end if;
+
+end;
+
+/
+
+
+
+PROMPT
+PROMPT *************************************************************
+PROMPT SQL GEANOLOGY
+PROMPT *************************************************************
+PROMPT
+
+
+begin
+
+
+if ( :l_show_sql_gea = 1 ) then
+
+DBMS_OUTPUT.put_line (rpad('%Self_time',10) ||'|'|| rpad('Self_time',10) ||'|'|| rpad('Recur_time',10)  ||'|'||  rpad('Exec_count',10)  ||'|'||  rpad('sqlid',12)  ||'|'||   rpad('hv',12)||'|'||   rpad('u_id',6));
+DBMS_OUTPUT.put_line ('------------------------------------------------------------------------');	
+for c_1 in (
+WITH sql_gea1
+     AS (SELECT row_num r,
+                curnum,
+                CASE WHEN dep < dep_pre THEN CALL_BEGIN ELSE row_num END b,
+                u_id,
+                dep,
+                dep_pre,
+                RPAD ('.', dep, '.') || '' || text text,
+                sqlid,
+                hv,
+                (ALL_WAIT_TIME + CPU_TIME) all_response,
+                (SELF_WAIT_ELA_S + SELF_CPU_TIME) self_response,
+                DECODE (call_name, 'EXEC', 1, 0) AS is_exec
+           FROM TRCEXTPROF_GEANOLGY_TEXT),
+     sql_gea2
+     AS (    SELECT ROWNUM row_num2, co.*, CONNECT_BY_ROOT text par
+               FROM sql_gea1 co
+         START WITH dep = 0
+         CONNECT BY PRIOR dep = dep - 1 AND PRIOR b < r AND PRIOR r > r)
+  SELECT SUM (self_response) self_response_time,
+         SUM (all_response) - SUM (self_response) recursive_response_time,
+         SUM (is_exec) exec_count,
+         sqlid,
+         u_id,
+         text,
+         hv,
+         dep
+    FROM sql_gea2
+GROUP BY sqlid,
+         u_id,
+         text,
+         hv,
+         dep,
+         par
+ORDER BY MIN (row_num2) ) loop
+ 
+  DBMS_OUTPUT.put_line ( rpad(  ROUND(((c_1.self_response_time) /  :l_total_response_time ) *100,2),10) ||'|'||rpad(c_1.self_response_time,10) ||'|'|| rpad(c_1.recursive_response_time,10)  ||'|'||  rpad(c_1.exec_count,10)  ||'|'||  rpad( c_1.sqlid,12)  ||'|'||   rpad( c_1.hv,12)||'|'||   rpad( c_1.u_id,6) ||'|'|| c_1.text);
+ 
+ end loop;
+ 
+ else
+ 
+ DBMS_OUTPUT.put_line (' * Option ''g'' not specified to display SQL geanology');
 
  end if;
 
