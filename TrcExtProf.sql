@@ -228,11 +228,12 @@ CREATE UNIQUE  INDEX  TRCEXTPROF_STATS_IDX ON TRCEXTPROF_STATS(ROW_NUM);
 
 prompt Temporary table and indexes for bindes
 
-CREATE GLOBAL TEMPORARY TABLE TRCEXTPROF_BINDS
+CREATE GLOBAL TEMPORARY TABLE HATEM.TRCEXTPROF_BINDS
 (
-  ROW_NUM  NUMBER                                   NULL,
-  TEXT     VARCHAR2(4000 BYTE)                      NULL,
-  PAR_CUR  VARCHAR2(4000 BYTE)                      NULL
+  ROW_NUM   NUMBER                                  NULL,
+  TEXT      VARCHAR2(4000 BYTE)                     NULL,
+  CUR_NUM   VARCHAR2(4000 BYTE)                     NULL,
+  BIND_END  NUMBER                                  NULL
 )
 ON COMMIT PRESERVE ROWS
 RESULT_CACHE (MODE DEFAULT)
