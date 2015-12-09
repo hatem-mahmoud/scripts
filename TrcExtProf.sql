@@ -1118,7 +1118,7 @@ declare
 
 cursor c_general_info is (     
 SELECT MAX (tim),
-       MIN (tim),
+       MIN (tim - ela),
        MAX (max_tim_db_call),
        SUM (NB_INTERNAL_STAT),
        SUM (nb_recursive_stat),
@@ -1143,6 +1143,37 @@ SELECT MAX (tim),
                   END)
                / 10E5
                   AS tim,
+                  (CASE
+                     WHEN text LIKE 'WAIT%'
+                     THEN
+                         TO_NUMBER (
+						   SUBSTR (
+							  text,
+							  INSTR (text, 'ela=') + 5,
+								INSTR (text, ' ', INSTR (text, 'ela=') + 5)
+							  - INSTR (text, 'ela=')
+							  - 4))
+                     WHEN text LIKE 'PARSE ERROR%'
+                     THEN
+                        0 
+					 WHEN text LIKE 'PARSING IN CURSOR%'
+                     THEN
+                        0 
+					 WHEN text LIKE 'ERROR%'
+                     THEN
+                        0 	
+                     ELSE
+                         TO_NUMBER (
+                          SUBSTR (
+                             text,
+                             INSTR (text, 'e=') + 2,
+                               INSTR (text, ',', INSTR (text, 'e='))
+                             - INSTR (text, 'e=')
+                             - 2))
+
+                  END)
+               / 10E5
+                  AS ela,  
                CASE
                   WHEN row_num LIKE
                           MAX (
