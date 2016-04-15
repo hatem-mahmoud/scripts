@@ -1,0 +1,87 @@
+#! /usr/bin/env stap
+#
+# This script contains excerpt of code developed by :
+#   Luca Canali  : http://externaltable.blogspot.com/2016/03/systemtap-guru-mode-and-oracle-sql.html
+
+
+global listener_child_pid,oracle_process_pid,check_pid,statement_track
+
+probe begin {
+  printf("-----------------------------\n");
+  printf("Waiting for new connection\n");
+
+}
+
+function block_parse(pointersql:long) %{
+    char *sqltext;
+    sqltext = (char *) STAP_ARG_pointersql;
+     /* Modify the SQL text with an end of line: this will throw ORA-00900: invalid SQL statement */
+    sqltext[0] = 0;
+%}
+
+
+probe kernel.function("inet_csk_accept").return {
+  sock = $return
+  if (target() == pid() && sock != 0) {
+   if (inet_get_ip_source(sock) == @1) {
+      printf("-----------------------------\n");
+      printf("User connected from %s on %s\n",inet_get_ip_source(sock),ctime());
+      check_pid = 1;
+    }
+  }
+}
+
+
+probe nd_syscall.clone.return {
+  if (check_pid  == 1 && target() == pid()  ) {
+    printf("Tracking child listener with pid : %s\n",retstr);
+    listener_child_pid = retstr
+    check_pid = 0;
+  }
+
+
+  if (strtol(listener_child_pid,10) == pid()) {
+    printf("Assigned oracle process with pid : %s\n",retstr);
+    oracle_process_pid = retstr;
+    listener_child_pid = "-1";
+  }
+}
+
+
+probe process("oracle").function("kksParseCursor") {
+  if ( statement_track == 1 && strtol(oracle_process_pid,10) == pid()) {
+
+    sqltext = user_string2(pointer_arg(5),"error")
+
+    if (isinstr(sqltext, "create") || isinstr(sqltext, "drop")) {
+      printf("Bloked statement : %s \n",sqltext)
+      block_parse(pointer_arg(5))
+    } else if (isinstr(sqltext, "error") == 0 ){
+      printf("Parsed statement :  %s \n", sqltext)
+    }
+  }
+}
+
+
+probe process("oracle").function("opiinfv") {
+
+  if (pid() == strtol(oracle_process_pid,10) )
+  {
+       connect_info = user_string2(pointer_arg(2),"ERROR");
+       printf("Connection info : \n");
+       printf("%s\n",connect_info )
+       printf("-----------------------------\n");
+   if (isinstr( connect_info,@2) == 1 )
+     {
+       printf("Traking statement parsing\n");
+       printf("-----------------------------\n");
+       statement_track= 1;
+     } else {
+       printf("Traking statement parsing not enabled (Different service_name specified)\n");
+       printf("-----------------------------\n");
+       printf("Waiting for new connection\n");
+       statement_track = 0;
+     }
+
+  }
+}
