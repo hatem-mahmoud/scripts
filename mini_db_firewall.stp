@@ -2,9 +2,7 @@
 #
 # This script contains excerpt of code developed by :
 #   Luca Canali  : http://externaltable.blogspot.com/2016/03/systemtap-guru-mode-and-oracle-sql.html
-
-
-global listener_child_pid,oracle_process_pid,check_pid,statement_track
+global listener_child_pid,oracle_process_pid,check_pid,statement_track,fd_socket
 
 probe begin {
   printf("-----------------------------\n");
@@ -24,11 +22,19 @@ probe kernel.function("inet_csk_accept").return {
   sock = $return
   if (target() == pid() && sock != 0) {
    if (inet_get_ip_source(sock) == @1) {
-      printf("-----------------------------\n");
+      printf("----------------------------- \n");
       printf("User connected from %s on %s\n",inet_get_ip_source(sock),ctime());
       check_pid = 1;
     }
   }
+}
+
+
+probe syscall.accept.return {
+ if (target() == pid() && check_pid == 1) {
+   printf("Allocated file discriptor : %s\n",retstr);
+   fd_socket = retstr;
+ }
 }
 
 
@@ -48,7 +54,7 @@ probe nd_syscall.clone.return {
 }
 
 
-probe process("oracle").function("kksParseCursor") {
+probe process("/app/oracle/12.1.0/dbhome_1/bin/oracle").function("kksParseCursor") {
   if ( statement_track == 1 && strtol(oracle_process_pid,10) == pid()) {
 
     sqltext = user_string2(pointer_arg(5),"error")
@@ -63,7 +69,7 @@ probe process("oracle").function("kksParseCursor") {
 }
 
 
-probe process("oracle").function("opiinfv") {
+probe process("/app/oracle/12.1.0/dbhome_1/bin/oracle").function("opiinfv") {
 
   if (pid() == strtol(oracle_process_pid,10) )
   {
@@ -85,3 +91,26 @@ probe process("oracle").function("opiinfv") {
 
   }
 }
+
+
+
+probe  nd_syscall.write {
+ if ( fd ==  strtol(fd_socket,10) &&  pid() == strtol(oracle_process_pid,10) ) {
+
+ #For some reason i was not able to get the full string using user_string_n(pointer_arg(2),ulong_arg(3)) so i used this dirty trick
+ for (i=0;i<ulong_arg(3);i=i+10) {
+   if ( isinstr(user_string_n(pointer_arg(2)+i,10) , "HATEM" ) == 1 ) {
+     printf("Changing data\n");
+     replace_string(pointer_arg(2)+i,str_replace(user_string_n(pointer_arg(2)+i,10),"HATEM","LOOOL"));
+   }
+ }
+ }
+}
+
+function replace_string(old_text:long,new_text:string) %{
+    char *oldtext;
+    char *newtext;
+    oldtext = (char *) STAP_ARG_old_text;
+    newtext = (char *) STAP_ARG_new_text;
+    strcpy(oldtext,newtext);
+%}
