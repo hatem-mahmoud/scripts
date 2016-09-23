@@ -2,9 +2,10 @@
 # Author : Hatem Mahmoud <h.mahmoud87@gmail.com>
 # BLOG : https://mahmoudhatem.wordpress.com
 #
+# Example : cpu_profiler.sh PID SAMPLE_TIME_SEC
 #
-#Run eventsname.sql and place the output file eventsname.sed in the current directory
-#Update the folowing variable before running the script
+# Run eventsname.sql and place the output file eventsname.sed in the current directory
+# Update the folowing variable before running the script
 #
 
 oracle_path=/oracle11/install/bin/oracle
