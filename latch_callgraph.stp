@@ -1,0 +1,23 @@
+global padding=-1
+
+probe process("oracle").function("ksl_get_shared_latch") {
+ if (pid() == target()) {
+    padding=padding+1
+    printf ("%s->Shared Latch acquisition : laddr=%x ,wait=%d ,where=%d,why=%d,mode=%d\n", substr("                             ",1,padding),register("rdi"), register("rsi"), register("rcx"), register("rdx"), register("r8") )
+ }
+}
+
+
+probe process("oracle").function("kslgetl") {
+ if (pid() == target()) {
+    padding=padding+1
+    printf ("%s->Exculsive Latch acquisition : laddr=%x ,wait=%d ,where=%d,why=%d\n",  substr("                             ",1,padding),register("rdi"), register("rsi"), register("rcx"), register("rdx") )
+ }
+}
+
+probe process("oracle").function("kslfre") {
+ if (pid() == target()) {    
+    printf ("%s<-Latch released : laddr=%x\n", substr("                             ",1,padding),register("rdi") )
+	padding=padding-1
+ }
+}
