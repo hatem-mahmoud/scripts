@@ -64,6 +64,26 @@ global KSUSSOPC = 1602
 global KSUSSTIM = 1632
 global KSUSENUM = 1704
 
+/*
+* You have to use the following query to determine interesting where location to probe for 
+* (where 115 and 116 correspond respectively to "ksupucg: set busy" and "ksupop: clear busy"
+* in my 12.1.0.2.6 instance)
+* SELECT indx 
+*   FROM x$ksllw
+*  WHERE     KSLLWLBL = 'session ptr'
+*       AND KSLLWNAM like '%set busy%'
+*        AND indx IN (SELECT indx
+*                       FROM x$kslwsc
+*                      WHERE KSLLASNAM = 'session idle bit');
+*/
+
+probe process("oracle").function("ksl_get_shared_latch") {
+  if (pid() == target() && session_addr == 0 && ( s64_arg(4) == 115 || s64_arg(4) == 116 ) ) {
+    session_addr =  s64_arg(3)
+    printf("Session initialized %d\n",pointer_arg(3))
+  }
+}
+
 
 @define in_iowait(task) %(
   @choose_defined(@task->in_iowait,
@@ -89,15 +109,6 @@ function timestamp()
 {
   return gettimeofday_us()
 }
-
-
-probe process("oracle").function("ksl_get_shared_latch") {
-  if (pid() == target() && session_addr == 0 && ( s64_arg(4) == 115 || s64_arg(4) == 116 ) ) {
-    session_addr =  s64_arg(3)
-    printf("Session initialized %d\n",pointer_arg(3))
-  }
-}
-
 
 probe process("oracle").function("kcbgtcr")
 	 {
