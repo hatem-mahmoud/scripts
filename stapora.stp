@@ -60,14 +60,13 @@ global eventlatency[2000]
 * order by c.kqfcooff;
 */
 
-global KSUSSOPC = 1602
-global KSUSSTIM = 1632
-global KSUSENUM = 1704
+global KSUSSOPC = 5826
+global KSUSSTIM = 5856
+global KSUSENUM = 5920
 
 /*
-* You have to use the following query to determine interesting where location to probe for 
-* (where 115 and 116 correspond respectively to "ksupucg: set busy" and "ksupop: clear busy"
-* in my 12.1.0.2.6 instance)
+* You have to use the following query to determine interesting where location to probe for and replace them in 
+* "( s64_arg(4) == 95 )":
 * SELECT indx 
 *   FROM x$ksllw
 *  WHERE     KSLLWLBL = 'session ptr'
@@ -78,7 +77,7 @@ global KSUSENUM = 1704
 */
 
 probe process("oracle").function("ksl_get_shared_latch") {
-  if (pid() == target() && session_addr == 0 && ( s64_arg(4) == 115 || s64_arg(4) == 116 ) ) {
+  if (pid() == target() && session_addr == 0 && ( s64_arg(4) == 95 ) ) {
     session_addr =  s64_arg(3)
     printf("Session initialized %d\n",pointer_arg(3))
   }
