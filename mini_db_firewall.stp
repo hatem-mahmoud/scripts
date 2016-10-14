@@ -1,5 +1,8 @@
 #! /usr/bin/env stap
 #
+# Tested with ORACLE 11.2.0.4 on  OEL6 with kernel UEK4 
+# Systemtap version used 3.0
+#
 # This script contains excerpt of code developed by :
 #   Luca Canali  : http://externaltable.blogspot.com/2016/03/systemtap-guru-mode-and-oracle-sql.html
 global listener_child_pid,oracle_process_pid,check_pid,statement_track,fd_socket
@@ -54,14 +57,14 @@ probe nd_syscall.clone.return {
 }
 
 
-probe process("/app/oracle/12.1.0/dbhome_1/bin/oracle").function("kksParseCursor") {
+probe process("oracle").function("kksParseCursor") {
   if ( statement_track == 1 && strtol(oracle_process_pid,10) == pid()) {
 
-    sqltext = user_string2(pointer_arg(5),"error")
+    sqltext = user_string2(register("rbx"),"error")
 
     if (isinstr(sqltext, "create") || isinstr(sqltext, "drop")) {
       printf("Bloked statement : %s \n",sqltext)
-      block_parse(pointer_arg(5))
+      block_parse(register("rbx"))
     } else if (isinstr(sqltext, "error") == 0 ){
       printf("Parsed statement :  %s \n", sqltext)
     }
@@ -69,7 +72,7 @@ probe process("/app/oracle/12.1.0/dbhome_1/bin/oracle").function("kksParseCursor
 }
 
 
-probe process("/app/oracle/12.1.0/dbhome_1/bin/oracle").function("opiinfv") {
+probe process("oracle").function("opiinfv") {
 
   if (pid() == strtol(oracle_process_pid,10) )
   {
@@ -97,7 +100,7 @@ probe process("/app/oracle/12.1.0/dbhome_1/bin/oracle").function("opiinfv") {
 probe  nd_syscall.write {
  if ( fd ==  strtol(fd_socket,10) &&  pid() == strtol(oracle_process_pid,10) ) {
 
- #For some reason i was not able to get the full string using user_string_n(pointer_arg(2),ulong_arg(3)) so i used this dirty trick
+ #For some reason i was not able to get the full string using user_string_n(pointer_arg(2),ulong_arg(3)) so i used this very dirty trick (it will not work for all the cases and can be enhanced)
  for (i=0;i<ulong_arg(3);i=i+10) {
    if ( isinstr(user_string_n(pointer_arg(2)+i,10) , "HATEM" ) == 1 ) {
      printf("Changing data\n");
