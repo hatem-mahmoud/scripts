@@ -1,0 +1,108 @@
+
+/*
+* Script to monitor activity for a specified latch address
+* Tested in : oracle 11.2.0.4/OEL6/UEK4
+* Author:  Hatem Mahmoud
+*
+* Usage :  stap -v monitor_latch.stp "latch_address" "latch_number" "refresh_time" 
+*/
+
+
+/*
+* Run this query to check for the offset of the sid and sql_hash fields
+* select c.kqfconam FIELD_NAME, c.kqfcooff OFFSET from x$kqfco c, x$kqfta t
+* where t.indx = c.kqfcotab
+* and t.kqftanam='X$KSUSE'
+* and c.kqfconam in ('KSUSENUM','KSUSESQH')
+* order by c.kqfcooff;
+*/
+
+global KSUSENUM = 5920
+global KSUSESQH = 6084
+
+/*
+* Check the address of ksupga_ symbol 
+* objdump -x -j .bss oracle | grep ksupga_ | awk '{print $1}'
+*/
+
+global ksupga_address=202316608
+global ksupga_offset=24
+
+
+
+global init_latch_monitor=0
+global latch_holder
+global latch_get_offset
+global begin_hold_time
+global previous_get_value=0
+
+
+probe begin {
+
+printf ("\n----------------------------------------------------------------------------------\n") 
+printf ("--------------------Monitoring latch with address 0x%x----------------------\n",$1)	
+printf ("----------------------------------------------------------------------------------\n") 
+
+}
+
+
+probe kernel.data($1).write
+{  
+  
+  //begin monitoring only if we have the previous copy of the latch address content
+  if (init_latch_monitor == 1 ) 
+  {
+  //If the number of gets does not increment then the latch is acquired
+   if (previous_get_value == user_int32($1+latch_get_offset)) 
+   {	
+	 begin_hold_time[pid()]=gettimeofday_us()
+   }
+   else
+   {
+    //If the number of gets does increment then the latch is released
+	if (begin_hold_time[pid()] != 0) {	 
+	  delta = gettimeofday_us() - begin_hold_time[pid()]
+	  latch_holder[pid(),user_uint16(user_uint64(ksupga_address+ksupga_offset)+KSUSENUM),user_uint32(user_uint64(ksupga_address+ksupga_offset)+KSUSESQH)] <<< delta
+    }
+   }  
+  } 
+  else
+  {
+   //check latch gets offset relativly to latch level location (depend on latch type)
+    if ( user_int32($1+8) == $2 )
+	{
+	 latch_get_offset=4
+	}
+    	else
+	{
+	 latch_get_offset=8
+	}
+  
+  }
+    
+  //Store the latch address content for future comparaison  
+  previous_get_value=user_int32($1+latch_get_offset)
+  init_latch_monitor = 1;  
+ 
+
+}
+
+
+probe timer.s($3)
+{
+
+if (init_latch_monitor == 1)
+{
+printf ("\n----------------------------------------------------------------------------------\n") 
+printf ("PID   |SID   |SQL_HASH  |REQ_NB |HOLD_TIME(us)|AVG_HOLD_TIME(us)|MAX_HOLD_TIME(us)\n")	
+printf ("----------------------------------------------------------------------------------\n") 
+foreach ([a,b,c] in latch_holder-) {
+		printf ("%6d|%6d|%10d|%7d|%13d|%17d|%17d\n",a,b,c ,@count(latch_holder[a,b,c]),@sum(latch_holder[a,b,c]),@avg(latch_holder[a,b,c]),@max(latch_holder[a,b,c]))
+}
+delete latch_holder
+}
+else
+{
+printf("Latch monitoring in standby mode\n")
+}
+}
