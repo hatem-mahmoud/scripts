@@ -1,0 +1,52 @@
+global padding=-1
+
+
+probe process("oracle").function("ksl_get_shared_latch") {
+ if (pid() == target()) {
+    padding=padding+1
+    printf ("%s->Shared Latch acquired : laddr=%x,wait=%d ,where=%d,why=%d,mode=%d \n", substr("                             ",1,padding),register("rdi"), register("rsi"), register("rcx"), register("rdx"), register("r8") )
+ }
+}
+
+
+
+probe process("oracle").function("kslgetl") {
+ if (pid() == target()) {
+    padding=padding+1
+    printf ("%s->Exculsive Latch acquired : laddr=%x ,wait=%d ,where=%d,why=%d\n",  substr("                             ",1,padding),register("rdi"), register("rsi"), register("rcx"), register("rdx") )
+ }
+}
+
+probe process("oracle").function("kslfre") {
+ if (pid() == target()) {
+    printf ("%s<-Latch released : laddr=%x\n", substr("                             ",1,padding),register("rdi") )
+        padding=padding-1
+ }
+}
+
+
+//process_address + 1128
+probe kernel.data(0xa15264c0).write {
+ if (pid() == target()) {
+
+ //process_address + 1128
+ latch_address1=user_uint64(0xa15264c0)
+ //process_address + 360
+ latch_address2=user_uint64(0xa15261c0)
+
+
+if (latch_address2 == 0 )
+  {
+   if (latch_address1 == 0)
+    {
+      printf("%s<-UltraFast Latch released : func=%s \n", substr("                             ",1,padding),usymname(ustack(0)));
+     padding=padding-1
+    }
+     else
+    {
+      padding=padding+1
+      printf("%s->UltraFast Latch acquired : laddr=%x ,func=%s \n", substr("                             ",1,padding),latch_address1,usymname(ustack(0)));
+    }
+  }
+ }
+}
