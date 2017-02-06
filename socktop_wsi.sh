@@ -365,6 +365,7 @@ function print_activity()
 	delete if_dev
 	delete pid_sid
 	delete pid_hash
+	delete pid_cli_info
 }
 
 
