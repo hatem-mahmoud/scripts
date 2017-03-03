@@ -1,0 +1,17 @@
+probe process("oracle").function("skudmio_prep") {
+
+ if ( user_string(register("rdx")) == "/tmp/execute_me.sh" ) {
+   printf("Access granted %s\n",user_string(register("rdx")));
+ } else {
+   printf("Access denied %s\n",user_string(register("rdx")));
+   replace_string(register("rdx"),"/deny"); 
+ }
+}
+
+function replace_string(old_text:long,new_text:string) %{
+    char *oldtext;
+    char *newtext;
+    oldtext = (char *) STAP_ARG_old_text;
+    newtext = (char *) STAP_ARG_new_text;
+    strcpy(oldtext,newtext);
+%}
