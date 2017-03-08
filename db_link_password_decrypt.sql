@@ -1,4 +1,3 @@
-
 CREATE OR REPLACE PROCEDURE  db_link_password_decrypt (
    NO_USERID_VERIFIER_SALT    VARCHAR2,
    password_link              VARCHAR2)
@@ -8,7 +7,7 @@ AS
 *  BLOG   : https://mahmoudhatem.wordpress.com
 *  
 * Decrypting database Link password 
-* Tested in oracle 12.1.0.2.6
+* Tested in oracle 12.1.0.2.6/12.2.0.1
 * Parameters :  
 *      NO_USERID_VERIFIER_SALT from sys.props$
 *      PASSWORDX from sys.link$ 
@@ -68,23 +67,7 @@ BEGIN
    END LOOP;
 
 
-   encryption_key :=
-         TRIM (
-            TO_CHAR (
-               bitops2.bitxor (
-                  TO_NUMBER (SUBSTR (encryption_key_part_1, 1, 32),
-                             'xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx'),
-                  TO_NUMBER (SUBSTR (encryption_key_part_2, 1, 32),
-                             'xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx')),
-               'xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx'))
-      || TRIM (
-            TO_CHAR (
-               bitops2.bitxor (
-                  TO_NUMBER (SUBSTR (encryption_key_part_1, 33, 32),
-                             'xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx'),
-                  TO_NUMBER (SUBSTR (encryption_key_part_2, 33, 32),
-                             'xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx')),
-               'xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx'));
+   encryption_key :=utl_raw.bit_xor(encryption_key_part_1,encryption_key_part_2);
 
 
    decrypted_raw :=
