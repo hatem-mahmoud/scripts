@@ -1,0 +1,50 @@
+#! /usr/bin/env stap
+#
+# Tested with ORACLE 12.1.0.2.6 on OEL6 with kernel UEK4
+# Systemtap version used 3.0
+#
+global listener_child_pid,oracle_process_pid,check_pid
+global contCmd
+
+probe begin {
+  printf("-----------------------------\n");
+  printf("Waiting for new connection\n");
+}
+
+probe kernel.function("inet_csk_accept").return {
+  sock = $return
+  if (target() == pid() && sock != 0) {
+   if (inet_get_ip_source(sock) == @1) {
+      printf("----------------------------- \n");
+      printf("User connected from %s on %s\n",inet_get_ip_source(sock),ctime());
+      check_pid = 1;
+    }
+  }
+}
+
+
+probe nd_syscall.clone.return {
+  if (check_pid  == 1 && target() == pid()  ) {
+    printf("Tracking child listener with pid : %s\n",retstr);
+    listener_child_pid = retstr
+    check_pid = 0;
+  }
+
+  if (strtol(listener_child_pid,10) == pid()) {
+    printf("Assigned oracle process with pid : %s\n",retstr);
+    oracle_process_pid = retstr;
+    stopCmd = sprintf("set +o posix && kill -SIGSTOP %s", oracle_process_pid);
+    contCmd = sprintf("set +o posix && kill -SIGCONT %s", oracle_process_pid);
+    printf("Process with pid %s suspended ! Attach you debugging program then hit Ctr+C to resume execution !\n", oracle_process_pid);
+    system(stopCmd);
+	  listener_child_pid = "-1";
+}
+}
+
+
+probe end {
+ if (strtol(oracle_process_pid,10) != 0 ) {
+   printf("Process with pid %s resumed !\n", oracle_process_pid);
+   system(contCmd);
+ }
+}
