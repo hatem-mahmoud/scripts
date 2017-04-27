@@ -48,6 +48,11 @@ printf ("-----------------------------------------------------------------------
 
 probe kernel.data($1).write
 {  
+  //Check the latch virtual address only in the context of process who belong to the target oracle instance
+  //Verify to which instance the process who modified the virtual address content belong
+  //to be imporved !  (execname return a truncated string max 15 char so we can not use it to check the instance SID in every case such as  isinstr(execname(),"testdb" ) )
+
+if ( (isinstr(execname(),"ora_" ) == 1 || isinstr(execname(),"oracle" ) == 1) && isinstr(execname(),"te")  ){
   
   //begin monitoring only if we have the previous copy of the latch address content
   if (init_latch_monitor == 1 ) 
@@ -84,7 +89,7 @@ probe kernel.data($1).write
   previous_get_value=user_int32($1+latch_get_offset)
   init_latch_monitor = 1;  
  
-
+}
 }
 
 
