@@ -46,7 +46,7 @@ printf ("-----------------------------------------------------------------------
 }
 
 
-probe kernel.data($1).write
+probe kernel.data($1).length(8).write
 {  
   //Check the latch virtual address only in the context of process who belong to the target oracle instance
   //Verify to which instance the process who modified the virtual address content belong
