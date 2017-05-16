@@ -1,0 +1,36 @@
+
+global latch_hold
+global latch_hold_c,latch_hold_p
+global padding=-1
+
+
+//process_address + 568+16*18 (“KSLLALAQ” of  x$ksupr fixed table)
+probe kernel.data($1).write {
+if (target() ==  pid() ) {
+
+latch_hold_c=user_int64($1);
+
+
+//Looping throught latch state objects array
+for (i=1;i<19;i=i+1) {
+        if (user_int64($1-16*i) != 0 ) {
+                latch_hold[user_int64($1-16*i)] = 1
+        }
+}
+
+if (latch_hold_c != 0 ) {
+//user_int64($1+592) is for handling special case of ultra fast latch
+        if (latch_hold[latch_hold_c] != 1 && user_int64($1+592) != latch_hold_c ) {
+                padding=padding+1;
+                printf("%s->Latch acquired in func %s at adr=0x%x laddr=%x  %d %d\n", substr("                             ",1,padding),probefunc(),latch_hold_c,latch_hold_c,user_int32(latch_hold_c+4),user_int32(latch_hold_c+8));
+        }
+} else {
+        if (latch_hold[latch_hold_p] != 1 && user_int64($1+592) != latch_hold_p) {
+                printf("%s<-Latch released in func %s at adr=0x%x laddr=%x %d %d\n", substr("                             ",1,padding),probefunc(),latch_hold_p,latch_hold_p,user_int32(latch_hold_p+4),user_int32(latch_hold_p+8));
+                padding=padding-1;
+        }
+}
+latch_hold_p=latch_hold_c;
+delete latch_hold;
+}
+}
