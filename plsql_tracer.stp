@@ -1,0 +1,80 @@
+#! /usr/bin/env stap
+#
+# plsql_tracer.stp
+#
+# This script is a geeky PL/SQL tracer
+# Usage:  stap -v plsql_profiler.stp -x 14971  | xargs -i ./sql_resolver.sh {}
+#
+# Author : Hatem Mahmoud <h.mahmoud87@gmail.com>
+# BLOG 	 : https://mahmoudhatem.wordpress.com
+#
+# Tested in oracle 12.2.0.1
+# Note: this is an experimental script, use at your own risk
+
+
+global plsql_run_addr,monitor,b_monitor
+
+
+#PL/SQL begin execution
+probe process("oracle").function("plsql_run").call {
+  plsql_run_addr = register("rdi");
+  monitor = 1;
+}
+
+#PL/SQL end execution
+probe process("oracle").function("plsql_run").return {
+  monitor = 0;
+}
+
+
+
+#Tracing PL/SQL functions 
+probe  process("oracle").function("p*")
+{
+
+if ( monitor > 1 ) {
+
+current_addr = plsql_run_addr+120;
+base_addr1 = plsql_run_addr+144;
+base_addr2 = user_int64(base_addr1);
+base_addr3 = user_int64(base_addr2)+264;
+KGLHDADR = user_int64(base_addr2)+104;
+
+inst_offset = user_int64(current_addr) - user_int64(user_int64(base_addr3))
+
+printf("%s:%x:%x:%d\n",probefunc(),inst_offset,user_int64(KGLHDADR),monitor);
+
+}
+
+}
+
+
+
+#Follow plsql call
+probe  process("oracle").function("pfrinstr_ENTER").call {
+
+if (b_monitor == 1) {
+monitor = monitor + 1;
+b_monitor = 0;
+} else {
+b_monitor = 2;
+}
+
+}
+
+
+probe  process("oracle").function("pfrust").call {
+
+if ( b_monitor < 2 ) {
+monitor = monitor - 1;
+} else {
+b_monitor = 0;
+}
+
+}
+
+
+
+probe  process("oracle").function("pfrxca").call {
+b_monitor = 1;
+}
