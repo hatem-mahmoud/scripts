@@ -1,0 +1,93 @@
+global plsql_run_addr,monitor,b_monitor,last_offset
+
+#PL/SQL begin execution
+probe process("oracle").function("plsql_run").call {
+  plsql_run_addr = register("rdi");
+  monitor = 1;
+  printf("Line Begin|%d|%x|%x\n",local_clock_us(),0,0);
+
+}
+
+#PL/SQL end execution
+probe process("oracle").function("plsql_run").return {
+  monitor = 0;
+  printf("Line End|%d|%x|%x\n",local_clock_us(),0,0);
+
+}
+
+
+probe  process("oracle").function("p*").call
+{
+
+if ( monitor > 1 ) {
+
+        current_addr = plsql_run_addr+120;
+        base_addr1 = plsql_run_addr+144;
+        base_addr2 = user_int64(base_addr1);
+        base_addr3 = user_int64(base_addr2)+264;
+        KGLHDADR = user_int64(base_addr2)+104;
+
+        inst_offset = user_int64(current_addr) - user_int64(user_int64(base_addr3))		
+        printf("Line Tracker|%d|%x|%x\n",local_clock_us(),inst_offset,user_int64(KGLHDADR));
+
+}
+}
+
+
+#Follow plsql call
+probe  process("oracle").function("pfrinstr_ENTER").call {
+
+if (b_monitor == 1) {	        
+		monitor = monitor + 1;
+		b_monitor = 0;
+} else {
+		b_monitor = 2;
+}
+
+}
+
+
+probe  process("oracle").function("pfrust").call {
+
+if ( b_monitor < 2 ) {
+monitor = monitor - 1;
+		current_addr = plsql_run_addr+120;
+        base_addr1 = plsql_run_addr+144;
+        base_addr2 = user_int64(base_addr1);
+        base_addr3 = user_int64(base_addr2)+264;
+        KGLHDADR = user_int64(base_addr2)+104;
+
+        inst_offset = user_int64(current_addr) - user_int64(user_int64(base_addr3))		
+        printf("Line Tracker|%d|%x|%x|%d\n",local_clock_us(),inst_offset,user_int64(KGLHDADR),99999)
+} else {
+b_monitor = 0;
+}
+
+}
+
+
+
+probe  process("oracle").function("prfinstr_XCAL").call {
+		b_monitor = 1;
+		current_addr = plsql_run_addr+120;
+        base_addr1 = plsql_run_addr+144;
+        base_addr2 = user_int64(base_addr1);
+        base_addr3 = user_int64(base_addr2)+264;
+        KGLHDADR = user_int64(base_addr2)+104;
+
+        inst_offset = user_int64(current_addr) - user_int64(user_int64(base_addr3))
+		last_offset = inst_offset;
+}
+
+
+probe  process("oracle").function("pfrxca").call {
+		b_monitor = 1;
+		current_addr = plsql_run_addr+120;
+        base_addr1 = plsql_run_addr+144;
+        base_addr2 = user_int64(base_addr1);
+        base_addr3 = user_int64(base_addr2)+264;
+        KGLHDADR = user_int64(base_addr2)+104;
+
+        inst_offset = last_offset;
+        printf("Line Tracker|%d|%x|%x|%d\n",local_clock_us(),inst_offset,user_int64(KGLHDADR),monitor);
+}
