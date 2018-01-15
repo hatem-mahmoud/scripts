@@ -21,6 +21,7 @@ cache_test=`grep "$kglhd_var $offset_var"   cache_resolver`
 if [ -z "$cache_test" ] 
 then
 
+# ARGUMENT 1 and 3 of funtion pfrln0lookup  have to be investigated in more detail for now i just put any address that s mapped to VAS of the target process
 line_var=`sqlplus / as sysdba <<EOF 2>&1 | grep -i function | cut -d' ' -f4
 oradebug setmypid
 oradebug call pfrln0lookup 0x7ffff3c6bc38 $kglhd_var 0x7ffff3c6bc38 $offset_var
