@@ -1,0 +1,78 @@
+#! /usr/bin/env stap
+#
+# trace_mem_alloc.stp
+#
+# From memory request to PL/SQL source line
+# Usage:  stap -v trace_mem_alloc.stp -x  4597  '"pmuccst: adt/record"' 5  | xargs -i ./trace_mem_alloc_resov.sh {}
+#
+# Author : Hatem Mahmoud <h.mahmoud87@gmail.com>
+# BLOG   : https://mahmoudhatem.wordpress.com
+#
+# Tested in oracle 12.2.0.1
+# Note: this is an experimental script, use at your own risk
+
+
+global plsql_run_addr,monitor,inst_offset,KGLHDADR_1
+global allocation_tracker
+
+
+#PL/SQL begin execution
+probe process("oracle").function("plsql_run").call {
+  plsql_run_addr = register("rdi");
+  monitor = 1;
+}
+
+#PL/SQL end execution
+probe process("oracle").function("plsql_run").return {
+  monitor = 0;
+}
+
+
+#Tracing PL/SQL functions
+probe  process("oracle").function("p*")
+{
+
+if ( monitor == 1 ) {
+
+current_addr = plsql_run_addr+120;
+base_addr1 = plsql_run_addr+144;
+base_addr2 = user_int64(base_addr1);
+base_addr3 = user_int64(base_addr2)+264;
+KGLHDADR = user_int64(base_addr2)+104;
+
+inst_offset = user_int64(current_addr) - user_int64(user_int64(base_addr3))
+KGLHDADR_1 = user_int64(KGLHDADR);
+
+}
+
+}
+
+
+probe  process("oracle").function("kghalf").call,process("oracle").function("kghalp").call
+{
+
+if ( monitor == 1 &&   isinstr(user_string(pointer_arg(6)), $1)==1 ) {
+        allocation_tracker[KGLHDADR_1,inst_offset] <<< 1
+}
+}
+
+
+probe  process("oracle").function("kghalo").call
+{
+if ( monitor == 1 &&  isinstr(user_string(pointer_arg(9)), $1)==1   ) {
+        allocation_tracker[KGLHDADR_1,inst_offset] <<< 1
+}
+}
+
+
+
+probe timer.s($2) {
+
+        printf(":--------------------------------------------------------:\n");
+        printf(":PL/SQL line tracker for memory allocation reason : %s\n",$1);
+        printf(":--------------------------------------------------------:\n");
+        foreach ([a,b] in allocation_tracker+ ) {
+                printf ("%d:%x:%x \n", @count(allocation_tracker[a,b]),  a,b);
+        }
+
+}
