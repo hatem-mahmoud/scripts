@@ -8,6 +8,8 @@
 # Author : Hatem Mahmoud <h.mahmoud87@gmail.com>
 # BLOG   : https://mahmoudhatem.wordpress.com
 #
+# Based on Stefan Koehler dtrace script : http://www.soocs.de/public/scripts/dtrace_kghal_pga_code
+#
 # Tested in oracle 12.2.0.1
 # Note: this is an experimental script, use at your own risk
 
