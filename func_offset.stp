@@ -1,3 +1,16 @@
+#! /usr/bin/env stap
+#
+# func_offset.stp 
+#
+# Usage:  stap -g -v func_offset.stp oracle_exec_inode probe_function_address s_offset
+#
+# Author : Hatem Mahmoud <h.mahmoud87@gmail.com>
+# BLOG   : https://mahmoudhatem.wordpress.com
+#
+#
+# Note: this is an experimental script, use at your own risk
+ 
+ 
  function  change_offset(off:long)
  %{
         char *var;
