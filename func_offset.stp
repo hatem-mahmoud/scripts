@@ -11,25 +11,15 @@
 # Note: this is an experimental script, use at your own risk
  
  
- function  change_offset(off:long)
- %{
-        char *var;
-        memcpy(&var, ((char *)CONTEXT->kregs) + 104, sizeof(var));
-        //change offset
-        var += STAP_ARG_off ;
-        memcpy( ((char *)CONTEXT->kregs) + 104, &var, sizeof(var));
- %}
-
-
  probe kernel.function("uprobe_register"),kernel.function("uprobe_unregister")
  {
   if( $inode->i_ino == $1) {
    if ($offset ==  $2 ) {
      printf("Patching sepecial offset at  %x\n", $offset);
-     change_offset($3);
+     $offset = $offset + $3;
     } else {
      printf("Patching offset at  %x\n", $offset);
-     change_offset(2);
+     $offset = $offset + 2;
    }
    }
  }
