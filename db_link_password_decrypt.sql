@@ -20,7 +20,7 @@ AS
    encryption_key          VARCHAR2 (128);
    Ciphertext              VARCHAR2 (64);
    initialization_vector   VARCHAR2 (32);
-   decrypted_raw           VARCHAR2 (2000);
+   decrypted_raw           RAW (1000);
    output_string           VARCHAR2 (2000);
    encryption_type         PLS_INTEGER
       :=                                              -- total encryption type
@@ -91,7 +91,10 @@ BEGIN
                            typ   => encryption_type,
                            key   => encryption_key,
                            iv    => initialization_vector);
-   output_string := UTL_I18N.RAW_TO_CHAR (decrypted_raw, 'AL32UTF8');
+      output_string := UTL_I18N.RAW_TO_CHAR ( utl_raw.substr( decrypted_raw, 2,
+                                                              to_number( rawtohex( utl_raw.substr( decrypted_raw, 1, 1 ) ), 'XX' )
+                                                            )
+                                            );
 
 
 
