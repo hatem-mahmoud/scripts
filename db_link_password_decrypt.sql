@@ -5,6 +5,11 @@ AS
 /*
 *  Author : Hatem Mahmoud
 *  BLOG   : https://mahmoudhatem.wordpress.com
+*
+*  Contributor :
+*  Adric Norris (landstander668) : Strip decrypted password to plaintext portion
+*  Adric Norris (landstander668) : Allow script to be run using SQL*Plus
+*
 *  
 * Decrypting database Link password 
 * Tested in oracle 12.1.0.2.6/12.2.0.1
