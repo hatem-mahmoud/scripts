@@ -1,0 +1,703 @@
+SQL> ORADEBUG DOC COMPONENT
+
+
+Components in library DIAG:												   EDX(1160001)  ECX
+--------------------------
+alter session set  events 'trace[ diag_uts					  ] disk=high';      	   1050001          
+alter session set  events 'trace[	uts_vw					  ] disk=high';            1050014       
+alter session set  events 'trace[ diag_adr					  ] disk=high';    	       1050002       
+alter session set  events 'trace[	ams_comp				  ] disk=high';            105000d 
+alter session set  events 'trace[	ame_comp				  ] disk=high';            105000e 
+alter session set  events 'trace[	ami_comp				  ] disk=high';            105000f 
+alter session set  events 'trace[	diag_ads				  ] disk=high';            1050013 
+alter session set  events 'trace[ diag_hm					  ] disk=high';            1050003   
+alter session set  events 'trace[ diag_ips					  ] disk=high';            1050004   
+alter session set  events 'trace[ diag_dde					  ] disk=high';            1050005   
+alter session set  events 'trace[ diag_fmwk					  ] disk=high';            1050006   
+alter session set  events 'trace[	diag_ilcts				  ] disk=high';            1050007 
+alter session set  events 'trace[	diag_attr				  ] disk=high';            1050008 
+alter session set  events 'trace[	diag_comp				  ] disk=high';            1050009 
+alter session set  events 'trace[ diag_testp				  ] disk=high';            105000a   
+alter session set  events 'trace[	diag_testc1				  ] disk=high';            105000b
+alter session set  events 'trace[	diag_testc2				  ] disk=high';            105000c 
+alter session set  events 'trace[ KGSD						  ] disk=high';            1050010  
+alter session set  events 'trace[ diag_events				  ] disk=high';            1050011   
+alter session set  events 'trace[ diag_adl					  ] disk=high';            1050012   
+alter session set  events 'trace[ diag_vwk					  ] disk=high';            1050015  
+alter session set  events 'trace[	diag_vwk_parser			  ] disk=high';            1050016  
+alter session set  events 'trace[	diag_vwk_uts			  ] disk=high';            1050017 
+alter session set  events 'trace[	diag_vwk_ams			  ] disk=high';            1050018 
+alter session set  events 'trace[	diag_vwk_ci				  ] disk=high';            1050019 
+alter session set  events 'trace[ kghsc						  ] disk=high';            105001a  
+alter session set  events 'trace[ dbgxtk					  ] disk=high';            105001b   
+alter session set  events 'trace[ KDIZOLTP				 	  ] disk=high';            105001c     
+
+Components in library RDBMS:
+--------------------------
+alter session set  events 'trace[ SQL_Compiler                ] disk=high';            2050001
+alter session set  events 'trace[    SQL_Parser               ] disk=high';            2050002
+alter session set  events 'trace[    SQL_Semantic             ] disk=high';            2050003
+alter session set  events 'trace[    SQL_Optimizer            ] disk=high';            2050004
+alter session set  events 'trace[      SQL_Transform          ] disk=high';            2050005
+alter session set  events 'trace[        SQL_MVRW             ] disk=high';            2050006
+alter session set  events 'trace[        SQL_VMerge           ] disk=high';            2050007
+alter session set  events 'trace[        SQL_Virtual          ] disk=high';            2050008
+alter session set  events 'trace[      SQL_APA                ] disk=high';            2050009
+alter session set  events 'trace[      SQL_Costing            ] disk=high';            205000a
+alter session set  events 'trace[        SQL_Parallel_Optimization ] disk=high';       205000b
+alter session set  events 'trace[        Vector_Processing      ] disk=high';          2050179
+alter session set  events 'trace[      SQL_Plan_Management      ] disk=high';          205005a
+alter session set  events 'trace[      SQL_Plan_Directive       ] disk=high';          20500b4
+alter session set  events 'trace[      SQL_Optimizer_Stats      ] disk=high';          2050134
+alter session set  events 'trace[        SQL_Optimizer_Stats_Advisor ] disk=high';     2050135
+alter session set  events 'trace[    SQL_Code_Generator         ] disk=high';          205000c
+alter session set  events 'trace[      SQL_Parallel_Compilation ] disk=high';          205000d
+alter session set  events 'trace[      SQL_Expression_Analysis  ] disk=high';          205000e
+alter session set  events 'trace[      SQL_Rowsets_Setup        ] disk=high';          205015b
+alter session set  events 'trace[    MPGE                       ] disk=high';          2050090
+alter session set  events 'trace[    ADS                        ] disk=high';          20500c6
+alter session set  events 'trace[    ICDT_Compile               ] disk=high';          2050136
+alter session set  events 'trace[    Shard_Sql                  ] disk=high';          2050153
+alter session set  events 'trace[    AQP                        ] disk=high';          2050154
+alter session set  events 'trace[    PTF_Comp                   ] disk=high';          205018b
+alter session set  events 'trace[  SQL_Execution                ] disk=high';          205000f
+alter session set  events 'trace[    Parallel_Execution         ] disk=high';          2050010
+alter session set  events 'trace[      PX_Messaging             ] disk=high';          2050011
+alter session set  events 'trace[      PX_Group                 ] disk=high';          2050012
+alter session set  events 'trace[      PX_Affinity              ] disk=high';          2050013
+alter session set  events 'trace[      PX_Buffer                ] disk=high';          2050014
+alter session set  events 'trace[      PX_Granule               ] disk=high';          2050015
+alter session set  events 'trace[      PX_Control               ] disk=high';          2050016
+alter session set  events 'trace[      PX_Table_Queue           ] disk=high';          2050017
+alter session set  events 'trace[      PX_Scheduler             ] disk=high';          2050018
+alter session set  events 'trace[      PX_Queuing               ] disk=high';          2050019
+alter session set  events 'trace[      PX_Blackbox              ] disk=high';          205008c
+alter session set  events 'trace[      PX_PTL                   ] disk=high';          20500a7
+alter session set  events 'trace[      PX_Expr_Eval             ] disk=high';          20500d7
+alter session set  events 'trace[      PX_Selector              ] disk=high';          20500dc
+alter session set  events 'trace[      PX_Overhead              ] disk=high';          205011a
+alter session set  events 'trace[    Bloom_Filter               ] disk=high';          205001a
+alter session set  events 'trace[    Time_Limit                 ] disk=high';          205012b
+alter session set  events 'trace[    ICDT_Exec                  ] disk=high';          2050137
+alter session set  events 'trace[    EXECUTE_TEMP_TABLE         ] disk=high';          2050148
+alter session set  events 'trace[    SQL_Trace                  ] disk=high';          2050157
+alter session set  events 'trace[    PTF_Exec                   ] disk=high';          205018c
+alter session set  events 'trace[  PGA_Manage                   ] disk=high';          205001b
+alter session set  events 'trace[    PGA_Compile                ] disk=high';          205001c
+alter session set  events 'trace[    PGA_IMM                    ] disk=high';          205001d
+alter session set  events 'trace[    PGA_CMM                    ] disk=high';          205001e
+alter session set  events 'trace[    PGA_ADV                    ] disk=high';          205001f
+alter session set  events 'trace[  rdbms_dde                    ] disk=high';          2050020
+alter session set  events 'trace[  VOS                          ] disk=high';          2050021
+alter session set  events 'trace[    hang_analysis              ] disk=high';          2050022
+alter session set  events 'trace[    background_proc            ] disk=high';          2050023
+alter session set  events 'trace[    system_param               ] disk=high';          2050024
+alter session set  events 'trace[    ksu                        ] disk=high';          2050025
+alter session set  events 'trace[      ksutac                   ] disk=high';          2050026
+alter session set  events 'trace[    ksv_trace                  ] disk=high';          205003c
+alter session set  events 'trace[    file                       ] disk=high';          20500a9
+alter session set  events 'trace[    ksq                        ] disk=high';          205013a
+alter session set  events 'trace[    ksolt_trace                ] disk=high';          2050160
+alter session set  events 'trace[    KSIM                       ] disk=high';          2050166
+alter session set  events 'trace[      KSIM_GRPOP               ] disk=high';          2050167
+alter session set  events 'trace[    KSIPC                      ] disk=high';          205017a
+alter session set  events 'trace[      KSMSQ                    ] disk=high';          205017b
+alter session set  events 'trace[        KSMSQ_MQL              ] disk=high';          205017c
+alter session set  events 'trace[      KSRMA                    ] disk=high';          205017d
+alter session set  events 'trace[      KSRMF                    ] disk=high';          205017e
+alter session set  events 'trace[      KSIPC_AM                 ] disk=high';          205017f
+alter session set  events 'trace[      KSIPC_GRP                ] disk=high';          2050180
+alter session set  events 'trace[      KSIPC_SN                 ] disk=high';          2050181
+alter session set  events 'trace[      KSIPC_KV                 ] disk=high';          2050182
+alter session set  events 'trace[      KSIPC_TOPO               ] disk=high';          2050183
+alter session set  events 'trace[      KSIPC_PR                 ] disk=high';          2050184
+alter session set  events 'trace[      KSIPC_IPCLW              ] disk=high';          2050185
+alter session set  events 'trace[      KSIPC_IPCOR              ] disk=high';          2050186
+alter session set  events 'trace[      KSIPC_SHREG              ] disk=high';          2050187
+alter session set  events 'trace[    LREG                       ] disk=high';          2050189
+alter session set  events 'trace[    ksupd                      ] disk=high';          205018a
+alter session set  events 'trace[  sql_mon                      ] disk=high';          2050027
+alter session set  events 'trace[    sql_mon_deamon             ] disk=high';          2050028
+alter session set  events 'trace[    sql_mon_query              ] disk=high';          2050029
+alter session set  events 'trace[  CACHE_RCV                    ] disk=high';          205002a
+alter session set  events 'trace[    DLF                        ] disk=high';          205011b
+alter session set  events 'trace[    MBR                        ] disk=high';          205016b
+alter session set  events 'trace[  DIRPATH_LOAD                 ] disk=high';          205002b
+alter session set  events 'trace[    DIRPATH_LOAD_BIS           ] disk=high';          2050089
+alter session set  events 'trace[  RAC                          ] disk=high';          205002c
+alter session set  events 'trace[    GES                        ] disk=high';          205002d
+alter session set  events 'trace[      KSI                      ] disk=high';          2050030
+alter session set  events 'trace[      RAC_ENQ                  ] disk=high';          2050039
+alter session set  events 'trace[      DD                       ] disk=high';          205004e
+alter session set  events 'trace[      RAC_BCAST                ] disk=high';          2050097
+alter session set  events 'trace[      RAC_FRZ                  ] disk=high';          20500ab
+alter session set  events 'trace[      KJOE                     ] disk=high';          20500cb
+alter session set  events 'trace[    GCS                        ] disk=high';          205002e
+alter session set  events 'trace[      GCS_BSCN                 ] disk=high';          2050059
+alter session set  events 'trace[      GCS_READMOSTLY           ] disk=high';          2050081
+alter session set  events 'trace[      GCS_READER_BYPASS        ] disk=high';          2050082
+alter session set  events 'trace[      GCS_DELTAPUSH            ] disk=high';          2050083
+alter session set  events 'trace[    GSIPC                      ] disk=high';          205002f
+alter session set  events 'trace[    RAC_RCFG                   ] disk=high';          2050046
+alter session set  events 'trace[    RAC_DRM                    ] disk=high';          2050047
+alter session set  events 'trace[    RAC_MRDOM                  ] disk=high';          2050048
+alter session set  events 'trace[      MRDOM_ESM                ] disk=high';          205014a
+alter session set  events 'trace[    CGS                        ] disk=high';          205004a
+alter session set  events 'trace[    CGSIMR                     ] disk=high';          205004b
+alter session set  events 'trace[    RAC_WLM                    ] disk=high';          205005b
+alter session set  events 'trace[    RAC_MLMDS                  ] disk=high';          205006d
+alter session set  events 'trace[    RAC_KA                     ] disk=high';          20500b5
+alter session set  events 'trace[    RAC_LT                     ] disk=high';          20500d6
+alter session set  events 'trace[    RAC_SLOCK                  ] disk=high';          205012a
+alter session set  events 'trace[    KJSC                       ] disk=high';          205013e
+alter session set  events 'trace[    LMHB                       ] disk=high';          2050158
+alter session set  events 'trace[  db_trace                     ] disk=high';          2050031
+alter session set  events 'trace[  kst                          ] disk=high';          2050032
+alter session set  events 'trace[  ddedmp                       ] disk=high';          2050033
+alter session set  events 'trace[  cursor                       ] disk=high';          2050034
+alter session set  events 'trace[    Bind_Capture               ] disk=high';          205006b
+alter session set  events 'trace[    KKSH                       ] disk=high';          2050127
+alter session set  events 'trace[  KSM                          ] disk=high';          2050035
+alter session set  events 'trace[  KSE                          ] disk=high';          2050036
+alter session set  events 'trace[  explain                      ] disk=high';          2050037
+alter session set  events 'trace[  rdbms_event                  ] disk=high';          2050038
+alter session set  events 'trace[  LOB_INODE                    ] disk=high';          205003b
+alter session set  events 'trace[  rdbms_adr                    ] disk=high';          205003d
+alter session set  events 'trace[  ASM                          ] disk=high';          205003e
+alter session set  events 'trace[    KFK                        ] disk=high';          205003f
+alter session set  events 'trace[      KFKIO                    ] disk=high';          2050040
+alter session set  events 'trace[        KFKIO_COUNT            ] disk=high';          205016c
+alter session set  events 'trace[        KFKIO_CANCEL           ] disk=high';          205016d
+alter session set  events 'trace[        KFKIO_HARD             ] disk=high';          205016e
+alter session set  events 'trace[        KFKIO_SPLIT            ] disk=high';          205016f
+alter session set  events 'trace[        KFKIO_MISC             ] disk=high';          2050170
+alter session set  events 'trace[      KFKSB                    ] disk=high';          2050041
+alter session set  events 'trace[        KFKSB_LIB              ] disk=high';          2050171
+alter session set  events 'trace[        KFKSB_DM               ] disk=high';          2050172
+alter session set  events 'trace[      KFKS                     ] disk=high';          2050159
+alter session set  events 'trace[    KFN                        ] disk=high';          2050042
+alter session set  events 'trace[      KFNU                     ] disk=high';          2050043
+alter session set  events 'trace[      KFNS                     ] disk=high';          2050044
+alter session set  events 'trace[      KFNC                     ] disk=high';          2050045
+alter session set  events 'trace[      KFNOR                    ] disk=high';          20500eb
+alter session set  events 'trace[    KFIS                       ] disk=high';          2050058
+alter session set  events 'trace[    KFM                        ] disk=high';          205005c
+alter session set  events 'trace[      KFMD                     ] disk=high';          205005d
+alter session set  events 'trace[      KFMS                     ] disk=high';          205005e
+alter session set  events 'trace[    KFFB                       ] disk=high';          205007e
+alter session set  events 'trace[    KFFD                       ] disk=high';          205007f
+alter session set  events 'trace[    KFZ                        ] disk=high';          2050084
+alter session set  events 'trace[    KFC                        ] disk=high';          205008d
+alter session set  events 'trace[    KFR                        ] disk=high';          205008e
+alter session set  events 'trace[    KFE                        ] disk=high';          2050092
+alter session set  events 'trace[    KFDP                       ] disk=high';          2050093
+alter session set  events 'trace[    KFG                        ] disk=high';          2050094
+alter session set  events 'trace[      KFGB                     ] disk=high';          205013c
+alter session set  events 'trace[    KFDS                       ] disk=high';          2050098
+alter session set  events 'trace[    KFIA                       ] disk=high';          20500bd
+alter session set  events 'trace[      KFIAS                    ] disk=high';          20500be
+alter session set  events 'trace[      KFIAC                    ] disk=high';          20500bf
+alter session set  events 'trace[    KFFSCRUB                   ] disk=high';          20500c3
+alter session set  events 'trace[    KFIO                       ] disk=high';          20500c4
+alter session set  events 'trace[    KFIOER                     ] disk=high';          20500c5
+alter session set  events 'trace[    KFV                        ] disk=high';          20500cc
+alter session set  events 'trace[      KFVSU                    ] disk=high';          20500cd
+alter session set  events 'trace[      KFVSD                    ] disk=high';          20500ce
+alter session set  events 'trace[      KFVIOC                   ] disk=high';          205015c
+alter session set  events 'trace[    KFDX                       ] disk=high';          20500e4
+alter session set  events 'trace[    KFZP                       ] disk=high';          20500e7
+alter session set  events 'trace[    KFA                        ] disk=high';          20500e8
+alter session set  events 'trace[    KFF                        ] disk=high';          2050102
+alter session set  events 'trace[    KFD                        ] disk=high';          2050110
+alter session set  events 'trace[      KFDVA                    ] disk=high';          2050111
+alter session set  events 'trace[    KFTHA                      ] disk=high';          2050118
+alter session set  events 'trace[    KFFG                       ] disk=high';          205013d
+alter session set  events 'trace[    KFFS                       ] disk=high';          2050155
+alter session set  events 'trace[    KFIOS                      ] disk=high';          2050165
+alter session set  events 'trace[  DML                          ] disk=high';          2050049
+alter session set  events 'trace[  Health_Monitor               ] disk=high';          205004c
+alter session set  events 'trace[  DRA                          ] disk=high';          205004d
+alter session set  events 'trace[  DIRACC                       ] disk=high';          205004f
+alter session set  events 'trace[  PART                         ] disk=high';          2050051
+alter session set  events 'trace[    PART_IntPart               ] disk=high';          2050052
+alter session set  events 'trace[    PART_Dictionary            ] disk=high';          2050095
+alter session set  events 'trace[  LOB_KDLW                     ] disk=high';          2050053
+alter session set  events 'trace[  LOB_KDLX                     ] disk=high';          2050054
+alter session set  events 'trace[  LOB_KDLXDUP                  ] disk=high';          2050055
+alter session set  events 'trace[  LOB_KDLRCI                   ] disk=high';          2050056
+alter session set  events 'trace[  LOB_KDLA                     ] disk=high';          2050057
+alter session set  events 'trace[  SQL_Manage                   ] disk=high';          205005f
+alter session set  events 'trace[    SQL_Manage_Infra           ] disk=high';          2050060
+alter session set  events 'trace[    SQL_Tune                   ] disk=high';          2050061
+alter session set  events 'trace[      SQL_Tune_Auto            ] disk=high';          2050062
+alter session set  events 'trace[        Auto_Tune_Opt          ] disk=high';          205006f
+alter session set  events 'trace[      SQL_Tune_Index           ] disk=high';          2050063
+alter session set  events 'trace[      SQL_Tune_Plan            ] disk=high';          2050064
+alter session set  events 'trace[      SQL_Tune_Px              ] disk=high';          2050065
+alter session set  events 'trace[      SQL_Tune_Fr              ] disk=high';          2050066
+alter session set  events 'trace[      SQL_Tune_Stats           ] disk=high';          205014c
+alter session set  events 'trace[      SQL_Tune_Exa             ] disk=high';          2050188
+alter session set  events 'trace[    SQL_Test_Exec              ] disk=high';          2050067
+alter session set  events 'trace[    SQL_Perf                   ] disk=high';          2050068
+alter session set  events 'trace[    SQL_Repair                 ] disk=high';          2050069
+alter session set  events 'trace[    SQL_trace_parser           ] disk=high';          2050091
+alter session set  events 'trace[  SQL_Analyze                  ] disk=high';          205006a
+alter session set  events 'trace[  SQL_DS                       ] disk=high';          205006c
+alter session set  events 'trace[  SQL_DDL                      ] disk=high';          205006e
+alter session set  events 'trace[    KKP                        ] disk=high';          2050132
+alter session set  events 'trace[  RAT_WCR                      ] disk=high';          2050070
+alter session set  events 'trace[  Spatial                      ] disk=high';          2050071
+alter session set  events 'trace[    Spatial_IND                ] disk=high';          2050072
+alter session set  events 'trace[    Spatial_GR                 ] disk=high';          2050073
+alter session set  events 'trace[  Text                         ] disk=high';          2050074
+alter session set  events 'trace[  rdbms_gc                     ] disk=high';          2050075
+alter session set  events 'trace[  XS                           ] disk=high';          2050076
+alter session set  events 'trace[    XSSESSION                  ] disk=high';          2050077
+alter session set  events 'trace[    XSPRINCIPAL                ] disk=high';          2050078
+alter session set  events 'trace[    XSSECCLASS                 ] disk=high';          2050079
+alter session set  events 'trace[    XSXDS                      ] disk=high';          205007a
+alter session set  events 'trace[    XSVPD                      ] disk=high';          205007b
+alter session set  events 'trace[    XSXDB_DEFAULT              ] disk=high';          205007c
+alter session set  events 'trace[    XS_MIDTIER                 ] disk=high';          205007d
+alter session set  events 'trace[    XSNSTEMPLATE               ] disk=high';          205009a
+alter session set  events 'trace[    XSACL                      ] disk=high';          205009b
+alter session set  events 'trace[    XSADM                      ] disk=high';          20500c2
+alter session set  events 'trace[  AQ                           ] disk=high';          2050085
+alter session set  events 'trace[    AQ_DEQ                     ] disk=high';          2050086
+alter session set  events 'trace[    AQ_BACK                    ] disk=high';          20500cf
+alter session set  events 'trace[      AQ_TM                    ] disk=high';          2050087
+alter session set  events 'trace[      AQ_CP                    ] disk=high';          205009d
+alter session set  events 'trace[      AQ_LB                    ] disk=high';          205009e
+alter session set  events 'trace[      AQ_NTFN                  ] disk=high';          205009f
+alter session set  events 'trace[        AQ_NTFNP12C            ] disk=high';          2050114
+alter session set  events 'trace[      AQ_TMSQ                  ] disk=high';          20500d3
+alter session set  events 'trace[    AQ_MC                      ] disk=high';          20500d0
+alter session set  events 'trace[    AQ_PT                      ] disk=high';          20500d1
+alter session set  events 'trace[    AQ_SUB                     ] disk=high';          20500d2
+alter session set  events 'trace[    AQ_OPT                     ] disk=high';          2050133
+alter session set  events 'trace[    AQ_DLY                     ] disk=high';          2050156
+alter session set  events 'trace[  KSFM                         ] disk=high';          2050088
+alter session set  events 'trace[  KXD                          ] disk=high';          205008a
+alter session set  events 'trace[    KXDAM                      ] disk=high';          205008b
+alter session set  events 'trace[    KCFIS                      ] disk=high';          205008f
+alter session set  events 'trace[    NSMTIO                     ] disk=high';          2050099
+alter session set  events 'trace[    KXDBIO                     ] disk=high';          20500a0
+alter session set  events 'trace[    KXDRS                      ] disk=high';          20500e3
+alter session set  events 'trace[    KXDOFL                     ] disk=high';          20500e9
+alter session set  events 'trace[    KXDMISC                    ] disk=high';          20500ea
+alter session set  events 'trace[    KXDCM                      ] disk=high';          2050113
+alter session set  events 'trace[    KXDBC                      ] disk=high';          2050128
+alter session set  events 'trace[  DV                           ] disk=high';          2050096
+alter session set  events 'trace[  ASO                          ] disk=high';          205009c
+alter session set  events 'trace[    RADM                       ] disk=high';          20500a1
+alter session set  events 'trace[  SVRMAN                       ] disk=high';          20500a2
+alter session set  events 'trace[    AWR                        ] disk=high';          20500a3
+alter session set  events 'trace[      ASH                      ] disk=high';          2050050
+alter session set  events 'trace[      METRICS                  ] disk=high';          20500a4
+alter session set  events 'trace[      REPOSITORY               ] disk=high';          20500df
+alter session set  events 'trace[        FLUSH                  ] disk=high';          20500e0
+alter session set  events 'trace[        PURGE                  ] disk=high';          20500e1
+alter session set  events 'trace[      AWRUTL                   ] disk=high';          20500e2
+alter session set  events 'trace[    AUTOTASK                   ] disk=high';          20500a5
+alter session set  events 'trace[    MMON                       ] disk=high';          20500a6
+alter session set  events 'trace[    SVRALRT                    ] disk=high';          20500aa
+alter session set  events 'trace[    IUT                        ] disk=high';          2050151
+alter session set  events 'trace[  OLS                          ] disk=high';          20500a8
+alter session set  events 'trace[  AUDITNG                      ] disk=high';          20500ac
+alter session set  events 'trace[    Configuration              ] disk=high';          20500ad
+alter session set  events 'trace[    QueueWrite                 ] disk=high';          20500ae
+alter session set  events 'trace[    FileWrite                  ] disk=high';          20500af
+alter session set  events 'trace[    RecordCompose              ] disk=high';          20500b0
+alter session set  events 'trace[    DBConsolidation            ] disk=high';          20500b1
+alter session set  events 'trace[    SYS_Auditing               ] disk=high';          20500b2
+alter session set  events 'trace[  KJCI                         ] disk=high';          20500b3
+alter session set  events 'trace[  KJZ                          ] disk=high';          20500b6
+alter session set  events 'trace[    KJZC                       ] disk=high';          20500b7
+alter session set  events 'trace[    KJZD                       ] disk=high';          20500b8
+alter session set  events 'trace[    KJZF                       ] disk=high';          20500b9
+alter session set  events 'trace[    KJZG                       ] disk=high';          20500ba
+alter session set  events 'trace[    KJZH                       ] disk=high';          20500bb
+alter session set  events 'trace[    KJZM                       ] disk=high';          20500bc
+alter session set  events 'trace[  SEC                          ] disk=high';          20500c0
+alter session set  events 'trace[    CBAC                       ] disk=high';          20500c1
+alter session set  events 'trace[    VPD                        ] disk=high';          205013b
+alter session set  events 'trace[    GDSI                       ] disk=high';          2050163
+alter session set  events 'trace[  dbop                         ] disk=high';          20500c7
+alter session set  events 'trace[    dbop_gen                   ] disk=high';          20500c8
+alter session set  events 'trace[      dbop_deamon              ] disk=high';          20500c9
+alter session set  events 'trace[    dbop_comp                  ] disk=high';          20500ca
+alter session set  events 'trace[  em_express                   ] disk=high';          20500d4
+alter session set  events 'trace[  orarep                       ] disk=high';          20500d5
+alter session set  events 'trace[  Data                         ] disk=high';          20500d8
+alter session set  events 'trace[    KDS                        ] disk=high';          20500d9
+alter session set  events 'trace[      KDSRID                   ] disk=high';          20500da
+alter session set  events 'trace[      KDSFTS                   ] disk=high';          20500db
+alter session set  events 'trace[      KDSCLU                   ] disk=high';          2050119
+alter session set  events 'trace[    KDWF                       ] disk=high';          205014b
+alter session set  events 'trace[    IMOLTP_KV                  ] disk=high';          2050169
+alter session set  events 'trace[    MEMOPT_FI                  ] disk=high';          205016a
+alter session set  events 'trace[  RAT                          ] disk=high';          20500dd
+alter session set  events 'trace[    RAT_MASK                   ] disk=high';          20500de
+alter session set  events 'trace[  BA                           ] disk=high';          20500e5
+alter session set  events 'trace[  KBC                          ] disk=high';          20500e6
+alter session set  events 'trace[  connection_broker            ] disk=high';          20500ec
+alter session set  events 'trace[  KRA                          ] disk=high';          20500ed
+alter session set  events 'trace[  KRA_SQL                      ] disk=high';          20500ee
+alter session set  events 'trace[  KRB                          ] disk=high';          20500ef
+alter session set  events 'trace[    KRB_THREAD                 ] disk=high';          20500f0
+alter session set  events 'trace[    KRB_IO                     ] disk=high';          20500f1
+alter session set  events 'trace[    KRB_INCR                   ] disk=high';          20500f2
+alter session set  events 'trace[    KRB_PERF                   ] disk=high';          20500f3
+alter session set  events 'trace[    KRB_BPOUTPUT               ] disk=high';          20500f4
+alter session set  events 'trace[    KRB_BPVAL                  ] disk=high';          20500f5
+alter session set  events 'trace[    KRB_FLWRES                 ] disk=high';          20500f6
+alter session set  events 'trace[    KRB_FLWCPY                 ] disk=high';          20500f7
+alter session set  events 'trace[    KRB_FLWBCK                 ] disk=high';          20500f8
+alter session set  events 'trace[    KRB_FLWUSAGE               ] disk=high';          20500f9
+alter session set  events 'trace[    KRB_OPTIM                  ] disk=high';          20500fa
+alter session set  events 'trace[  KRBABR                       ] disk=high';          20500fb
+alter session set  events 'trace[  KRC                          ] disk=high';          20500fc
+alter session set  events 'trace[  KRC_CHANGES                  ] disk=high';          20500fd
+alter session set  events 'trace[  IM                           ] disk=high';          2050103
+alter session set  events 'trace[    IM_transaction             ] disk=high';          2050104
+alter session set  events 'trace[      IM_Txn_PJ                ] disk=high';          205012c
+alter session set  events 'trace[      IM_Txn_SJ                ] disk=high';          205012d
+alter session set  events 'trace[      IM_Txn_JS                ] disk=high';          205012e
+alter session set  events 'trace[      IM_Txn_Conc              ] disk=high';          205012f
+alter session set  events 'trace[      IM_Txn_Blk               ] disk=high';          2050130
+alter session set  events 'trace[      IM_Txn_Read              ] disk=high';          2050131
+alter session set  events 'trace[      IM_Txn_ADG               ] disk=high';          2050152
+alter session set  events 'trace[    IM_space                   ] disk=high';          2050105
+alter session set  events 'trace[    IM_data                    ] disk=high';          2050106
+alter session set  events 'trace[      IM_populate              ] disk=high';          2050107
+alter session set  events 'trace[      IM_background            ] disk=high';          2050108
+alter session set  events 'trace[      IM_scan                  ] disk=high';          2050109
+alter session set  events 'trace[      IM_journal               ] disk=high';          205010a
+alter session set  events 'trace[      IM_dump                  ] disk=high';          2050115
+alter session set  events 'trace[      IM_FS                    ] disk=high';          2050116
+alter session set  events 'trace[      IM_optimizer             ] disk=high';          2050117
+alter session set  events 'trace[      IM_GD                    ] disk=high';          2050149
+alter session set  events 'trace[      IM_ADO                   ] disk=high';          205014d
+alter session set  events 'trace[      IM_IME                   ] disk=high';          2050150
+alter session set  events 'trace[      IM_Dictionary            ] disk=high';          205015a
+alter session set  events 'trace[      IM_Verification          ] disk=high';          2050164
+alter session set  events 'trace[  xdb_wallet                   ] disk=high';          2050112
+alter session set  events 'trace[  PROGINT                      ] disk=high';          205011c
+alter session set  events 'trace[    OCI                        ] disk=high';          205011d
+alter session set  events 'trace[    OPI                        ] disk=high';          205011e
+alter session set  events 'trace[    RPI                        ] disk=high';          205011f
+alter session set  events 'trace[    NPI                        ] disk=high';          2050120
+alter session set  events 'trace[    Two_Task                   ] disk=high';          2050121
+alter session set  events 'trace[    PROGINT_PLSQL              ] disk=high';          2050122
+alter session set  events 'trace[    Two_Phase                  ] disk=high';          2050123
+alter session set  events 'trace[    Conn_Pool                  ] disk=high';          2050124
+alter session set  events 'trace[    TSM                        ] disk=high';          2050125
+alter session set  events 'trace[    PROGINT_MISC               ] disk=high';          2050126
+alter session set  events 'trace[  KDFS                         ] disk=high';          2050129
+alter session set  events 'trace[  OLAP                         ] disk=high';          2050138
+alter session set  events 'trace[    OLAP_Paging                ] disk=high';          2050139
+alter session set  events 'trace[  STREAMS                      ] disk=high';          205013f
+alter session set  events 'trace[    STREAMS_CAPTURE            ] disk=high';          2050140
+alter session set  events 'trace[    STREAMS_PROPAGATION        ] disk=high';          2050141
+alter session set  events 'trace[      STREAMS_PROPAGATION_SENDER ] disk=high';        2050142
+alter session set  events 'trace[      STREAMS_PROPAGATION_RECEIVER ] disk=high';      2050143
+alter session set  events 'trace[    STREAMS_APPLY             ] disk=high';           2050144
+alter session set  events 'trace[      STREAMS_APPLY_COORDINATOR ] disk=high';         2050145
+alter session set  events 'trace[      STREAMS_APPLY_READER   ] disk=high';            2050146
+alter session set  events 'trace[      STREAMS_APPLY_SERVER   ] disk=high';            2050147
+alter session set  events 'trace[  Space                      ] disk=high';            205014e
+alter session set  events 'trace[    Search_Cache             ] disk=high';            205014f
+alter session set  events 'trace[  CONTEXT                    ] disk=high';            205015d
+alter session set  events 'trace[    CONTEXT_INDEX            ] disk=high';            205015e
+alter session set  events 'trace[    CONTEXT_QUERY            ] disk=high';            205015f
+alter session set  events 'trace[  rdbms_uts                  ] disk=high';            2050161
+alter session set  events 'trace[  MIRA_RCV                   ] disk=high';            2050162
+alter session set  events 'trace[  reg_cache                  ] disk=high';            2050168
+alter session set  events 'trace[  OFS                        ] disk=high';            2050173
+alter session set  events 'trace[    OFS_KSFS                 ] disk=high';            2050174
+alter session set  events 'trace[    OFS_KSFSD                ] disk=high';            2050175
+alter session set  events 'trace[    OFS_KSFSM                ] disk=high';            2050176
+alter session set  events 'trace[    OFS_KSFSC1               ] disk=high';            2050177
+alter session set  events 'trace[    OFS_SKOFS                ] disk=high';            2050178
+
+Components in library GENERIC:
+--------------------------
+
+alter session set  events 'trace[   Generic_VOS                 ] disk=high';          4050001
+alter session set  events 'trace[      VOS_Heap_Manager         ] disk=high';          4050002
+alter session set  events 'trace[      VOS_Latches              ] disk=high';          4050003
+alter session set  events 'trace[      VOS_GST                  ] disk=high';          4050010
+alter session set  events 'trace[    XML                        ] disk=high';          4050004
+alter session set  events 'trace[    Generic_XDB                ] disk=high';          4050005
+alter session set  events 'trace[      XDB_Repository           ] disk=high';          4050006
+alter session set  events 'trace[      XDB_Protocols            ] disk=high';          4050007
+alter session set  events 'trace[      XDB_Query                ] disk=high';          4050008
+alter session set  events 'trace[      XDB_XMLIndex             ] disk=high';          4050009
+alter session set  events 'trace[      XDB_Schema               ] disk=high';          405000a
+alter session set  events 'trace[      XDB_XOB                  ] disk=high';          405000b
+alter session set  events 'trace[      XDB_CSX                  ] disk=high';          405000c
+alter session set  events 'trace[        XDB_CSX_ENCODING       ] disk=high';          4050022
+alter session set  events 'trace[        XDB_CSX_DECODING       ] disk=high';          4050023
+alter session set  events 'trace[        XDB_CSX_SELFCON        ] disk=high';          4050025
+alter session set  events 'trace[        XDB_CSX_PRINT          ] disk=high';          4050027
+alter session set  events 'trace[        XDB_CSX_TOKENMGR       ] disk=high';          4050032
+alter session set  events 'trace[      XDB_Default              ] disk=high';          405000d
+alter session set  events 'trace[      XDB_MEMORY               ] disk=high';          4050033
+alter session set  events 'trace[    LOB                        ] disk=high';          405000e
+alter session set  events 'trace[      LOB_Refcount             ] disk=high';          4050012
+alter session set  events 'trace[      LOB_Default              ] disk=high';          4050013
+alter session set  events 'trace[      LOB_DBLINK               ] disk=high';          4050026
+alter session set  events 'trace[      LOB_TEMPORARY            ] disk=high';          405004b
+alter session set  events 'trace[      LOB_API                  ] disk=high';          405004c
+alter session set  events 'trace[    KGH                        ] disk=high';          405000f
+alter session set  events 'trace[    KGF                        ] disk=high';          4050011
+alter session set  events 'trace[    LIBCACHE                   ] disk=high';          4050014
+alter session set  events 'trace[      LCO_Status_DDL           ] disk=high';          4050024
+alter session set  events 'trace[    OBJECTS                    ] disk=high';          4050015
+alter session set  events 'trace[      OBJECTS_DDL              ] disk=high';          4050016
+alter session set  events 'trace[      OBJECTS_Types            ] disk=high';          4050017
+alter session set  events 'trace[      OBJECTS_Images           ] disk=high';          4050018
+alter session set  events 'trace[      OBJECTS_Anydata          ] disk=high';          4050019
+alter session set  events 'trace[      OBJECTS_Streams          ] disk=high';          405001a
+alter session set  events 'trace[      OBJECTS_Dict             ] disk=high';          405001b
+alter session set  events 'trace[      OBJECTS_Semanal          ] disk=high';          405001c
+alter session set  events 'trace[      OBJECTS_Default          ] disk=high';          405001d
+alter session set  events 'trace[      OBJECTS_Tables           ] disk=high';          4050029
+alter session set  events 'trace[    KGFPM                      ] disk=high';          405001e
+alter session set  events 'trace[    KGFDVF                     ] disk=high';          405001f
+alter session set  events 'trace[    Shared_Objects             ] disk=high';          4050020
+alter session set  events 'trace[      SO_Loader                ] disk=high';          4050021
+alter session set  events 'trace[    Direct_NFS                 ] disk=high';          4050028
+alter session set  events 'trace[    KGSC                       ] disk=high';          405002a
+alter session set  events 'trace[      KGSC_KQD                 ] disk=high';          405002b
+alter session set  events 'trace[      KGSC_BUN                 ] disk=high';          405002c
+alter session set  events 'trace[      KGSC_KKS                 ] disk=high';          405002d
+alter session set  events 'trace[      KGSC_PLS                 ] disk=high';          405002e
+alter session set  events 'trace[      KGSC_CONS                ] disk=high';          405002f
+alter session set  events 'trace[      KGSC_TRIG                ] disk=high';          4050030
+alter session set  events 'trace[      KGSC_JOX                 ] disk=high';          4050031
+alter session set  events 'trace[    KDI                        ] disk=high';          4050034
+alter session set  events 'trace[      KDIADHI                  ] disk=high';          4050035
+alter session set  events 'trace[      KDIADLO                  ] disk=high';          4050036
+alter session set  events 'trace[      KDIL                     ] disk=high';          4050037
+alter session set  events 'trace[        KDILADHI               ] disk=high';          4050038
+alter session set  events 'trace[        KDILADLO               ] disk=high';          4050039
+alter session set  events 'trace[      KDIS                     ] disk=high';          405003a
+alter session set  events 'trace[        KDISADHI               ] disk=high';          405003b
+alter session set  events 'trace[        KDISADLO               ] disk=high';          405003c
+alter session set  events 'trace[      KDXT                     ] disk=high';          405003d
+alter session set  events 'trace[        KDXTADHI               ] disk=high';          405003e
+alter session set  events 'trace[        KDXTADLO               ] disk=high';          405003f
+alter session set  events 'trace[      KDIM                     ] disk=high';          4050040
+alter session set  events 'trace[        KDIMADHI               ] disk=high';          4050041
+alter session set  events 'trace[        KDIMADLO               ] disk=high';          4050042
+alter session set  events 'trace[      KDIF                     ] disk=high';          4050043
+alter session set  events 'trace[        KDIFADHI               ] disk=high';          4050044
+alter session set  events 'trace[        KDIFADLO               ] disk=high';          4050045
+alter session set  events 'trace[      KDIZADHI                 ] disk=high';          4050046
+alter session set  events 'trace[      KDIZADLO                 ] disk=high';          4050047
+alter session set  events 'trace[      KDIDML                   ] disk=high';          4050048
+alter session set  events 'trace[        KDIDMLADHI             ] disk=high';          4050049
+alter session set  events 'trace[        KDIDMLADLO             ] disk=high';          405004a
+alter session set  events 'trace[      KDIGDR                   ] disk=high';          405004d
+alter session set  events 'trace[        KDIGDRBR               ] disk=high';          405004e
+alter session set  events 'trace[        KDIGDRLF               ] disk=high';          405004f
+
+Components in library CLIENT:
+--------------------------
+alter session set  events 'trace[  Client_KPU                   ] disk=high';          6050001
+alter session set  events 'trace[    KPU_Memory                 ] disk=high';          6050002
+alter session set  events 'trace[    KPU_TTC                    ] disk=high';          6050003
+alter session set  events 'trace[    KPU_Relational             ] disk=high';          6050004
+alter session set  events 'trace[    KPU_Objects                ] disk=high';          6050005
+alter session set  events 'trace[    KPU_LOBS                   ] disk=high';          6050006
+alter session set  events 'trace[  progint_appcont              ] disk=high';          6050007
+alter session set  events 'trace[    progint_appcont_rdbms      ] disk=high';          6050008
+alter session set  events 'trace[  SQLLDR_Load                  ] disk=high';          6050009
+alter session set  events 'trace[  DPAPI_Load                   ] disk=high';          605000b
+alter session set  events 'trace[  dbfs_client_profiler         ] disk=high';          605000c
+
+Components in library LIBCELL:
+--------------------------
+  Client_Library               Client Library ((null))
+    Disk_Layer                 Disk Layer ((null))
+    Network_Layer              Network Layer ((null))
+    Connect_Layer              Connect Layer ((null))
+    IPC_Layer                  IPC Layer ((null))
+
+Components in library ORANET:
+--------------------------
+  TNSLSNR                      OraNet Listener ((null))
+    NET_NSGR                   Network Service Generic Registration ((null))
+    NET_NSGI                   TNI Network Service Generic Listener User-defined class ((null))
+  CMAN                         OraNet Connection Manager ((null))
+  NET                          OraNet Services ((null))
+    NET_NI                     Network Interface Layer ((null))
+    NET_NS                     Network Session Layer ((null))
+    NET_NT                     Network Transport Layer ((null))
+    NET_NTM                    Network Transport Mailbox Layer ((null))
+    NET_NTP                    Network Transport IPC Layer ((null))
+    NET_NTT                    Network Transport TCP/IP Layer ((null))
+    NET_NTUS                   Network Transport Unix Domain Sockets Layer ((null))
+    NET_NL                     Network Library ((null))
+    NET_NA                     Network Authentication ((null))
+    NET_NZ                     Network Zecurity ((null))
+    NET_NTZ                    Network SSL ((null))
+    NET_NU                     Network Trace Route Utility ((null))
+    NET_NN                     Network Names ((null))
+
+Components in library ADVCMP:
+--------------------------
+alter session set  events 'trace[ ADVCMP_MAIN                   ] disk=high';          12050001
+alter session set  events 'trace[    ADVCMP_COMP                ] disk=high';          12050002
+alter session set  events 'trace[    ADVCMP_DECOMP              ] disk=high';          12050003
+alter session set  events 'trace[      ADVCMP_DECOMP_HPK        ] disk=high';          12050004
+alter session set  events 'trace[      ADVCMP_DECOMP_PCODE      ] disk=high';          12050005
+
+Components in library PLSQL:
+--------------------------
+alter session set  events 'trace[  PLSQL_Apps                   ] disk=high';          19050001
+alter session set  events 'trace[    PLSQL_Utl_File             ] disk=high';          19050014
+alter session set  events 'trace[  PLSQL_Codegen                ] disk=high';          19050002
+alter session set  events 'trace[    PLSQL_COG_IDL_Gen          ] disk=high';          19050003
+alter session set  events 'trace[    PLSQL_COG_Infrastructure   ] disk=high';          19050004
+alter session set  events 'trace[    PLSQL_COG_Native           ] disk=high';          19050005
+alter session set  events 'trace[    PLSQL_COG_Optimizer        ] disk=high';          19050006
+alter session set  events 'trace[    PLSQL_COG_MCode_Gen        ] disk=high';          19050007
+alter session set  events 'trace[  PLSQL_Code_Execution         ] disk=high';          19050008
+alter session set  events 'trace[    PLSQL_Stack_Frames         ] disk=high';          19050015
+alter session set  events 'trace[  PLSQL_External_Proc          ] disk=high';          19050009
+alter session set  events 'trace[  PLSQL_IDL                    ] disk=high';          1905000a
+alter session set  events 'trace[  PLSQL_ILMS                   ] disk=high';          1905000b
+alter session set  events 'trace[  PLSQL_KNLDE                  ] disk=high';          1905000c
+alter session set  events 'trace[  PLSQL_KG_Interface           ] disk=high';          1905000d
+alter session set  events 'trace[  PLSQL_Infrastructure         ] disk=high';          1905000e
+alter session set  events 'trace[  PLSQL_PSD                    ] disk=high';          1905000f
+alter session set  events 'trace[    PLSQL_PSD_Generic          ] disk=high';          19050010
+alter session set  events 'trace[    PLSQL_PSD_Standalones      ] disk=high';          19050011
+alter session set  events 'trace[  PLSQL_Semantics              ] disk=high';          19050012
+alter session set  events 'trace[  PLSQL_Syntax                 ] disk=high';          19050013
+
+Components in library XDK:
+--------------------------
+alter session set  events 'trace[  XDK_Parser                   ] disk=high';          1a050001
+alter session set  events 'trace[    XDK_FSM_Parser             ] disk=high';          1a050002
+alter session set  events 'trace[  XDK_Schema_Validator         ] disk=high';          1a050003
+alter session set  events 'trace[  XDK_Xslt_Engine              ] disk=high';          1a050004
+
+Components in library VPLIB:
+--------------------------
+  Vector_Translate             Vector Translate (qkaxl, qerxl, qesxl, evaxl)
+  Vector_Aggregate             Vector Aggregate (qergv, qesgv, evavgby)
+  Vector_PX                    Vector PX (qesxlp)
+  
+  
+  
+SQL> ORADEBUG DOC event name 
+
+Events in library DIAG:
+------------------------------
+trace[]              Main event to control UTS tracing          			            EDX:1160001  ECX:check Components 
+disable_dde_action[] Event used by DDE to disable actions
+ams_trace[]          Event to dump ams performance trace records
+ams_rowsrc_trace[]   Event to dump ams row source tracing
+sweep_verification   Event to enable sweep file verification
+enable_xml_inc_staging Event to enable xml incident staging format
+dbg[]                Event to hook dbgtDbg logging statements
+
+Events in library RDBMS:
+------------------------------
+wait_event[]         event to control wait event post-wakeup actions                    EDX:2160002
+alert_text           event for textual alerts
+trace_recursive      event to force tracing recursive SQL statements
+clientid_overwrite   event to overwrite client_identifier when client_info is set
+sql_monitor          event to force monitoring SQL statements
+sql_monitor_test     event to test SQL monitoring
+eventsync_tac        Event posted from events syncing tac
+sql_trace            event for sql trace												EDX:216000e
+pmon_startup         startup of pmon process
+background_startup   startup of background processes
+db_open_begin        start of db open operation								     	   
+test_gvtf            test GV$() Table Tunction
+fault                Event used to inject fault in RDBMS kernel
+gcr_systest          gcr_systest
+em_express           EM Express debug event
+emx_control          event to control em express
+emx_test_control     event to control em express testing
+awrdiag[]            AWR Diagnostic Event
+msgq_trace           event to control msgq tracing
+ipclw_trace          event to control ipclw tracing
+kbc_fault            event to control container fault injection
+asm_corruption_trace event to control ASM corruption tracing
+kxdrs_sim            debug event to simulate certain conditions in kxdrs layer
+
+kcfio_debug          debug event to debug kcfio based on event level
+
+krbabrstat_fault     event to control krbabrstat fault injection
+periodic_dump[]      event for periodically dumping
+kxdrs_log_for_wbfc   debug event to log skipped extents for wbfc resilvering
+
+clean_plsql_error_stack Event to clear ORA-06512s from the error stack
+plsql_coverage_flag  Event to set plsql coverage flag
+
+Events in library GENERIC:
+------------------------------
+kg_event[]           Support old error number events (use err# for short)
+
+Events in library CLIENT:
+------------------------------
+oci_trace            event for oci trace
+
+Events in library LIBCELL:
+------------------------------
+libcell_stat         libcell statistics level specification
+cellclnt_skgxp_trc_ops Controls to trace SKGXP operations
+cellclnt_ossnet_trc  Controls to trace IP affinity in ossnet
+cellclnt_high_lat_ops Control to trace High-latency I/O operations
+diskmon_sim_ops[]    Diskmon simulation events
+cellclnt_read_outlier_limit Control to trace read I/O outliers
+cellclnt_write_outlier_limit Control to trace write I/O outliers
+cellclnt_lgwrite_outlier_limit Control to trace log write I/O outliers
+cellclnt_sparse_mode Mode of how to handle sparse buffers
+cellclnt_submission_recon Simulation period for forcing submission reconnect
+
+Events in library FPLIB:
+------------------------------
+fgq_control          fine grain quarantine control
+
+Events in library ADVCMP:
+------------------------------
+arch_comp_level[]    arch_comp_level[<ulevel, 1-7>]
+ccmp_debug           columnar compression debug event
+inmemory_nobasic     disable KDZCF_IMC_BASIC implementation
+inmemory_nohybrid    disable KDZCF_IMC_HYBRID implementation
+ccmp_align           columnar compression enable alignment
+ccmp_countstar       columnar compression enable count(*) optimization
+ccmp_dumpunaligned   columnar compression dump dbas of unaligned CUs
+ccmp_rbtree          columnar compression switch back to rb tree
+inmemory_force_ccl   inmemory force column compression levels
+columnar_cache_config flash cash configuration event
+inmemory_imcu[]      inmemory_imcu[<ulevel=  nocomp|dml|query_low|query_high|capacity_low|capacity_high>]
+inmemory_nobitpacked_gd disable bit-packed GD codes in CU. Use ub4 instead
+inmemory_selectivevc enable selective column support for virtual columns
+inmemory_dicthash    enable storage of dictionary hash values in IMCU
+inmemory_cache_joinopt inmemory cache join optimizations
+inmemory_scan_joinopt join optimizations to use during scan
+inmemory_compute_cachehash compute a hash vector when there is no cached hash
+ifc_dump_block       block rdba to dump in IFC
+ifc_ulevel[]         ifc_ulevel
+inmemory_prefixdict  enable prefix compression on dictionary encoded IMCU
+inmemory_disable_dsb usage of stored DSB dictionary during scans
+
+Events in library PLSQL:
+------------------------------
+plsql_event[]        Support PL/SQL error number events
+
+Events in library VPLIB:
+------------------------------
+key_vector_debug     key vector debug parameters
+key_vector_diag      key vector diagnostics parameters
+key_vector_test      key vector testing parameters
+
+  
+
