@@ -5,32 +5,32 @@ Components in library DIAG:
 --------------------------
 alter session set  events 'trace[ diag_uts					  ] disk=high';      	   EDX:1160001  ECX:1050001          
 alter session set  events 'trace[	uts_vw					  ] disk=high';            EDX:1160001  ECX:1050014       
-alter session set  events 'trace[ diag_adr					  ] disk=high';    	       EDX:1160001  ECX:1050002       
+alter session set  events 'trace[ diag_adr					  ] disk=high';    	     EDX:1160001  ECX:1050002       
 alter session set  events 'trace[	ams_comp				  ] disk=high';            EDX:1160001  ECX:105000d 
 alter session set  events 'trace[	ame_comp				  ] disk=high';            EDX:1160001  ECX:105000e 
 alter session set  events 'trace[	ami_comp				  ] disk=high';            EDX:1160001  ECX:105000f 
 alter session set  events 'trace[	diag_ads				  ] disk=high';            EDX:1160001  ECX:1050013 
 alter session set  events 'trace[ diag_hm					  ] disk=high';            EDX:1160001  ECX:1050003   
-alter session set  events 'trace[ diag_ips					  ] disk=high';            EDX:1160001  ECX:1050004   
-alter session set  events 'trace[ diag_dde					  ] disk=high';            EDX:1160001  ECX:1050005   
-alter session set  events 'trace[ diag_fmwk					  ] disk=high';            EDX:1160001  ECX:1050006   
-alter session set  events 'trace[	diag_ilcts				  ] disk=high';            EDX:1160001  ECX:1050007 
+alter session set  events 'trace[ diag_ips					  ] disk=high';          EDX:1160001  ECX:1050004   
+alter session set  events 'trace[ diag_dde					  ] disk=high';          EDX:1160001  ECX:1050005   
+alter session set  events 'trace[ diag_fmwk					  ] disk=high';          EDX:1160001  ECX:1050006   
+alter session set  events 'trace[	diag_ilcts				  ] disk=high';          EDX:1160001  ECX:1050007 
 alter session set  events 'trace[	diag_attr				  ] disk=high';            EDX:1160001  ECX:1050008 
 alter session set  events 'trace[	diag_comp				  ] disk=high';            EDX:1160001  ECX:1050009 
-alter session set  events 'trace[ diag_testp				  ] disk=high';            EDX:1160001  ECX:105000a   
-alter session set  events 'trace[	diag_testc1				  ] disk=high';            EDX:1160001  ECX:105000b
-alter session set  events 'trace[	diag_testc2				  ] disk=high';            EDX:1160001  ECX:105000c 
+alter session set  events 'trace[ diag_testp				  ] disk=high';          EDX:1160001  ECX:105000a   
+alter session set  events 'trace[	diag_testc1				  ] disk=high';          EDX:1160001  ECX:105000b
+alter session set  events 'trace[	diag_testc2				  ] disk=high';          EDX:1160001  ECX:105000c 
 alter session set  events 'trace[ KGSD						  ] disk=high';            EDX:1160001  ECX:1050010  
-alter session set  events 'trace[ diag_events				  ] disk=high';            EDX:1160001  ECX:1050011   
-alter session set  events 'trace[ diag_adl					  ] disk=high';            EDX:1160001  ECX:1050012   
-alter session set  events 'trace[ diag_vwk					  ] disk=high';            EDX:1160001  ECX:1050015  
-alter session set  events 'trace[	diag_vwk_parser			  ] disk=high';            EDX:1160001  ECX:1050016  
-alter session set  events 'trace[	diag_vwk_uts			  ] disk=high';            EDX:1160001  ECX:1050017 
-alter session set  events 'trace[	diag_vwk_ams			  ] disk=high';            EDX:1160001  ECX:1050018 
-alter session set  events 'trace[	diag_vwk_ci				  ] disk=high';            EDX:1160001  ECX:1050019 
+alter session set  events 'trace[ diag_events				  ] disk=high';          EDX:1160001  ECX:1050011   
+alter session set  events 'trace[ diag_adl					  ] disk=high';          EDX:1160001  ECX:1050012   
+alter session set  events 'trace[ diag_vwk					  ] disk=high';          EDX:1160001  ECX:1050015  
+alter session set  events 'trace[	diag_vwk_parser			  ] disk=high';        EDX:1160001  ECX:1050016  
+alter session set  events 'trace[	diag_vwk_uts			  ] disk=high';          EDX:1160001  ECX:1050017 
+alter session set  events 'trace[	diag_vwk_ams			  ] disk=high';          EDX:1160001  ECX:1050018 
+alter session set  events 'trace[	diag_vwk_ci				  ] disk=high';          EDX:1160001  ECX:1050019 
 alter session set  events 'trace[ kghsc						  ] disk=high';            EDX:1160001  ECX:105001a  
 alter session set  events 'trace[ dbgxtk					  ] disk=high';            EDX:1160001  ECX:105001b   
-alter session set  events 'trace[ KDIZOLTP				 	  ] disk=high';            EDX:1160001  ECX:105001c     
+alter session set  events 'trace[ KDIZOLTP				 	  ] disk=high';          EDX:1160001  ECX:105001c     
 
 Components in library RDBMS:
 --------------------------
@@ -597,49 +597,49 @@ SQL> ORADEBUG DOC event name
 
 Events in library DIAG:
 ------------------------------
-trace[]              Main event to control UTS tracing          			            EDX:1160001  ECX:check Components 
+trace[]              Main event to control UTS tracing          			                  EDX:1160001  ECX:check Components 
 disable_dde_action[] Event used by DDE to disable actions                               EDX:1160003
 ams_trace[]          Event to dump ams performance trace records                        EDX:1160005
 ams_rowsrc_trace[]   Event to dump ams row source tracing                               EDX:1160006
 sweep_verification   Event to enable sweep file verification                            EDX:1160018
 enable_xml_inc_staging Event to enable xml incident staging format                      EDX:116001a
-dbg[]                Event to hook dbgtDbg logging statements							EDX:116001b
+dbg[]                Event to hook dbgtDbg logging statements						              	EDX:116001b
  
 Events in library RDBMS:
 ------------------------------
 wait_event[]         event to control wait event post-wakeup actions                    EDX:2160002
-alert_text           event for textual alerts	 										EDX:2160007
-trace_recursive      event to force tracing recursive SQL statements					EDX:2160008
-clientid_overwrite   event to overwrite client_identifier when client_info is set		EDX:2160009
-sql_monitor          event to force monitoring SQL statements							EDX:216000a
-sql_monitor_test     event to test SQL monitoring										EDX:216000b
-eventsync_tac        Event posted from events syncing tac								EDX:216000d
-sql_trace            event for sql trace												EDX:216000e
-pmon_startup         startup of pmon process											EDX:216000f
-background_startup   startup of background processes									EDX:2160010
-db_open_begin        start of db open operation											EDX:2160011		     	   
-test_gvtf            test GV$() Table Tunction											EDX:2160012
-fault                Event used to inject fault in RDBMS kernel							EDX:2160013
-gcr_systest          gcr_systest														EDX:2160015
-em_express           EM Express debug event												EDX:2160016
-emx_control          event to control em express										EDX:2160017
-emx_test_control     event to control em express testing								EDX:2160018
-awrdiag[]            AWR Diagnostic Event												EDX:2160019
-msgq_trace           event to control msgq tracing										EDX:216001a
-ipclw_trace          event to control ipclw tracing										EDX:216001b
-kbc_fault            event to control container fault injection							EDX:216001c
-asm_corruption_trace event to control ASM corruption tracing							EDX:216001d
-kxdrs_sim            debug event to simulate certain conditions in kxdrs layer			EDX:216001e
-kcfio_debug          debug event to debug kcfio based on event level					EDX:216001f
-krbabrstat_fault     event to control krbabrstat fault injection						EDX:2160020
-periodic_dump[]      event for periodically dumping										EDX:2160021
-kxdrs_log_for_wbfc   debug event to log skipped extents for wbfc resilvering			EDX:2160022	
-clean_plsql_error_stack Event to clear ORA-06512s from the error stack					EDX:2160023
-plsql_coverage_flag  Event to set plsql coverage flag									EDX:2160024
+alert_text           event for textual alerts	 										                      EDX:2160007
+trace_recursive      event to force tracing recursive SQL statements				          	EDX:2160008
+clientid_overwrite   event to overwrite client_identifier when client_info is set		    EDX:2160009
+sql_monitor          event to force monitoring SQL statements						              	EDX:216000a
+sql_monitor_test     event to test SQL monitoring									                    	EDX:216000b
+eventsync_tac        Event posted from events syncing tac							                	EDX:216000d
+sql_trace            event for sql trace											                        	EDX:216000e
+pmon_startup         startup of pmon process										                      	EDX:216000f
+background_startup   startup of background processes								                  	EDX:2160010
+db_open_begin        start of db open operation										                    	EDX:2160011		     	   
+test_gvtf            test GV$() Table Tunction											                    EDX:2160012
+fault                Event used to inject fault in RDBMS kernel						            	EDX:2160013
+gcr_systest          gcr_systest												                            		EDX:2160015
+em_express           EM Express debug event											                      	EDX:2160016
+emx_control          event to control em express									                    	EDX:2160017
+emx_test_control     event to control em express testing								                EDX:2160018
+awrdiag[]            AWR Diagnostic Event											                        	EDX:2160019
+msgq_trace           event to control msgq tracing									                  	EDX:216001a
+ipclw_trace          event to control ipclw tracing									                  	EDX:216001b
+kbc_fault            event to control container fault injection						            	EDX:216001c
+asm_corruption_trace event to control ASM corruption tracing						              	EDX:216001d
+kxdrs_sim            debug event to simulate certain conditions in kxdrs layer		    	EDX:216001e
+kcfio_debug          debug event to debug kcfio based on event level				          	EDX:216001f
+krbabrstat_fault     event to control krbabrstat fault injection					            	EDX:2160020
+periodic_dump[]      event for periodically dumping									                  	EDX:2160021
+kxdrs_log_for_wbfc   debug event to log skipped extents for wbfc resilvering	      		EDX:2160022	
+clean_plsql_error_stack Event to clear ORA-06512s from the error stack				        	EDX:2160023
+plsql_coverage_flag  Event to set plsql coverage flag									                  EDX:2160024
 
 Events in library GENERIC:
 ------------------------------
-kg_event[]           Support old error number events (use err# for short)				EDX:4160001
+kg_event[]           Support old error number events (use err# for short)				        EDX:4160001
 
 Events in library CLIENT:
 ------------------------------
@@ -664,31 +664,31 @@ fgq_control          fine grain quarantine control
 
 Events in library ADVCMP:
 ------------------------------
-arch_comp_level[]    arch_comp_level[<ulevel, 1-7>]										EDX:12160001
-ccmp_debug           columnar compression debug event 									EDX:12160002
-inmemory_nobasic     disable KDZCF_IMC_BASIC implementation								EDX:12160003
-inmemory_nohybrid    disable KDZCF_IMC_HYBRID implementation							EDX:12160004
-ccmp_align           columnar compression enable alignment								EDX:12160005
+arch_comp_level[]    arch_comp_level[<ulevel, 1-7>]										          EDX:12160001
+ccmp_debug           columnar compression debug event 									        EDX:12160002
+inmemory_nobasic     disable KDZCF_IMC_BASIC implementation								      EDX:12160003
+inmemory_nohybrid    disable KDZCF_IMC_HYBRID implementation							      EDX:12160004
+ccmp_align           columnar compression enable alignment								      EDX:12160005
 ccmp_countstar       columnar compression enable count(*) optimization					EDX:12160006
-ccmp_dumpunaligned   columnar compression dump dbas of unaligned CUs					EDX:12160007
-ccmp_rbtree          columnar compression switch back to rb tree						EDX:12160008
-inmemory_force_ccl   inmemory force column compression levels							EDX:12160009
-columnar_cache_config flash cash configuration event									EDX:1216000a
+ccmp_dumpunaligned   columnar compression dump dbas of unaligned CUs					  EDX:12160007
+ccmp_rbtree          columnar compression switch back to rb tree						    EDX:12160008
+inmemory_force_ccl   inmemory force column compression levels							      EDX:12160009
+columnar_cache_config flash cash configuration event								          	EDX:1216000a
 inmemory_imcu[]      inmemory_imcu[<ulevel=  nocomp|dml|query_low|query_high|capacity_low|capacity_high>]   	EDX:1216000b
-inmemory_nobitpacked_gd disable bit-packed GD codes in CU. Use ub4 instead				EDX:1216000c
+inmemory_nobitpacked_gd disable bit-packed GD codes in CU. Use ub4 instead			EDX:1216000c
 inmemory_selectivevc enable selective column support for virtual columns				EDX:1216000d
-inmemory_dicthash    enable storage of dictionary hash values in IMCU					EDX:1216000e
-inmemory_cache_joinopt inmemory cache join optimizations								EDX:1216000f
-inmemory_scan_joinopt join optimizations to use during scan								EDX:12160010
-inmemory_compute_cachehash compute a hash vector when there is no cached hash			EDX:12160011
-ifc_dump_block       block rdba to dump in IFC											EDX:12160012
-ifc_ulevel[]         ifc_ulevel															EDX:12160013
+inmemory_dicthash    enable storage of dictionary hash values in IMCU				   	EDX:1216000e
+inmemory_cache_joinopt inmemory cache join optimizations								        EDX:1216000f
+inmemory_scan_joinopt join optimizations to use during scan								      EDX:12160010
+inmemory_compute_cachehash compute a hash vector when there is no cached hash		EDX:12160011
+ifc_dump_block       block rdba to dump in IFC											            EDX:12160012
+ifc_ulevel[]         ifc_ulevel															                    EDX:12160013
 inmemory_prefixdict  enable prefix compression on dictionary encoded IMCU				EDX:12160014
-inmemory_disable_dsb usage of stored DSB dictionary during scans						EDX:12160015
+inmemory_disable_dsb usage of stored DSB dictionary during scans						    EDX:12160015
 
 Events in library PLSQL:
 ------------------------------
-plsql_event[]        Support PL/SQL error number events									EDX:19160001
+plsql_event[]        Support PL/SQL error number events								        	EDX:19160001
 
 Events in library VPLIB:
 ------------------------------
