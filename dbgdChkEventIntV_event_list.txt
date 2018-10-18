@@ -519,32 +519,32 @@ alter session set  events 'trace[  dbfs_client_profiler         ] disk=high';   
 
 Components in library LIBCELL:
 --------------------------
-  Client_Library               Client Library ((null))
-    Disk_Layer                 Disk Layer ((null))
-    Network_Layer              Network Layer ((null))
-    Connect_Layer              Connect Layer ((null))
-    IPC_Layer                  IPC Layer ((null))
+alter session set  events 'trace[  Client_Library               ] disk=high';          EDX:1160001  ECX:7050001 
+alter session set  events 'trace[    Disk_Layer                 ] disk=high';          EDX:1160001  ECX:7050002 
+alter session set  events 'trace[    Network_Layer              ] disk=high';          EDX:1160001  ECX:7050003 
+alter session set  events 'trace[    Connect_Layer              ] disk=high';          EDX:1160001  ECX:7050004 
+alter session set  events 'trace[    IPC_Layer                  ] disk=high';          EDX:1160001  ECX:7050005 
 
 Components in library ORANET:
 --------------------------
-  TNSLSNR                      OraNet Listener ((null))
-    NET_NSGR                   Network Service Generic Registration ((null))
-    NET_NSGI                   TNI Network Service Generic Listener User-defined class ((null))
-  CMAN                         OraNet Connection Manager ((null))
-  NET                          OraNet Services ((null))
-    NET_NI                     Network Interface Layer ((null))
-    NET_NS                     Network Session Layer ((null))
-    NET_NT                     Network Transport Layer ((null))
-    NET_NTM                    Network Transport Mailbox Layer ((null))
-    NET_NTP                    Network Transport IPC Layer ((null))
-    NET_NTT                    Network Transport TCP/IP Layer ((null))
-    NET_NTUS                   Network Transport Unix Domain Sockets Layer ((null))
-    NET_NL                     Network Library ((null))
-    NET_NA                     Network Authentication ((null))
-    NET_NZ                     Network Zecurity ((null))
-    NET_NTZ                    Network SSL ((null))
-    NET_NU                     Network Trace Route Utility ((null))
-    NET_NN                     Network Names ((null))
+alter session set  events 'trace[  TNSLSNR                      ] disk=high';          EDX:1160001  ECX:8050001            
+alter session set  events 'trace[    NET_NSGR                   ] disk=high';          EDX:1160001  ECX:8050011
+alter session set  events 'trace[    NET_NSGI                   ] disk=high';          EDX:1160001  ECX:8050012
+alter session set  events 'trace[  CMAN                         ] disk=high';          EDX:1160001  ECX:8050002
+alter session set  events 'trace[  NET                          ] disk=high';          EDX:1160001  ECX:8050003
+alter session set  events 'trace[    NET_NI                     ] disk=high';          EDX:1160001  ECX:8050004
+alter session set  events 'trace[    NET_NS                     ] disk=high';          EDX:1160001  ECX:8050005
+alter session set  events 'trace[    NET_NT                     ] disk=high';          EDX:1160001  ECX:8050006
+alter session set  events 'trace[    NET_NTM                    ] disk=high';          EDX:1160001  ECX:8050007
+alter session set  events 'trace[    NET_NTP                    ] disk=high';          EDX:1160001  ECX:8050008
+alter session set  events 'trace[    NET_NTT                    ] disk=high';          EDX:1160001  ECX:8050009
+alter session set  events 'trace[    NET_NTUS                   ] disk=high';          EDX:1160001  ECX:805000a
+alter session set  events 'trace[    NET_NL                     ] disk=high';          EDX:1160001  ECX:805000b
+alter session set  events 'trace[    NET_NA                     ] disk=high';          EDX:1160001  ECX:805000c
+alter session set  events 'trace[    NET_NZ                     ] disk=high';          EDX:1160001  ECX:805000d
+alter session set  events 'trace[    NET_NTZ                    ] disk=high';          EDX:1160001  ECX:805000e
+alter session set  events 'trace[    NET_NU                     ] disk=high';          EDX:1160001  ECX:805000f
+alter session set  events 'trace[    NET_NN                     ] disk=high';          EDX:1160001  ECX:8050010
 
 Components in library ADVCMP:
 --------------------------
@@ -587,9 +587,9 @@ alter session set  events 'trace[  XDK_Xslt_Engine              ] disk=high';   
 
 Components in library VPLIB:
 --------------------------
-  Vector_Translate             Vector Translate (qkaxl, qerxl, qesxl, evaxl)
-  Vector_Aggregate             Vector Aggregate (qergv, qesgv, evavgby)
-  Vector_PX                    Vector PX (qesxlp)
+alter session set  events 'trace[  Vector_Translate             ] disk=high';           EDX:1160001  ECX:1b050001
+alter session set  events 'trace[  Vector_Aggregate             ] disk=high';           EDX:1160001  ECX:1b050002
+alter session set  events 'trace[  Vector_PX                    ] disk=high';           EDX:1160001  ECX:1b050003
   
   
   
