@@ -1,0 +1,757 @@
+SQL> ORADEBUG DOC COMPONENT
+
+
+Components in library DIAG:                                                            
+--------------------------
+alter session set  events 'trace[ diag_uts                    ] disk=high';            EDX:1160001  ECX:1050001          
+alter session set  events 'trace[   uts_vw                    ] disk=high';            EDX:1160001  ECX:1050014       
+alter session set  events 'trace[ diag_adr                    ] disk=high';            EDX:1160001  ECX:1050002       
+alter session set  events 'trace[   ams_comp                  ] disk=high';            EDX:1160001  ECX:105000d 
+alter session set  events 'trace[   ame_comp                  ] disk=high';            EDX:1160001  ECX:105000e 
+alter session set  events 'trace[   ami_comp                  ] disk=high';            EDX:1160001  ECX:105000f 
+alter session set  events 'trace[   diag_ads                  ] disk=high';            EDX:1160001  ECX:1050013 
+alter session set  events 'trace[ diag_hm                     ] disk=high';            EDX:1160001  ECX:1050003   
+alter session set  events 'trace[ diag_ips                    ] disk=high';            EDX:1160001  ECX:1050004   
+alter session set  events 'trace[ diag_dde                    ] disk=high';            EDX:1160001  ECX:1050005   
+alter session set  events 'trace[ diag_fmwk                   ] disk=high';            EDX:1160001  ECX:1050006   
+alter session set  events 'trace[   diag_ilcts                ] disk=high';            EDX:1160001  ECX:1050007 
+alter session set  events 'trace[   diag_attr                 ] disk=high';            EDX:1160001  ECX:1050008 
+alter session set  events 'trace[   diag_comp                 ] disk=high';            EDX:1160001  ECX:1050009 
+alter session set  events 'trace[ diag_testp                  ] disk=high';            EDX:1160001  ECX:105000a   
+alter session set  events 'trace[   diag_testc1               ] disk=high';            EDX:1160001  ECX:105000b
+alter session set  events 'trace[   diag_testc2               ] disk=high';            EDX:1160001  ECX:105000c 
+alter session set  events 'trace[ KGSD                        ] disk=high';            EDX:1160001  ECX:1050010  
+alter session set  events 'trace[ diag_events                 ] disk=high';            EDX:1160001  ECX:1050011   
+alter session set  events 'trace[ diag_adl                    ] disk=high';            EDX:1160001  ECX:1050012   
+alter session set  events 'trace[ diag_vwk                    ] disk=high';            EDX:1160001  ECX:1050015  
+alter session set  events 'trace[   diag_vwk_parser           ] disk=high';            EDX:1160001  ECX:1050016  
+alter session set  events 'trace[   diag_vwk_uts              ] disk=high';            EDX:1160001  ECX:1050017 
+alter session set  events 'trace[   diag_vwk_ams              ] disk=high';            EDX:1160001  ECX:1050018 
+alter session set  events 'trace[   diag_vwk_ci               ] disk=high';            EDX:1160001  ECX:1050019 
+alter session set  events 'trace[ kghsc                       ] disk=high';            EDX:1160001  ECX:105001a  
+alter session set  events 'trace[ dbgxtk                      ] disk=high';            EDX:1160001  ECX:105001b   
+alter session set  events 'trace[ KDIZOLTP                    ] disk=high';            EDX:1160001  ECX:105001c     
+
+Components in library RDBMS:
+--------------------------
+alter session set  events 'trace[ SQL_Compiler                ] disk=high';            EDX:1160001  ECX:2050001
+alter session set  events 'trace[    SQL_Parser               ] disk=high';            EDX:1160001  ECX:2050002
+alter session set  events 'trace[    SQL_Semantic             ] disk=high';            EDX:1160001  ECX:2050003
+alter session set  events 'trace[    SQL_Optimizer            ] disk=high';            EDX:1160001  ECX:2050004
+alter session set  events 'trace[      SQL_Transform          ] disk=high';            EDX:1160001  ECX:2050005
+alter session set  events 'trace[        SQL_MVRW             ] disk=high';            EDX:1160001  ECX:2050006
+alter session set  events 'trace[        SQL_VMerge           ] disk=high';            EDX:1160001  ECX:2050007
+alter session set  events 'trace[        SQL_Virtual          ] disk=high';            EDX:1160001  ECX:2050008
+alter session set  events 'trace[      SQL_APA                ] disk=high';            EDX:1160001  ECX:2050009
+alter session set  events 'trace[      SQL_Costing            ] disk=high';            EDX:1160001  ECX:205000a
+alter session set  events 'trace[        SQL_Parallel_Optimization ] disk=high';       EDX:1160001  ECX:205000b
+alter session set  events 'trace[        Vector_Processing      ] disk=high';          EDX:1160001  ECX:2050179
+alter session set  events 'trace[      SQL_Plan_Management      ] disk=high';          EDX:1160001  ECX:205005a
+alter session set  events 'trace[      SQL_Plan_Directive       ] disk=high';          EDX:1160001  ECX:20500b4
+alter session set  events 'trace[      SQL_Optimizer_Stats      ] disk=high';          EDX:1160001  ECX:2050134
+alter session set  events 'trace[        SQL_Optimizer_Stats_Advisor ] disk=high';     EDX:1160001  ECX:2050135
+alter session set  events 'trace[    SQL_Code_Generator         ] disk=high';          EDX:1160001  ECX:205000c
+alter session set  events 'trace[      SQL_Parallel_Compilation ] disk=high';          EDX:1160001  ECX:205000d
+alter session set  events 'trace[      SQL_Expression_Analysis  ] disk=high';          EDX:1160001  ECX:205000e
+alter session set  events 'trace[      SQL_Rowsets_Setup        ] disk=high';          EDX:1160001  ECX:205015b
+alter session set  events 'trace[    MPGE                       ] disk=high';          EDX:1160001  ECX:2050090
+alter session set  events 'trace[    ADS                        ] disk=high';          EDX:1160001  ECX:20500c6
+alter session set  events 'trace[    ICDT_Compile               ] disk=high';          EDX:1160001  ECX:2050136
+alter session set  events 'trace[    Shard_Sql                  ] disk=high';          EDX:1160001  ECX:2050153
+alter session set  events 'trace[    AQP                        ] disk=high';          EDX:1160001  ECX:2050154
+alter session set  events 'trace[    PTF_Comp                   ] disk=high';          EDX:1160001  ECX:205018b
+alter session set  events 'trace[  SQL_Execution                ] disk=high';          EDX:1160001  ECX:205000f
+alter session set  events 'trace[    Parallel_Execution         ] disk=high';          EDX:1160001  ECX:2050010
+alter session set  events 'trace[      PX_Messaging             ] disk=high';          EDX:1160001  ECX:2050011
+alter session set  events 'trace[      PX_Group                 ] disk=high';          EDX:1160001  ECX:2050012
+alter session set  events 'trace[      PX_Affinity              ] disk=high';          EDX:1160001  ECX:2050013
+alter session set  events 'trace[      PX_Buffer                ] disk=high';          EDX:1160001  ECX:2050014
+alter session set  events 'trace[      PX_Granule               ] disk=high';          EDX:1160001  ECX:2050015
+alter session set  events 'trace[      PX_Control               ] disk=high';          EDX:1160001  ECX:2050016
+alter session set  events 'trace[      PX_Table_Queue           ] disk=high';          EDX:1160001  ECX:2050017
+alter session set  events 'trace[      PX_Scheduler             ] disk=high';          EDX:1160001  ECX:2050018
+alter session set  events 'trace[      PX_Queuing               ] disk=high';          EDX:1160001  ECX:2050019
+alter session set  events 'trace[      PX_Blackbox              ] disk=high';          EDX:1160001  ECX:205008c
+alter session set  events 'trace[      PX_PTL                   ] disk=high';          EDX:1160001  ECX:20500a7
+alter session set  events 'trace[      PX_Expr_Eval             ] disk=high';          EDX:1160001  ECX:20500d7
+alter session set  events 'trace[      PX_Selector              ] disk=high';          EDX:1160001  ECX:20500dc
+alter session set  events 'trace[      PX_Overhead              ] disk=high';          EDX:1160001  ECX:205011a
+alter session set  events 'trace[    Bloom_Filter               ] disk=high';          EDX:1160001  ECX:205001a
+alter session set  events 'trace[    Time_Limit                 ] disk=high';          EDX:1160001  ECX:205012b
+alter session set  events 'trace[    ICDT_Exec                  ] disk=high';          EDX:1160001  ECX:2050137
+alter session set  events 'trace[    EXECUTE_TEMP_TABLE         ] disk=high';          EDX:1160001  ECX:2050148
+alter session set  events 'trace[    SQL_Trace                  ] disk=high';          EDX:1160001  ECX:2050157
+alter session set  events 'trace[    PTF_Exec                   ] disk=high';          EDX:1160001  ECX:205018c
+alter session set  events 'trace[  PGA_Manage                   ] disk=high';          EDX:1160001  ECX:205001b
+alter session set  events 'trace[    PGA_Compile                ] disk=high';          EDX:1160001  ECX:205001c
+alter session set  events 'trace[    PGA_IMM                    ] disk=high';          EDX:1160001  ECX:205001d
+alter session set  events 'trace[    PGA_CMM                    ] disk=high';          EDX:1160001  ECX:205001e
+alter session set  events 'trace[    PGA_ADV                    ] disk=high';          EDX:1160001  ECX:205001f
+alter session set  events 'trace[  rdbms_dde                    ] disk=high';          EDX:1160001  ECX:2050020
+alter session set  events 'trace[  VOS                          ] disk=high';          EDX:1160001  ECX:2050021
+alter session set  events 'trace[    hang_analysis              ] disk=high';          EDX:1160001  ECX:2050022
+alter session set  events 'trace[    background_proc            ] disk=high';          EDX:1160001  ECX:2050023
+alter session set  events 'trace[    system_param               ] disk=high';          EDX:1160001  ECX:2050024
+alter session set  events 'trace[    ksu                        ] disk=high';          EDX:1160001  ECX:2050025
+alter session set  events 'trace[      ksutac                   ] disk=high';          EDX:1160001  ECX:2050026
+alter session set  events 'trace[    ksv_trace                  ] disk=high';          EDX:1160001  ECX:205003c
+alter session set  events 'trace[    file                       ] disk=high';          EDX:1160001  ECX:20500a9
+alter session set  events 'trace[    ksq                        ] disk=high';          EDX:1160001  ECX:205013a
+alter session set  events 'trace[    ksolt_trace                ] disk=high';          EDX:1160001  ECX:2050160
+alter session set  events 'trace[    KSIM                       ] disk=high';          EDX:1160001  ECX:2050166
+alter session set  events 'trace[      KSIM_GRPOP               ] disk=high';          EDX:1160001  ECX:2050167
+alter session set  events 'trace[    KSIPC                      ] disk=high';          EDX:1160001  ECX:205017a
+alter session set  events 'trace[      KSMSQ                    ] disk=high';          EDX:1160001  ECX:205017b
+alter session set  events 'trace[        KSMSQ_MQL              ] disk=high';          EDX:1160001  ECX:205017c
+alter session set  events 'trace[      KSRMA                    ] disk=high';          EDX:1160001  ECX:205017d
+alter session set  events 'trace[      KSRMF                    ] disk=high';          EDX:1160001  ECX:205017e
+alter session set  events 'trace[      KSIPC_AM                 ] disk=high';          EDX:1160001  ECX:205017f
+alter session set  events 'trace[      KSIPC_GRP                ] disk=high';          EDX:1160001  ECX:2050180
+alter session set  events 'trace[      KSIPC_SN                 ] disk=high';          EDX:1160001  ECX:2050181
+alter session set  events 'trace[      KSIPC_KV                 ] disk=high';          EDX:1160001  ECX:2050182
+alter session set  events 'trace[      KSIPC_TOPO               ] disk=high';          EDX:1160001  ECX:2050183
+alter session set  events 'trace[      KSIPC_PR                 ] disk=high';          EDX:1160001  ECX:2050184
+alter session set  events 'trace[      KSIPC_IPCLW              ] disk=high';          EDX:1160001  ECX:2050185
+alter session set  events 'trace[      KSIPC_IPCOR              ] disk=high';          EDX:1160001  ECX:2050186
+alter session set  events 'trace[      KSIPC_SHREG              ] disk=high';          EDX:1160001  ECX:2050187
+alter session set  events 'trace[    LREG                       ] disk=high';          EDX:1160001  ECX:2050189
+alter session set  events 'trace[    ksupd                      ] disk=high';          EDX:1160001  ECX:205018a
+alter session set  events 'trace[  sql_mon                      ] disk=high';          EDX:1160001  ECX:2050027
+alter session set  events 'trace[    sql_mon_deamon             ] disk=high';          EDX:1160001  ECX:2050028
+alter session set  events 'trace[    sql_mon_query              ] disk=high';          EDX:1160001  ECX:2050029
+alter session set  events 'trace[  CACHE_RCV                    ] disk=high';          EDX:1160001  ECX:205002a
+alter session set  events 'trace[    DLF                        ] disk=high';          EDX:1160001  ECX:205011b
+alter session set  events 'trace[    MBR                        ] disk=high';          EDX:1160001  ECX:205016b
+alter session set  events 'trace[  DIRPATH_LOAD                 ] disk=high';          EDX:1160001  ECX:205002b
+alter session set  events 'trace[    DIRPATH_LOAD_BIS           ] disk=high';          EDX:1160001  ECX:2050089
+alter session set  events 'trace[  RAC                          ] disk=high';          EDX:1160001  ECX:205002c
+alter session set  events 'trace[    GES                        ] disk=high';          EDX:1160001  ECX:205002d
+alter session set  events 'trace[      KSI                      ] disk=high';          EDX:1160001  ECX:2050030
+alter session set  events 'trace[      RAC_ENQ                  ] disk=high';          EDX:1160001  ECX:2050039
+alter session set  events 'trace[      DD                       ] disk=high';          EDX:1160001  ECX:205004e
+alter session set  events 'trace[      RAC_BCAST                ] disk=high';          EDX:1160001  ECX:2050097
+alter session set  events 'trace[      RAC_FRZ                  ] disk=high';          EDX:1160001  ECX:20500ab
+alter session set  events 'trace[      KJOE                     ] disk=high';          EDX:1160001  ECX:20500cb
+alter session set  events 'trace[    GCS                        ] disk=high';          EDX:1160001  ECX:205002e
+alter session set  events 'trace[      GCS_BSCN                 ] disk=high';          EDX:1160001  ECX:2050059
+alter session set  events 'trace[      GCS_READMOSTLY           ] disk=high';          EDX:1160001  ECX:2050081
+alter session set  events 'trace[      GCS_READER_BYPASS        ] disk=high';          EDX:1160001  ECX:2050082
+alter session set  events 'trace[      GCS_DELTAPUSH            ] disk=high';          EDX:1160001  ECX:2050083
+alter session set  events 'trace[    GSIPC                      ] disk=high';          EDX:1160001  ECX:205002f
+alter session set  events 'trace[    RAC_RCFG                   ] disk=high';          EDX:1160001  ECX:2050046
+alter session set  events 'trace[    RAC_DRM                    ] disk=high';          EDX:1160001  ECX:2050047
+alter session set  events 'trace[    RAC_MRDOM                  ] disk=high';          EDX:1160001  ECX:2050048
+alter session set  events 'trace[      MRDOM_ESM                ] disk=high';          EDX:1160001  ECX:205014a
+alter session set  events 'trace[    CGS                        ] disk=high';          EDX:1160001  ECX:205004a
+alter session set  events 'trace[    CGSIMR                     ] disk=high';          EDX:1160001  ECX:205004b
+alter session set  events 'trace[    RAC_WLM                    ] disk=high';          EDX:1160001  ECX:205005b
+alter session set  events 'trace[    RAC_MLMDS                  ] disk=high';          EDX:1160001  ECX:205006d
+alter session set  events 'trace[    RAC_KA                     ] disk=high';          EDX:1160001  ECX:20500b5
+alter session set  events 'trace[    RAC_LT                     ] disk=high';          EDX:1160001  ECX:20500d6
+alter session set  events 'trace[    RAC_SLOCK                  ] disk=high';          EDX:1160001  ECX:205012a
+alter session set  events 'trace[    KJSC                       ] disk=high';          EDX:1160001  ECX:205013e
+alter session set  events 'trace[    LMHB                       ] disk=high';          EDX:1160001  ECX:2050158
+alter session set  events 'trace[  db_trace                     ] disk=high';          EDX:1160001  ECX:2050031
+alter session set  events 'trace[  kst                          ] disk=high';          EDX:1160001  ECX:2050032
+alter session set  events 'trace[  ddedmp                       ] disk=high';          EDX:1160001  ECX:2050033
+alter session set  events 'trace[  cursor                       ] disk=high';          EDX:1160001  ECX:2050034
+alter session set  events 'trace[    Bind_Capture               ] disk=high';          EDX:1160001  ECX:205006b
+alter session set  events 'trace[    KKSH                       ] disk=high';          EDX:1160001  ECX:2050127
+alter session set  events 'trace[  KSM                          ] disk=high';          EDX:1160001  ECX:2050035
+alter session set  events 'trace[  KSE                          ] disk=high';          EDX:1160001  ECX:2050036
+alter session set  events 'trace[  explain                      ] disk=high';          EDX:1160001  ECX:2050037
+alter session set  events 'trace[  rdbms_event                  ] disk=high';          EDX:1160001  ECX:2050038
+alter session set  events 'trace[  LOB_INODE                    ] disk=high';          EDX:1160001  ECX:205003b
+alter session set  events 'trace[  rdbms_adr                    ] disk=high';          EDX:1160001  ECX:205003d
+alter session set  events 'trace[  ASM                          ] disk=high';          EDX:1160001  ECX:205003e
+alter session set  events 'trace[    KFK                        ] disk=high';          EDX:1160001  ECX:205003f
+alter session set  events 'trace[      KFKIO                    ] disk=high';          EDX:1160001  ECX:2050040
+alter session set  events 'trace[        KFKIO_COUNT            ] disk=high';          EDX:1160001  ECX:205016c
+alter session set  events 'trace[        KFKIO_CANCEL           ] disk=high';          EDX:1160001  ECX:205016d
+alter session set  events 'trace[        KFKIO_HARD             ] disk=high';          EDX:1160001  ECX:205016e
+alter session set  events 'trace[        KFKIO_SPLIT            ] disk=high';          EDX:1160001  ECX:205016f
+alter session set  events 'trace[        KFKIO_MISC             ] disk=high';          EDX:1160001  ECX:2050170
+alter session set  events 'trace[      KFKSB                    ] disk=high';          EDX:1160001  ECX:2050041
+alter session set  events 'trace[        KFKSB_LIB              ] disk=high';          EDX:1160001  ECX:2050171
+alter session set  events 'trace[        KFKSB_DM               ] disk=high';          EDX:1160001  ECX:2050172
+alter session set  events 'trace[      KFKS                     ] disk=high';          EDX:1160001  ECX:2050159
+alter session set  events 'trace[    KFN                        ] disk=high';          EDX:1160001  ECX:2050042
+alter session set  events 'trace[      KFNU                     ] disk=high';          EDX:1160001  ECX:2050043
+alter session set  events 'trace[      KFNS                     ] disk=high';          EDX:1160001  ECX:2050044
+alter session set  events 'trace[      KFNC                     ] disk=high';          EDX:1160001  ECX:2050045
+alter session set  events 'trace[      KFNOR                    ] disk=high';          EDX:1160001  ECX:20500eb
+alter session set  events 'trace[    KFIS                       ] disk=high';          EDX:1160001  ECX:2050058
+alter session set  events 'trace[    KFM                        ] disk=high';          EDX:1160001  ECX:205005c
+alter session set  events 'trace[      KFMD                     ] disk=high';          EDX:1160001  ECX:205005d
+alter session set  events 'trace[      KFMS                     ] disk=high';          EDX:1160001  ECX:205005e
+alter session set  events 'trace[    KFFB                       ] disk=high';          EDX:1160001  ECX:205007e
+alter session set  events 'trace[    KFFD                       ] disk=high';          EDX:1160001  ECX:205007f
+alter session set  events 'trace[    KFZ                        ] disk=high';          EDX:1160001  ECX:2050084
+alter session set  events 'trace[    KFC                        ] disk=high';          EDX:1160001  ECX:205008d
+alter session set  events 'trace[    KFR                        ] disk=high';          EDX:1160001  ECX:205008e
+alter session set  events 'trace[    KFE                        ] disk=high';          EDX:1160001  ECX:2050092
+alter session set  events 'trace[    KFDP                       ] disk=high';          EDX:1160001  ECX:2050093
+alter session set  events 'trace[    KFG                        ] disk=high';          EDX:1160001  ECX:2050094
+alter session set  events 'trace[      KFGB                     ] disk=high';          EDX:1160001  ECX:205013c
+alter session set  events 'trace[    KFDS                       ] disk=high';          EDX:1160001  ECX:2050098
+alter session set  events 'trace[    KFIA                       ] disk=high';          EDX:1160001  ECX:20500bd
+alter session set  events 'trace[      KFIAS                    ] disk=high';          EDX:1160001  ECX:20500be
+alter session set  events 'trace[      KFIAC                    ] disk=high';          EDX:1160001  ECX:20500bf
+alter session set  events 'trace[    KFFSCRUB                   ] disk=high';          EDX:1160001  ECX:20500c3
+alter session set  events 'trace[    KFIO                       ] disk=high';          EDX:1160001  ECX:20500c4
+alter session set  events 'trace[    KFIOER                     ] disk=high';          EDX:1160001  ECX:20500c5
+alter session set  events 'trace[    KFV                        ] disk=high';          EDX:1160001  ECX:20500cc
+alter session set  events 'trace[      KFVSU                    ] disk=high';          EDX:1160001  ECX:20500cd
+alter session set  events 'trace[      KFVSD                    ] disk=high';          EDX:1160001  ECX:20500ce
+alter session set  events 'trace[      KFVIOC                   ] disk=high';          EDX:1160001  ECX:205015c
+alter session set  events 'trace[    KFDX                       ] disk=high';          EDX:1160001  ECX:20500e4
+alter session set  events 'trace[    KFZP                       ] disk=high';          EDX:1160001  ECX:20500e7
+alter session set  events 'trace[    KFA                        ] disk=high';          EDX:1160001  ECX:20500e8
+alter session set  events 'trace[    KFF                        ] disk=high';          EDX:1160001  ECX:2050102
+alter session set  events 'trace[    KFD                        ] disk=high';          EDX:1160001  ECX:2050110
+alter session set  events 'trace[      KFDVA                    ] disk=high';          EDX:1160001  ECX:2050111
+alter session set  events 'trace[    KFTHA                      ] disk=high';          EDX:1160001  ECX:2050118
+alter session set  events 'trace[    KFFG                       ] disk=high';          EDX:1160001  ECX:205013d
+alter session set  events 'trace[    KFFS                       ] disk=high';          EDX:1160001  ECX:2050155
+alter session set  events 'trace[    KFIOS                      ] disk=high';          EDX:1160001  ECX:2050165
+alter session set  events 'trace[  DML                          ] disk=high';          EDX:1160001  ECX:2050049
+alter session set  events 'trace[  Health_Monitor               ] disk=high';          EDX:1160001  ECX:205004c
+alter session set  events 'trace[  DRA                          ] disk=high';          EDX:1160001  ECX:205004d
+alter session set  events 'trace[  DIRACC                       ] disk=high';          EDX:1160001  ECX:205004f
+alter session set  events 'trace[  PART                         ] disk=high';          EDX:1160001  ECX:2050051
+alter session set  events 'trace[    PART_IntPart               ] disk=high';          EDX:1160001  ECX:2050052
+alter session set  events 'trace[    PART_Dictionary            ] disk=high';          EDX:1160001  ECX:2050095
+alter session set  events 'trace[  LOB_KDLW                     ] disk=high';          EDX:1160001  ECX:2050053
+alter session set  events 'trace[  LOB_KDLX                     ] disk=high';          EDX:1160001  ECX:2050054
+alter session set  events 'trace[  LOB_KDLXDUP                  ] disk=high';          EDX:1160001  ECX:2050055
+alter session set  events 'trace[  LOB_KDLRCI                   ] disk=high';          EDX:1160001  ECX:2050056
+alter session set  events 'trace[  LOB_KDLA                     ] disk=high';          EDX:1160001  ECX:2050057
+alter session set  events 'trace[  SQL_Manage                   ] disk=high';          EDX:1160001  ECX:205005f
+alter session set  events 'trace[    SQL_Manage_Infra           ] disk=high';          EDX:1160001  ECX:2050060
+alter session set  events 'trace[    SQL_Tune                   ] disk=high';          EDX:1160001  ECX:2050061
+alter session set  events 'trace[      SQL_Tune_Auto            ] disk=high';          EDX:1160001  ECX:2050062
+alter session set  events 'trace[        Auto_Tune_Opt          ] disk=high';          EDX:1160001  ECX:205006f
+alter session set  events 'trace[      SQL_Tune_Index           ] disk=high';          EDX:1160001  ECX:2050063
+alter session set  events 'trace[      SQL_Tune_Plan            ] disk=high';          EDX:1160001  ECX:2050064
+alter session set  events 'trace[      SQL_Tune_Px              ] disk=high';          EDX:1160001  ECX:2050065
+alter session set  events 'trace[      SQL_Tune_Fr              ] disk=high';          EDX:1160001  ECX:2050066
+alter session set  events 'trace[      SQL_Tune_Stats           ] disk=high';          EDX:1160001  ECX:205014c
+alter session set  events 'trace[      SQL_Tune_Exa             ] disk=high';          EDX:1160001  ECX:2050188
+alter session set  events 'trace[    SQL_Test_Exec              ] disk=high';          EDX:1160001  ECX:2050067
+alter session set  events 'trace[    SQL_Perf                   ] disk=high';          EDX:1160001  ECX:2050068
+alter session set  events 'trace[    SQL_Repair                 ] disk=high';          EDX:1160001  ECX:2050069
+alter session set  events 'trace[    SQL_trace_parser           ] disk=high';          EDX:1160001  ECX:2050091
+alter session set  events 'trace[  SQL_Analyze                  ] disk=high';          EDX:1160001  ECX:205006a
+alter session set  events 'trace[  SQL_DS                       ] disk=high';          EDX:1160001  ECX:205006c
+alter session set  events 'trace[  SQL_DDL                      ] disk=high';          EDX:1160001  ECX:205006e
+alter session set  events 'trace[    KKP                        ] disk=high';          EDX:1160001  ECX:2050132
+alter session set  events 'trace[  RAT_WCR                      ] disk=high';          EDX:1160001  ECX:2050070
+alter session set  events 'trace[  Spatial                      ] disk=high';          EDX:1160001  ECX:2050071
+alter session set  events 'trace[    Spatial_IND                ] disk=high';          EDX:1160001  ECX:2050072
+alter session set  events 'trace[    Spatial_GR                 ] disk=high';          EDX:1160001  ECX:2050073
+alter session set  events 'trace[  Text                         ] disk=high';          EDX:1160001  ECX:2050074
+alter session set  events 'trace[  rdbms_gc                     ] disk=high';          EDX:1160001  ECX:2050075
+alter session set  events 'trace[  XS                           ] disk=high';          EDX:1160001  ECX:2050076
+alter session set  events 'trace[    XSSESSION                  ] disk=high';          EDX:1160001  ECX:2050077
+alter session set  events 'trace[    XSPRINCIPAL                ] disk=high';          EDX:1160001  ECX:2050078
+alter session set  events 'trace[    XSSECCLASS                 ] disk=high';          EDX:1160001  ECX:2050079
+alter session set  events 'trace[    XSXDS                      ] disk=high';          EDX:1160001  ECX:205007a
+alter session set  events 'trace[    XSVPD                      ] disk=high';          EDX:1160001  ECX:205007b
+alter session set  events 'trace[    XSXDB_DEFAULT              ] disk=high';          EDX:1160001  ECX:205007c
+alter session set  events 'trace[    XS_MIDTIER                 ] disk=high';          EDX:1160001  ECX:205007d
+alter session set  events 'trace[    XSNSTEMPLATE               ] disk=high';          EDX:1160001  ECX:205009a
+alter session set  events 'trace[    XSACL                      ] disk=high';          EDX:1160001  ECX:205009b
+alter session set  events 'trace[    XSADM                      ] disk=high';          EDX:1160001  ECX:20500c2
+alter session set  events 'trace[  AQ                           ] disk=high';          EDX:1160001  ECX:2050085
+alter session set  events 'trace[    AQ_DEQ                     ] disk=high';          EDX:1160001  ECX:2050086
+alter session set  events 'trace[    AQ_BACK                    ] disk=high';          EDX:1160001  ECX:20500cf
+alter session set  events 'trace[      AQ_TM                    ] disk=high';          EDX:1160001  ECX:2050087
+alter session set  events 'trace[      AQ_CP                    ] disk=high';          EDX:1160001  ECX:205009d
+alter session set  events 'trace[      AQ_LB                    ] disk=high';          EDX:1160001  ECX:205009e
+alter session set  events 'trace[      AQ_NTFN                  ] disk=high';          EDX:1160001  ECX:205009f
+alter session set  events 'trace[        AQ_NTFNP12C            ] disk=high';          EDX:1160001  ECX:2050114
+alter session set  events 'trace[      AQ_TMSQ                  ] disk=high';          EDX:1160001  ECX:20500d3
+alter session set  events 'trace[    AQ_MC                      ] disk=high';          EDX:1160001  ECX:20500d0
+alter session set  events 'trace[    AQ_PT                      ] disk=high';          EDX:1160001  ECX:20500d1
+alter session set  events 'trace[    AQ_SUB                     ] disk=high';          EDX:1160001  ECX:20500d2
+alter session set  events 'trace[    AQ_OPT                     ] disk=high';          EDX:1160001  ECX:2050133
+alter session set  events 'trace[    AQ_DLY                     ] disk=high';          EDX:1160001  ECX:2050156
+alter session set  events 'trace[  KSFM                         ] disk=high';          EDX:1160001  ECX:2050088
+alter session set  events 'trace[  KXD                          ] disk=high';          EDX:1160001  ECX:205008a
+alter session set  events 'trace[    KXDAM                      ] disk=high';          EDX:1160001  ECX:205008b
+alter session set  events 'trace[    KCFIS                      ] disk=high';          EDX:1160001  ECX:205008f
+alter session set  events 'trace[    NSMTIO                     ] disk=high';          EDX:1160001  ECX:2050099
+alter session set  events 'trace[    KXDBIO                     ] disk=high';          EDX:1160001  ECX:20500a0
+alter session set  events 'trace[    KXDRS                      ] disk=high';          EDX:1160001  ECX:20500e3
+alter session set  events 'trace[    KXDOFL                     ] disk=high';          EDX:1160001  ECX:20500e9
+alter session set  events 'trace[    KXDMISC                    ] disk=high';          EDX:1160001  ECX:20500ea
+alter session set  events 'trace[    KXDCM                      ] disk=high';          EDX:1160001  ECX:2050113
+alter session set  events 'trace[    KXDBC                      ] disk=high';          EDX:1160001  ECX:2050128
+alter session set  events 'trace[  DV                           ] disk=high';          EDX:1160001  ECX:2050096
+alter session set  events 'trace[  ASO                          ] disk=high';          EDX:1160001  ECX:205009c
+alter session set  events 'trace[    RADM                       ] disk=high';          EDX:1160001  ECX:20500a1
+alter session set  events 'trace[  SVRMAN                       ] disk=high';          EDX:1160001  ECX:20500a2
+alter session set  events 'trace[    AWR                        ] disk=high';          EDX:1160001  ECX:20500a3
+alter session set  events 'trace[      ASH                      ] disk=high';          EDX:1160001  ECX:2050050
+alter session set  events 'trace[      METRICS                  ] disk=high';          EDX:1160001  ECX:20500a4
+alter session set  events 'trace[      REPOSITORY               ] disk=high';          EDX:1160001  ECX:20500df
+alter session set  events 'trace[        FLUSH                  ] disk=high';          EDX:1160001  ECX:20500e0
+alter session set  events 'trace[        PURGE                  ] disk=high';          EDX:1160001  ECX:20500e1
+alter session set  events 'trace[      AWRUTL                   ] disk=high';          EDX:1160001  ECX:20500e2
+alter session set  events 'trace[    AUTOTASK                   ] disk=high';          EDX:1160001  ECX:20500a5
+alter session set  events 'trace[    MMON                       ] disk=high';          EDX:1160001  ECX:20500a6
+alter session set  events 'trace[    SVRALRT                    ] disk=high';          EDX:1160001  ECX:20500aa
+alter session set  events 'trace[    IUT                        ] disk=high';          EDX:1160001  ECX:2050151
+alter session set  events 'trace[  OLS                          ] disk=high';          EDX:1160001  ECX:20500a8
+alter session set  events 'trace[  AUDITNG                      ] disk=high';          EDX:1160001  ECX:20500ac
+alter session set  events 'trace[    Configuration              ] disk=high';          EDX:1160001  ECX:20500ad
+alter session set  events 'trace[    QueueWrite                 ] disk=high';          EDX:1160001  ECX:20500ae
+alter session set  events 'trace[    FileWrite                  ] disk=high';          EDX:1160001  ECX:20500af
+alter session set  events 'trace[    RecordCompose              ] disk=high';          EDX:1160001  ECX:20500b0
+alter session set  events 'trace[    DBConsolidation            ] disk=high';          EDX:1160001  ECX:20500b1
+alter session set  events 'trace[    SYS_Auditing               ] disk=high';          EDX:1160001  ECX:20500b2
+alter session set  events 'trace[  KJCI                         ] disk=high';          EDX:1160001  ECX:20500b3
+alter session set  events 'trace[  KJZ                          ] disk=high';          EDX:1160001  ECX:20500b6
+alter session set  events 'trace[    KJZC                       ] disk=high';          EDX:1160001  ECX:20500b7
+alter session set  events 'trace[    KJZD                       ] disk=high';          EDX:1160001  ECX:20500b8
+alter session set  events 'trace[    KJZF                       ] disk=high';          EDX:1160001  ECX:20500b9
+alter session set  events 'trace[    KJZG                       ] disk=high';          EDX:1160001  ECX:20500ba
+alter session set  events 'trace[    KJZH                       ] disk=high';          EDX:1160001  ECX:20500bb
+alter session set  events 'trace[    KJZM                       ] disk=high';          EDX:1160001  ECX:20500bc
+alter session set  events 'trace[  SEC                          ] disk=high';          EDX:1160001  ECX:20500c0
+alter session set  events 'trace[    CBAC                       ] disk=high';          EDX:1160001  ECX:20500c1
+alter session set  events 'trace[    VPD                        ] disk=high';          EDX:1160001  ECX:205013b
+alter session set  events 'trace[    GDSI                       ] disk=high';          EDX:1160001  ECX:2050163
+alter session set  events 'trace[  dbop                         ] disk=high';          EDX:1160001  ECX:20500c7
+alter session set  events 'trace[    dbop_gen                   ] disk=high';          EDX:1160001  ECX:20500c8
+alter session set  events 'trace[      dbop_deamon              ] disk=high';          EDX:1160001  ECX:20500c9
+alter session set  events 'trace[    dbop_comp                  ] disk=high';          EDX:1160001  ECX:20500ca
+alter session set  events 'trace[  em_express                   ] disk=high';          EDX:1160001  ECX:20500d4
+alter session set  events 'trace[  orarep                       ] disk=high';          EDX:1160001  ECX:20500d5
+alter session set  events 'trace[  Data                         ] disk=high';          EDX:1160001  ECX:20500d8
+alter session set  events 'trace[    KDS                        ] disk=high';          EDX:1160001  ECX:20500d9
+alter session set  events 'trace[      KDSRID                   ] disk=high';          EDX:1160001  ECX:20500da
+alter session set  events 'trace[      KDSFTS                   ] disk=high';          EDX:1160001  ECX:20500db
+alter session set  events 'trace[      KDSCLU                   ] disk=high';          EDX:1160001  ECX:2050119
+alter session set  events 'trace[    KDWF                       ] disk=high';          EDX:1160001  ECX:205014b
+alter session set  events 'trace[    IMOLTP_KV                  ] disk=high';          EDX:1160001  ECX:2050169
+alter session set  events 'trace[    MEMOPT_FI                  ] disk=high';          EDX:1160001  ECX:205016a
+alter session set  events 'trace[  RAT                          ] disk=high';          EDX:1160001  ECX:20500dd
+alter session set  events 'trace[    RAT_MASK                   ] disk=high';          EDX:1160001  ECX:20500de
+alter session set  events 'trace[  BA                           ] disk=high';          EDX:1160001  ECX:20500e5
+alter session set  events 'trace[  KBC                          ] disk=high';          EDX:1160001  ECX:20500e6
+alter session set  events 'trace[  connection_broker            ] disk=high';          EDX:1160001  ECX:20500ec
+alter session set  events 'trace[  KRA                          ] disk=high';          EDX:1160001  ECX:20500ed
+alter session set  events 'trace[  KRA_SQL                      ] disk=high';          EDX:1160001  ECX:20500ee
+alter session set  events 'trace[  KRB                          ] disk=high';          EDX:1160001  ECX:20500ef
+alter session set  events 'trace[    KRB_THREAD                 ] disk=high';          EDX:1160001  ECX:20500f0
+alter session set  events 'trace[    KRB_IO                     ] disk=high';          EDX:1160001  ECX:20500f1
+alter session set  events 'trace[    KRB_INCR                   ] disk=high';          EDX:1160001  ECX:20500f2
+alter session set  events 'trace[    KRB_PERF                   ] disk=high';          EDX:1160001  ECX:20500f3
+alter session set  events 'trace[    KRB_BPOUTPUT               ] disk=high';          EDX:1160001  ECX:20500f4
+alter session set  events 'trace[    KRB_BPVAL                  ] disk=high';          EDX:1160001  ECX:20500f5
+alter session set  events 'trace[    KRB_FLWRES                 ] disk=high';          EDX:1160001  ECX:20500f6
+alter session set  events 'trace[    KRB_FLWCPY                 ] disk=high';          EDX:1160001  ECX:20500f7
+alter session set  events 'trace[    KRB_FLWBCK                 ] disk=high';          EDX:1160001  ECX:20500f8
+alter session set  events 'trace[    KRB_FLWUSAGE               ] disk=high';          EDX:1160001  ECX:20500f9
+alter session set  events 'trace[    KRB_OPTIM                  ] disk=high';          EDX:1160001  ECX:20500fa
+alter session set  events 'trace[  KRBABR                       ] disk=high';          EDX:1160001  ECX:20500fb
+alter session set  events 'trace[  KRC                          ] disk=high';          EDX:1160001  ECX:20500fc
+alter session set  events 'trace[  KRC_CHANGES                  ] disk=high';          EDX:1160001  ECX:20500fd
+alter session set  events 'trace[  IM                           ] disk=high';          EDX:1160001  ECX:2050103
+alter session set  events 'trace[    IM_transaction             ] disk=high';          EDX:1160001  ECX:2050104
+alter session set  events 'trace[      IM_Txn_PJ                ] disk=high';          EDX:1160001  ECX:205012c
+alter session set  events 'trace[      IM_Txn_SJ                ] disk=high';          EDX:1160001  ECX:205012d
+alter session set  events 'trace[      IM_Txn_JS                ] disk=high';          EDX:1160001  ECX:205012e
+alter session set  events 'trace[      IM_Txn_Conc              ] disk=high';          EDX:1160001  ECX:205012f
+alter session set  events 'trace[      IM_Txn_Blk               ] disk=high';          EDX:1160001  ECX:2050130
+alter session set  events 'trace[      IM_Txn_Read              ] disk=high';          EDX:1160001  ECX:2050131
+alter session set  events 'trace[      IM_Txn_ADG               ] disk=high';          EDX:1160001  ECX:2050152
+alter session set  events 'trace[    IM_space                   ] disk=high';          EDX:1160001  ECX:2050105
+alter session set  events 'trace[    IM_data                    ] disk=high';          EDX:1160001  ECX:2050106
+alter session set  events 'trace[      IM_populate              ] disk=high';          EDX:1160001  ECX:2050107
+alter session set  events 'trace[      IM_background            ] disk=high';          EDX:1160001  ECX:2050108
+alter session set  events 'trace[      IM_scan                  ] disk=high';          EDX:1160001  ECX:2050109
+alter session set  events 'trace[      IM_journal               ] disk=high';          EDX:1160001  ECX:205010a
+alter session set  events 'trace[      IM_dump                  ] disk=high';          EDX:1160001  ECX:2050115
+alter session set  events 'trace[      IM_FS                    ] disk=high';          EDX:1160001  ECX:2050116
+alter session set  events 'trace[      IM_optimizer             ] disk=high';          EDX:1160001  ECX:2050117
+alter session set  events 'trace[      IM_GD                    ] disk=high';          EDX:1160001  ECX:2050149
+alter session set  events 'trace[      IM_ADO                   ] disk=high';          EDX:1160001  ECX:205014d
+alter session set  events 'trace[      IM_IME                   ] disk=high';          EDX:1160001  ECX:2050150
+alter session set  events 'trace[      IM_Dictionary            ] disk=high';          EDX:1160001  ECX:205015a
+alter session set  events 'trace[      IM_Verification          ] disk=high';          EDX:1160001  ECX:2050164
+alter session set  events 'trace[  xdb_wallet                   ] disk=high';          EDX:1160001  ECX:2050112
+alter session set  events 'trace[  PROGINT                      ] disk=high';          EDX:1160001  ECX:205011c
+alter session set  events 'trace[    OCI                        ] disk=high';          EDX:1160001  ECX:205011d
+alter session set  events 'trace[    OPI                        ] disk=high';          EDX:1160001  ECX:205011e
+alter session set  events 'trace[    RPI                        ] disk=high';          EDX:1160001  ECX:205011f
+alter session set  events 'trace[    NPI                        ] disk=high';          EDX:1160001  ECX:2050120
+alter session set  events 'trace[    Two_Task                   ] disk=high';          EDX:1160001  ECX:2050121
+alter session set  events 'trace[    PROGINT_PLSQL              ] disk=high';          EDX:1160001  ECX:2050122
+alter session set  events 'trace[    Two_Phase                  ] disk=high';          EDX:1160001  ECX:2050123
+alter session set  events 'trace[    Conn_Pool                  ] disk=high';          EDX:1160001  ECX:2050124
+alter session set  events 'trace[    TSM                        ] disk=high';          EDX:1160001  ECX:2050125
+alter session set  events 'trace[    PROGINT_MISC               ] disk=high';          EDX:1160001  ECX:2050126
+alter session set  events 'trace[  KDFS                         ] disk=high';          EDX:1160001  ECX:2050129
+alter session set  events 'trace[  OLAP                         ] disk=high';          EDX:1160001  ECX:2050138
+alter session set  events 'trace[    OLAP_Paging                ] disk=high';          EDX:1160001  ECX:2050139
+alter session set  events 'trace[  STREAMS                      ] disk=high';          EDX:1160001  ECX:205013f
+alter session set  events 'trace[    STREAMS_CAPTURE            ] disk=high';          EDX:1160001  ECX:2050140
+alter session set  events 'trace[    STREAMS_PROPAGATION        ] disk=high';          EDX:1160001  ECX:2050141
+alter session set  events 'trace[      STREAMS_PROPAGATION_SENDER ] disk=high';        EDX:1160001  ECX:2050142
+alter session set  events 'trace[      STREAMS_PROPAGATION_RECEIVER ] disk=high';      EDX:1160001  ECX:2050143
+alter session set  events 'trace[    STREAMS_APPLY             ] disk=high';           EDX:1160001  ECX:2050144
+alter session set  events 'trace[      STREAMS_APPLY_COORDINATOR ] disk=high';         EDX:1160001  ECX:2050145
+alter session set  events 'trace[      STREAMS_APPLY_READER   ] disk=high';            EDX:1160001  ECX:2050146
+alter session set  events 'trace[      STREAMS_APPLY_SERVER   ] disk=high';            EDX:1160001  ECX:2050147
+alter session set  events 'trace[  Space                      ] disk=high';            EDX:1160001  ECX:205014e
+alter session set  events 'trace[    Search_Cache             ] disk=high';            EDX:1160001  ECX:205014f
+alter session set  events 'trace[  CONTEXT                    ] disk=high';            EDX:1160001  ECX:205015d
+alter session set  events 'trace[    CONTEXT_INDEX            ] disk=high';            EDX:1160001  ECX:205015e
+alter session set  events 'trace[    CONTEXT_QUERY            ] disk=high';            EDX:1160001  ECX:205015f
+alter session set  events 'trace[  rdbms_uts                  ] disk=high';            EDX:1160001  ECX:2050161
+alter session set  events 'trace[  MIRA_RCV                   ] disk=high';            EDX:1160001  ECX:2050162
+alter session set  events 'trace[  reg_cache                  ] disk=high';            EDX:1160001  ECX:2050168
+alter session set  events 'trace[  OFS                        ] disk=high';            EDX:1160001  ECX:2050173
+alter session set  events 'trace[    OFS_KSFS                 ] disk=high';            EDX:1160001  ECX:2050174
+alter session set  events 'trace[    OFS_KSFSD                ] disk=high';            EDX:1160001  ECX:2050175
+alter session set  events 'trace[    OFS_KSFSM                ] disk=high';            EDX:1160001  ECX:2050176
+alter session set  events 'trace[    OFS_KSFSC1               ] disk=high';            EDX:1160001  ECX:2050177
+alter session set  events 'trace[    OFS_SKOFS                ] disk=high';            EDX:1160001  ECX:2050178
+
+Components in library GENERIC:
+--------------------------
+
+alter session set  events 'trace[   Generic_VOS                 ] disk=high';          EDX:1160001  ECX:4050001
+alter session set  events 'trace[      VOS_Heap_Manager         ] disk=high';          EDX:1160001  ECX:4050002
+alter session set  events 'trace[      VOS_Latches              ] disk=high';          EDX:1160001  ECX:4050003
+alter session set  events 'trace[      VOS_GST                  ] disk=high';          EDX:1160001  ECX:4050010
+alter session set  events 'trace[    XML                        ] disk=high';          EDX:1160001  ECX:4050004
+alter session set  events 'trace[    Generic_XDB                ] disk=high';          EDX:1160001  ECX:4050005
+alter session set  events 'trace[      XDB_Repository           ] disk=high';          EDX:1160001  ECX:4050006
+alter session set  events 'trace[      XDB_Protocols            ] disk=high';          EDX:1160001  ECX:4050007
+alter session set  events 'trace[      XDB_Query                ] disk=high';          EDX:1160001  ECX:4050008
+alter session set  events 'trace[      XDB_XMLIndex             ] disk=high';          EDX:1160001  ECX:4050009
+alter session set  events 'trace[      XDB_Schema               ] disk=high';          EDX:1160001  ECX:405000a
+alter session set  events 'trace[      XDB_XOB                  ] disk=high';          EDX:1160001  ECX:405000b
+alter session set  events 'trace[      XDB_CSX                  ] disk=high';          EDX:1160001  ECX:405000c
+alter session set  events 'trace[        XDB_CSX_ENCODING       ] disk=high';          EDX:1160001  ECX:4050022
+alter session set  events 'trace[        XDB_CSX_DECODING       ] disk=high';          EDX:1160001  ECX:4050023
+alter session set  events 'trace[        XDB_CSX_SELFCON        ] disk=high';          EDX:1160001  ECX:4050025
+alter session set  events 'trace[        XDB_CSX_PRINT          ] disk=high';          EDX:1160001  ECX:4050027
+alter session set  events 'trace[        XDB_CSX_TOKENMGR       ] disk=high';          EDX:1160001  ECX:4050032
+alter session set  events 'trace[      XDB_Default              ] disk=high';          EDX:1160001  ECX:405000d
+alter session set  events 'trace[      XDB_MEMORY               ] disk=high';          EDX:1160001  ECX:4050033
+alter session set  events 'trace[    LOB                        ] disk=high';          EDX:1160001  ECX:405000e
+alter session set  events 'trace[      LOB_Refcount             ] disk=high';          EDX:1160001  ECX:4050012
+alter session set  events 'trace[      LOB_Default              ] disk=high';          EDX:1160001  ECX:4050013
+alter session set  events 'trace[      LOB_DBLINK               ] disk=high';          EDX:1160001  ECX:4050026
+alter session set  events 'trace[      LOB_TEMPORARY            ] disk=high';          EDX:1160001  ECX:405004b
+alter session set  events 'trace[      LOB_API                  ] disk=high';          EDX:1160001  ECX:405004c
+alter session set  events 'trace[    KGH                        ] disk=high';          EDX:1160001  ECX:405000f
+alter session set  events 'trace[    KGF                        ] disk=high';          EDX:1160001  ECX:4050011
+alter session set  events 'trace[    LIBCACHE                   ] disk=high';          EDX:1160001  ECX:4050014
+alter session set  events 'trace[      LCO_Status_DDL           ] disk=high';          EDX:1160001  ECX:4050024
+alter session set  events 'trace[    OBJECTS                    ] disk=high';          EDX:1160001  ECX:4050015
+alter session set  events 'trace[      OBJECTS_DDL              ] disk=high';          EDX:1160001  ECX:4050016
+alter session set  events 'trace[      OBJECTS_Types            ] disk=high';          EDX:1160001  ECX:4050017
+alter session set  events 'trace[      OBJECTS_Images           ] disk=high';          EDX:1160001  ECX:4050018
+alter session set  events 'trace[      OBJECTS_Anydata          ] disk=high';          EDX:1160001  ECX:4050019
+alter session set  events 'trace[      OBJECTS_Streams          ] disk=high';          EDX:1160001  ECX:405001a
+alter session set  events 'trace[      OBJECTS_Dict             ] disk=high';          EDX:1160001  ECX:405001b
+alter session set  events 'trace[      OBJECTS_Semanal          ] disk=high';          EDX:1160001  ECX:405001c
+alter session set  events 'trace[      OBJECTS_Default          ] disk=high';          EDX:1160001  ECX:405001d
+alter session set  events 'trace[      OBJECTS_Tables           ] disk=high';          EDX:1160001  ECX:4050029
+alter session set  events 'trace[    KGFPM                      ] disk=high';          EDX:1160001  ECX:405001e
+alter session set  events 'trace[    KGFDVF                     ] disk=high';          EDX:1160001  ECX:405001f
+alter session set  events 'trace[    Shared_Objects             ] disk=high';          EDX:1160001  ECX:4050020
+alter session set  events 'trace[      SO_Loader                ] disk=high';          EDX:1160001  ECX:4050021
+alter session set  events 'trace[    Direct_NFS                 ] disk=high';          EDX:1160001  ECX:4050028
+alter session set  events 'trace[    KGSC                       ] disk=high';          EDX:1160001  ECX:405002a
+alter session set  events 'trace[      KGSC_KQD                 ] disk=high';          EDX:1160001  ECX:405002b
+alter session set  events 'trace[      KGSC_BUN                 ] disk=high';          EDX:1160001  ECX:405002c
+alter session set  events 'trace[      KGSC_KKS                 ] disk=high';          EDX:1160001  ECX:405002d
+alter session set  events 'trace[      KGSC_PLS                 ] disk=high';          EDX:1160001  ECX:405002e
+alter session set  events 'trace[      KGSC_CONS                ] disk=high';          EDX:1160001  ECX:405002f
+alter session set  events 'trace[      KGSC_TRIG                ] disk=high';          EDX:1160001  ECX:4050030
+alter session set  events 'trace[      KGSC_JOX                 ] disk=high';          EDX:1160001  ECX:4050031
+alter session set  events 'trace[    KDI                        ] disk=high';          EDX:1160001  ECX:4050034
+alter session set  events 'trace[      KDIADHI                  ] disk=high';          EDX:1160001  ECX:4050035
+alter session set  events 'trace[      KDIADLO                  ] disk=high';          EDX:1160001  ECX:4050036
+alter session set  events 'trace[      KDIL                     ] disk=high';          EDX:1160001  ECX:4050037
+alter session set  events 'trace[        KDILADHI               ] disk=high';          EDX:1160001  ECX:4050038
+alter session set  events 'trace[        KDILADLO               ] disk=high';          EDX:1160001  ECX:4050039
+alter session set  events 'trace[      KDIS                     ] disk=high';          EDX:1160001  ECX:405003a
+alter session set  events 'trace[        KDISADHI               ] disk=high';          EDX:1160001  ECX:405003b
+alter session set  events 'trace[        KDISADLO               ] disk=high';          EDX:1160001  ECX:405003c
+alter session set  events 'trace[      KDXT                     ] disk=high';          EDX:1160001  ECX:405003d
+alter session set  events 'trace[        KDXTADHI               ] disk=high';          EDX:1160001  ECX:405003e
+alter session set  events 'trace[        KDXTADLO               ] disk=high';          EDX:1160001  ECX:405003f
+alter session set  events 'trace[      KDIM                     ] disk=high';          EDX:1160001  ECX:4050040
+alter session set  events 'trace[        KDIMADHI               ] disk=high';          EDX:1160001  ECX:4050041
+alter session set  events 'trace[        KDIMADLO               ] disk=high';          EDX:1160001  ECX:4050042
+alter session set  events 'trace[      KDIF                     ] disk=high';          EDX:1160001  ECX:4050043
+alter session set  events 'trace[        KDIFADHI               ] disk=high';          EDX:1160001  ECX:4050044
+alter session set  events 'trace[        KDIFADLO               ] disk=high';          EDX:1160001  ECX:4050045
+alter session set  events 'trace[      KDIZADHI                 ] disk=high';          EDX:1160001  ECX:4050046
+alter session set  events 'trace[      KDIZADLO                 ] disk=high';          EDX:1160001  ECX:4050047
+alter session set  events 'trace[      KDIDML                   ] disk=high';          EDX:1160001  ECX:4050048
+alter session set  events 'trace[        KDIDMLADHI             ] disk=high';          EDX:1160001  ECX:4050049
+alter session set  events 'trace[        KDIDMLADLO             ] disk=high';          EDX:1160001  ECX:405004a
+alter session set  events 'trace[      KDIGDR                   ] disk=high';          EDX:1160001  ECX:405004d
+alter session set  events 'trace[        KDIGDRBR               ] disk=high';          EDX:1160001  ECX:405004e
+alter session set  events 'trace[        KDIGDRLF               ] disk=high';          EDX:1160001  ECX:405004f
+
+Components in library CLIENT:
+--------------------------
+alter session set  events 'trace[  Client_KPU                   ] disk=high';          EDX:1160001  ECX:6050001
+alter session set  events 'trace[    KPU_Memory                 ] disk=high';          EDX:1160001  ECX:6050002
+alter session set  events 'trace[    KPU_TTC                    ] disk=high';          EDX:1160001  ECX:6050003
+alter session set  events 'trace[    KPU_Relational             ] disk=high';          EDX:1160001  ECX:6050004
+alter session set  events 'trace[    KPU_Objects                ] disk=high';          EDX:1160001  ECX:6050005
+alter session set  events 'trace[    KPU_LOBS                   ] disk=high';          EDX:1160001  ECX:6050006
+alter session set  events 'trace[  progint_appcont              ] disk=high';          EDX:1160001  ECX:6050007
+alter session set  events 'trace[    progint_appcont_rdbms      ] disk=high';          EDX:1160001  ECX:6050008
+alter session set  events 'trace[  SQLLDR_Load                  ] disk=high';          EDX:1160001  ECX:6050009
+alter session set  events 'trace[  DPAPI_Load                   ] disk=high';          EDX:1160001  ECX:605000b
+alter session set  events 'trace[  dbfs_client_profiler         ] disk=high';          EDX:1160001  ECX:605000c
+
+Components in library LIBCELL:
+--------------------------
+  Client_Library               Client Library ((null))
+    Disk_Layer                 Disk Layer ((null))
+    Network_Layer              Network Layer ((null))
+    Connect_Layer              Connect Layer ((null))
+    IPC_Layer                  IPC Layer ((null))
+
+Components in library ORANET:
+--------------------------
+  TNSLSNR                      OraNet Listener ((null))
+    NET_NSGR                   Network Service Generic Registration ((null))
+    NET_NSGI                   TNI Network Service Generic Listener User-defined class ((null))
+  CMAN                         OraNet Connection Manager ((null))
+  NET                          OraNet Services ((null))
+    NET_NI                     Network Interface Layer ((null))
+    NET_NS                     Network Session Layer ((null))
+    NET_NT                     Network Transport Layer ((null))
+    NET_NTM                    Network Transport Mailbox Layer ((null))
+    NET_NTP                    Network Transport IPC Layer ((null))
+    NET_NTT                    Network Transport TCP/IP Layer ((null))
+    NET_NTUS                   Network Transport Unix Domain Sockets Layer ((null))
+    NET_NL                     Network Library ((null))
+    NET_NA                     Network Authentication ((null))
+    NET_NZ                     Network Zecurity ((null))
+    NET_NTZ                    Network SSL ((null))
+    NET_NU                     Network Trace Route Utility ((null))
+    NET_NN                     Network Names ((null))
+
+Components in library ADVCMP:
+--------------------------
+alter session set  events 'trace[ ADVCMP_MAIN                   ] disk=high';          EDX:1160001  ECX:12050001
+alter session set  events 'trace[    ADVCMP_COMP                ] disk=high';          EDX:1160001  ECX:12050002
+alter session set  events 'trace[    ADVCMP_DECOMP              ] disk=high';          EDX:1160001  ECX:12050003
+alter session set  events 'trace[      ADVCMP_DECOMP_HPK        ] disk=high';          EDX:1160001  ECX:12050004
+alter session set  events 'trace[      ADVCMP_DECOMP_PCODE      ] disk=high';          EDX:1160001  ECX:12050005
+
+Components in library PLSQL:
+--------------------------
+alter session set  events 'trace[  PLSQL_Apps                   ] disk=high';          EDX:1160001  ECX:19050001
+alter session set  events 'trace[    PLSQL_Utl_File             ] disk=high';          EDX:1160001  ECX:19050014
+alter session set  events 'trace[  PLSQL_Codegen                ] disk=high';          EDX:1160001  ECX:19050002
+alter session set  events 'trace[    PLSQL_COG_IDL_Gen          ] disk=high';          EDX:1160001  ECX:19050003
+alter session set  events 'trace[    PLSQL_COG_Infrastructure   ] disk=high';          EDX:1160001  ECX:19050004
+alter session set  events 'trace[    PLSQL_COG_Native           ] disk=high';          EDX:1160001  ECX:19050005
+alter session set  events 'trace[    PLSQL_COG_Optimizer        ] disk=high';          EDX:1160001  ECX:19050006
+alter session set  events 'trace[    PLSQL_COG_MCode_Gen        ] disk=high';          EDX:1160001  ECX:19050007
+alter session set  events 'trace[  PLSQL_Code_Execution         ] disk=high';          EDX:1160001  ECX:19050008
+alter session set  events 'trace[    PLSQL_Stack_Frames         ] disk=high';          EDX:1160001  ECX:19050015
+alter session set  events 'trace[  PLSQL_External_Proc          ] disk=high';          EDX:1160001  ECX:19050009
+alter session set  events 'trace[  PLSQL_IDL                    ] disk=high';          EDX:1160001  ECX:1905000a
+alter session set  events 'trace[  PLSQL_ILMS                   ] disk=high';          EDX:1160001  ECX:1905000b
+alter session set  events 'trace[  PLSQL_KNLDE                  ] disk=high';          EDX:1160001  ECX:1905000c
+alter session set  events 'trace[  PLSQL_KG_Interface           ] disk=high';          EDX:1160001  ECX:1905000d
+alter session set  events 'trace[  PLSQL_Infrastructure         ] disk=high';          EDX:1160001  ECX:1905000e
+alter session set  events 'trace[  PLSQL_PSD                    ] disk=high';          EDX:1160001  ECX:1905000f
+alter session set  events 'trace[    PLSQL_PSD_Generic          ] disk=high';          EDX:1160001  ECX:19050010
+alter session set  events 'trace[    PLSQL_PSD_Standalones      ] disk=high';          EDX:1160001  ECX:19050011
+alter session set  events 'trace[  PLSQL_Semantics              ] disk=high';          EDX:1160001  ECX:19050012
+alter session set  events 'trace[  PLSQL_Syntax                 ] disk=high';          EDX:1160001  ECX:19050013
+
+Components in library XDK:
+--------------------------
+alter session set  events 'trace[  XDK_Parser                   ] disk=high';          EDX:1160001  ECX:1a050001
+alter session set  events 'trace[    XDK_FSM_Parser             ] disk=high';          EDX:1160001  ECX:1a050002
+alter session set  events 'trace[  XDK_Schema_Validator         ] disk=high';          EDX:1160001  ECX:1a050003
+alter session set  events 'trace[  XDK_Xslt_Engine              ] disk=high';          EDX:1160001  ECX:1a050004
+
+Components in library VPLIB:
+--------------------------
+  Vector_Translate             Vector Translate (qkaxl, qerxl, qesxl, evaxl)
+  Vector_Aggregate             Vector Aggregate (qergv, qesgv, evavgby)
+  Vector_PX                    Vector PX (qesxlp)
+  
+  
+  
+SQL> ORADEBUG DOC event name 
+
+Events in library DIAG:
+------------------------------
+trace[]              Main event to control UTS tracing                                  EDX:1160001  ECX:check Components 
+simerr[]             Event used by DDE to simulate crashes                              EDX:1160002  -- undocumented
+disable_dde_action[] Event used by DDE to disable actions                               EDX:1160003
+eveppdebug[]         Event used by Events++ for location markers                        EDX:1160004  -- undocumented
+ams_trace[]          Event to dump ams performance trace records                        EDX:1160005
+ams_rowsrc_trace[]   Event to dump ams row source tracing                               EDX:1160006
+-- check event filter                                                                   1160007--1160017
+sweep_verification   Event to enable sweep file verification                            EDX:1160018
+-- check event filter                                                                   1160019
+enable_xml_inc_staging Event to enable xml incident staging format                      EDX:116001a
+dbg[]                Event to hook dbgtDbg logging statements                           EDX:116001b
+ 
+Events in library RDBMS:
+------------------------------
+-- check event scope                                                                    2160001
+wait_event[]         event to control wait event post-wakeup actions                    EDX:2160002
+-- check event filter                                                                   2160003
+testEvent1           EventArray for UnitTesting                                         EDX:2160004 -- undocumented
+TestEvent2           simple event for unit testing                                      EDX:2160005 -- undocumented
+-- check event scope                                                                    2160006
+alert_text           event for textual alerts                                           EDX:2160007
+trace_recursive      event to force tracing recursive SQL statements                    EDX:2160008
+clientid_overwrite   event to overwrite client_identifier when client_info is set       EDX:2160009
+sql_monitor          event to force monitoring SQL statements                           EDX:216000a
+sql_monitor_test     event to test SQL monitoring                                       EDX:216000b
+-- check event filter                                                                   216000c
+eventsync_tac        Event posted from events syncing tac                               EDX:216000d
+sql_trace            event for sql trace                                                EDX:216000e
+pmon_startup         startup of pmon process                                            EDX:216000f
+background_startup   startup of background processes                                    EDX:2160010
+db_open_begin        start of db open operation                                         EDX:2160011                
+test_gvtf            test GV$() Table Tunction                                          EDX:2160012
+fault                Event used to inject fault in RDBMS kernel                         EDX:2160013
+-- check event filter                                                                   2160014
+gcr_systest          gcr_systest                                                        EDX:2160015
+em_express           EM Express debug event                                             EDX:2160016
+emx_control          event to control em express                                        EDX:2160017
+emx_test_control     event to control em express testing                                EDX:2160018
+awrdiag[]            AWR Diagnostic Event                                               EDX:2160019
+msgq_trace           event to control msgq tracing                                      EDX:216001a
+ipclw_trace          event to control ipclw tracing                                     EDX:216001b
+kbc_fault            event to control container fault injection                         EDX:216001c
+asm_corruption_trace event to control ASM corruption tracing                            EDX:216001d
+kxdrs_sim            debug event to simulate certain conditions in kxdrs layer          EDX:216001e
+kcfio_debug          debug event to debug kcfio based on event level                    EDX:216001f
+krbabrstat_fault     event to control krbabrstat fault injection                        EDX:2160020
+periodic_dump[]      event for periodically dumping                                     EDX:2160021
+kxdrs_log_for_wbfc   debug event to log skipped extents for wbfc resilvering            EDX:2160022 
+clean_plsql_error_stack Event to clear ORA-06512s from the error stack                  EDX:2160023
+plsql_coverage_flag  Event to set plsql coverage flag                                   EDX:2160024
+
+Events in library GENERIC:
+------------------------------
+kg_event[]           Support old error number events (use err# for short)               EDX:4160001
+-- check event filter                                                                   4160002
+
+Events in library CLIENT:
+------------------------------
+oci_trace            event for oci trace                                                
+
+Events in library LIBCELL:
+------------------------------
+libcell_stat         libcell statistics level specification
+cellclnt_skgxp_trc_ops Controls to trace SKGXP operations
+cellclnt_ossnet_trc  Controls to trace IP affinity in ossnet
+cellclnt_high_lat_ops Control to trace High-latency I/O operations
+diskmon_sim_ops[]    Diskmon simulation events
+cellclnt_read_outlier_limit Control to trace read I/O outliers
+cellclnt_write_outlier_limit Control to trace write I/O outliers
+cellclnt_lgwrite_outlier_limit Control to trace log write I/O outliers
+cellclnt_sparse_mode Mode of how to handle sparse buffers
+cellclnt_submission_recon Simulation period for forcing submission reconnect
+
+Events in library FPLIB:
+------------------------------
+fgq_control          fine grain quarantine control
+
+Events in library ADVCMP:
+------------------------------
+arch_comp_level[]    arch_comp_level[<ulevel, 1-7>]                                     EDX:12160001
+ccmp_debug           columnar compression debug event                                   EDX:12160002
+inmemory_nobasic     disable KDZCF_IMC_BASIC implementation                             EDX:12160003
+inmemory_nohybrid    disable KDZCF_IMC_HYBRID implementation                            EDX:12160004
+ccmp_align           columnar compression enable alignment                              EDX:12160005
+ccmp_countstar       columnar compression enable count(*) optimization                  EDX:12160006
+ccmp_dumpunaligned   columnar compression dump dbas of unaligned CUs                    EDX:12160007
+ccmp_rbtree          columnar compression switch back to rb tree                        EDX:12160008
+inmemory_force_ccl   inmemory force column compression levels                           EDX:12160009
+columnar_cache_config flash cash configuration event                                    EDX:1216000a
+inmemory_imcu[]      inmemory_imcu[<ulevel=  nocomp|dml|query_low|query_high|capacity_low|capacity_high>]       EDX:1216000b
+inmemory_nobitpacked_gd disable bit-packed GD codes in CU. Use ub4 instead              EDX:1216000c
+inmemory_selectivevc enable selective column support for virtual columns                EDX:1216000d
+inmemory_dicthash    enable storage of dictionary hash values in IMCU                   EDX:1216000e
+inmemory_cache_joinopt inmemory cache join optimizations                                EDX:1216000f
+inmemory_scan_joinopt join optimizations to use during scan                             EDX:12160010
+inmemory_compute_cachehash compute a hash vector when there is no cached hash           EDX:12160011
+ifc_dump_block       block rdba to dump in IFC                                          EDX:12160012
+ifc_ulevel[]         ifc_ulevel                                                         EDX:12160013
+inmemory_prefixdict  enable prefix compression on dictionary encoded IMCU               EDX:12160014
+inmemory_disable_dsb usage of stored DSB dictionary during scans                        EDX:12160015
+
+Events in library PLSQL:
+------------------------------
+plsql_event[]        Support PL/SQL error number events                                 EDX:19160001
+
+Events in library VPLIB:
+------------------------------
+key_vector_debug     key vector debug parameters
+key_vector_diag      key vector diagnostics parameters
+key_vector_test      key vector testing parameters
+
+  
+  
+  
+  
+SQL> ORADEBUG DOC event filter
+
+Event filters in library DIAG:
+------------------------------
+occurence            filter to implement counting for event checks                  1160007
+callstack            filter to only fire an event when a function is on the stack.  1160008
+eq                   filter to only fire an event when a == b                       1160009
+ne                   filter to only fire an event when a != b                       116000a
+gt                   filter to only fire an event when a > b                        116000b
+lt                   filter to only fire an event when a < b                        116000c
+ge                   filter to only fire an event when a >= b                       116000d
+le                   filter to only fire an event when a <= b                       116000e
+anybit               filter to only fire an event when (a & b) != 0                 116000f
+allbit               filter to only fire an event when (a & b) == b                 1160010
+nobit                filter to only fire an event when (a & b) == 0                 1160011
+bet                  filter to only fire an event when b <= a <= c                  1160012
+nbet                 filter to only fire an event when a < b or a > c               1160013
+in                   filter to only fire an event when a is equal to any b .. p     1160014
+nin                  filter to only fire an event when a is not equal to any b .. p 1160015
+streq                filter to only fire an event when string s1 = s2 (up to <len> characters) 1160016
+strne                filter to only fire an event when string s1 != s2 (up to <len> characters) 1160017
+tag                  filter to only fire an event when a tag is set                 1160019
+
+Event filters in library RDBMS:
+------------------------------
+wait                 filter for specific wait parameters and wait duration           2160003
+process              filter to set events only for a specific process                216000c
+px                   filter to check identity of the process for fault injection     2160014
+
+Event filters in library GENERIC:
+------------------------------
+errarg               filter to set error events only for a specific error argument   4160002
+   
+   
+   
+SQL> ORADEBUG DOC EVENT SCOPE
+
+Event scopes in library RDBMS:
+------------------------------
+SQL[]                sql scope for RDBMS                                            2160001
+scope_t1             ub4 scope for testing                                          2160006 -- undocumented
+
+
