@@ -692,9 +692,8 @@ plsql_event[]        Support PL/SQL error number events                         
 
 Events in library VPLIB:
 ------------------------------
-key_vector_debug     key vector debug parameters
-key_vector_diag      key vector diagnostics parameters
-key_vector_test      key vector testing parameters
-
+key_vector_debug     key vector debug parameters                                        EDX:1b160001
+key_vector_diag      key vector diagnostics parameters                                  EDX:1b160002
+key_vector_test      key vector testing parameters                                      EDX:1b160003
   
 
