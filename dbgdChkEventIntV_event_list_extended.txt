@@ -655,24 +655,24 @@ kg_event[]           Support old error number events (use err# for short)       
 
 Events in library CLIENT:
 ------------------------------
-oci_trace            event for oci trace                                                
+oci_trace            event for oci trace                                               EDX:6160001                                      
 
 Events in library LIBCELL:
 ------------------------------
-libcell_stat         libcell statistics level specification
-cellclnt_skgxp_trc_ops Controls to trace SKGXP operations
-cellclnt_ossnet_trc  Controls to trace IP affinity in ossnet
-cellclnt_high_lat_ops Control to trace High-latency I/O operations
-diskmon_sim_ops[]    Diskmon simulation events
-cellclnt_read_outlier_limit Control to trace read I/O outliers
-cellclnt_write_outlier_limit Control to trace write I/O outliers
-cellclnt_lgwrite_outlier_limit Control to trace log write I/O outliers
-cellclnt_sparse_mode Mode of how to handle sparse buffers
-cellclnt_submission_recon Simulation period for forcing submission reconnect
+libcell_stat         libcell statistics level specification                            EDX:7160001
+cellclnt_skgxp_trc_ops Controls to trace SKGXP operations                              EDX:7160002
+cellclnt_ossnet_trc  Controls to trace IP affinity in ossnet                           EDX:7160003
+cellclnt_high_lat_ops Control to trace High-latency I/O operations                     EDX:7160004
+diskmon_sim_ops[]    Diskmon simulation events                                         EDX:7160005
+cellclnt_read_outlier_limit Control to trace read I/O outliers                         EDX:7160006
+cellclnt_write_outlier_limit Control to trace write I/O outliers                       EDX:7160007
+cellclnt_lgwrite_outlier_limit Control to trace log write I/O outliers                 EDX:7160008
+cellclnt_sparse_mode Mode of how to handle sparse buffers                              EDX:7160009
+cellclnt_submission_recon Simulation period for forcing submission reconnect           EDX:716000a   
 
 Events in library FPLIB:
 ------------------------------
-fgq_control          fine grain quarantine control
+fgq_control          fine grain quarantine control                                     EDX:b160001
 
 Events in library ADVCMP:
 ------------------------------
