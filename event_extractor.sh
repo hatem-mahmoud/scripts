@@ -1,4 +1,5 @@
 #Extact events that are checked in a specified core oracle function
+#Inspired from Franck Pachot Script https://blog.dbi-services.com/12cr2-no-cardinality-feedback-for-small-queries/
 #Example : ./event_extractor.sh kslwtectx
 
 gdb oracle <<< "disas $1" | awk --non-decimal-data '/mov .*,%edi$/{gsub(/[$,]/," ");a=$4}/EventRdbmsErr/{printf "dbkdChkEventRdbmsErr %d\n", a}' | sort -u
