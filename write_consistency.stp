@@ -4,18 +4,27 @@ if ( user_int32(u64_arg(1)+8) == $1 ) {
 }
 }
 
+
+
 probe process("oracle").function("kcbgcur") {
 if ( user_int32(u64_arg(1)+8) == $1 ) {
      printf("Cur: block#=%d \n",user_int32(u64_arg(1)+4) & 0x003FFFFF)
 }
 }
 
+
 probe process("oracle").function("dmlTrace") {
     printf("Write consistency issue detected\n");
 }
 
+
+
+probe process("oracle").function("kturRbkToSvpt") {
+    printf("Issue rollback to savepoint \n");
+}
+
+
 probe syscall.write {
  if (pid() == target() && isinstr(argstr,"phase") ) {
  printf(" %s \n", argstr)
-}
 }
