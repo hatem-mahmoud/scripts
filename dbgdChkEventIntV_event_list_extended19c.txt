@@ -121,6 +121,8 @@ alter session set  events 'trace[      KSIPCENV                 ] disk=high';   
 alter session set  events 'trace[      KSXP                     ] disk=high';          EDX:1160001  ECX:2050194
 alter session set  events 'trace[    LREG                       ] disk=high';          EDX:1160001  ECX:2050189
 alter session set  events 'trace[    ksupd                      ] disk=high';          EDX:1160001  ECX:205018a
+alter session set  events 'trace[    state_object               ] disk=high';          EDX:1160001  ECX:205018d 
+alter session set  events 'trace[    sess_signature             ] disk=high';          EDX:1160001  ECX:2050193 
 alter session set  events 'trace[  sql_mon                      ] disk=high';          EDX:1160001  ECX:2050027
 alter session set  events 'trace[    sql_mon_deamon             ] disk=high';          EDX:1160001  ECX:2050028
 alter session set  events 'trace[    sql_mon_query              ] disk=high';          EDX:1160001  ECX:2050029
@@ -426,7 +428,7 @@ alter session set  events 'trace[    OFS_KSFSM                ] disk=high';     
 alter session set  events 'trace[    OFS_KSFSC1               ] disk=high';            EDX:1160001  ECX:2050177
 alter session set  events 'trace[    OFS_SKOFS                ] disk=high';            EDX:1160001  ECX:2050178
 alter session set  events 'trace[  SQL_Compare_Plans          ] disk=high';            EDX:1160001  ECX:2050192
-alter session set  events 'trace[  sess_signature             ] disk=high';            EDX:1160001  ECX:2050193 -- Undocumented
+
 
 
 
