@@ -445,13 +445,9 @@ pickle.dump(valid_data,open("valid_data.pkl","wb"))
 pickle.dump(valid_label,open("valid_label.pkl","wb"))  
 
 #Encode testing Label
-#valle = preprocessing.LabelEncoder()
 valid_label_e=trle.transform(valid_label)
-#print(list(valle.classes_))
 print('Number of validation classes : ' , get_num_classes( np.array(valid_label_e)))
-#plot_class_distribution(np.array(valid_label_e))
-#print(list(valid_label))
-#print(valle.inverse_transform([0]))
+
      
 #test_data = pickle.load(open("test_data.pkl", "rb"))
 #test_label = pickle.load(open("test_label.pkl", "rb"))
@@ -478,14 +474,9 @@ pickle.dump(test_data,open("test_data.pkl","wb"))
 pickle.dump(test_label,open("test_label.pkl","wb"))  
 
 #Encode testing Label
-#ttle = preprocessing.LabelEncoder()
 test_label_e=trle.transform(test_label)
-#print(list(ttle.classes_))
-#print('Number of testing classes : ' , get_num_classes( np.array(test_label_e)))
-#plot_class_distribution(np.array(test_label_e))
-#print(unique(list(test_label_e)))
-#print(ttle.inverse_transform([0]))
-        
+print('Number of testing classes : ' , get_num_classes( np.array(test_label_e)))
+
 
 
 
