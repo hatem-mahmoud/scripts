@@ -181,28 +181,6 @@ EXCEPTION
 END;
 /
 
--- get other_xml from awr
-BEGIN
-  IF :other_xml IS NULL OR NVL(DBMS_LOB.GETLENGTH(:other_xml), 0) = 0 THEN
-    FOR i IN (SELECT other_xml
-                FROM dba_hist_sql_plan
-               WHERE sql_id = TRIM('&&modified_sql_id.')
-                 AND plan_hash_value = TO_NUMBER(TRIM('&&plan_hash_value.'))
-                 AND other_xml IS NOT NULL
-               ORDER BY
-                     id)
-    LOOP
-      :other_xml := i.other_xml;
-      EXIT; -- 1st
-    END LOOP;
-  END IF;
-EXCEPTION
-  WHEN OTHERS THEN
-    DBMS_OUTPUT.PUT_LINE('getting modified other_xml from awr: '||SQLERRM);
-    :other_xml := NULL;
-END;
-/
-
 -- other_xml as found
 SELECT :other_xml FROM DUAL;
 
@@ -210,7 +188,7 @@ SELECT :other_xml FROM DUAL;
 SET TERM ON;
 BEGIN
   IF :other_xml IS NULL THEN
-    RAISE_APPLICATION_ERROR(-20101, 'PLAN for modified SQL_ID &&modified_sql_id. and PHV &&plan_hash_value. was not found in memory (gv$sql_plan) or AWR (dba_hist_sql_plan).');
+    RAISE_APPLICATION_ERROR(-20101, 'PLAN for modified SQL_ID &&modified_sql_id. and PHV &&plan_hash_value. was not found in memory (gv$sql_plan).');
   END IF;
 END;
 /
