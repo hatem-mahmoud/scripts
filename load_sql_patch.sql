@@ -67,11 +67,7 @@ SELECT plan_hash_value
   FROM gv$sql_plan
  WHERE sql_id = TRIM('&&modified_sql_id.')
    AND other_xml IS NOT NULL
- UNION
-SELECT plan_hash_value
-  FROM dba_hist_sql_plan
- WHERE sql_id = TRIM('&&modified_sql_id.')
-   AND other_xml IS NOT NULL ),
+),
 m AS (
 SELECT plan_hash_value,
        SUM(elapsed_time)/SUM(executions) avg_et_secs
@@ -79,20 +75,11 @@ SELECT plan_hash_value,
  WHERE sql_id = TRIM('&&modified_sql_id.')
    AND executions > 0
  GROUP BY
-       plan_hash_value ),
-a AS (
-SELECT plan_hash_value,
-       SUM(elapsed_time_total)/SUM(executions_total) avg_et_secs
-  FROM dba_hist_sqlstat
- WHERE sql_id = TRIM('&&modified_sql_id.')
-   AND executions_total > 0
- GROUP BY
        plan_hash_value )
 SELECT p.plan_hash_value,
-       ROUND(NVL(m.avg_et_secs, a.avg_et_secs)/1e6, 3) avg_et_secs
-  FROM p, m, a
- WHERE p.plan_hash_value = m.plan_hash_value(+)
-   AND p.plan_hash_value = a.plan_hash_value(+)
+       ROUND(m.avg_et_secs/1e6, 3) avg_et_secs
+  FROM p, m
+ WHERE p.plan_hash_value = m.plan_hash_value(+)   
  ORDER BY
        avg_et_secs NULLS LAST;
 PRO
@@ -168,7 +155,7 @@ SELECT :sql_text FROM DUAL;
 SET TERM ON;
 BEGIN
   IF :sql_text IS NULL THEN
-    RAISE_APPLICATION_ERROR(-20100, 'SQL_TEXT for original SQL_ID &&original_sql_id. was not found in memory (gv$sqltext_with_newlines) or AWR (dba_hist_sqltext).');
+    RAISE_APPLICATION_ERROR(-20100, 'SQL_TEXT for original SQL_ID &&original_sql_id. was not found in memory (gv$sqltext_with_newlines).');
   END IF;
 END;
 /
