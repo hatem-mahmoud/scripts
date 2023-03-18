@@ -59,8 +59,7 @@ probe syscall.pwrite.return {
      cleanup=local_clock_us() - wait_end_ts[pid()]
 
      if ( txfr > 500000 ) {
-      printf("%d %9d %11d %9s %21s %9d %12d %12d %22d %22d %7d   \n",gettimeofday_s(),bsize[pid()],boffset[pid()],bfd[pid()],substr(execname(),0,6),e2e,setup,queue,txfr,cleanup,p
-id())
+      printf("%d %9d %11d %9s %21s %9d %12d %12d %22d %22d %7d   \n",gettimeofday_s(),bsize[pid()],boffset[pid()],bfd[pid()],substr(execname(),0,6),e2e,setup,queue,txfr,cleanup,pid())
       }
 
      delete write_start_ts[pid()]
